@@ -1,0 +1,19 @@
+<body lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <nav class="navbar navbar-expand-lg" style="background-color: white; margin-bottom: 40px" th:fragment="header(titulo, codePage)">
+        <div class="container-fluid">
+            <div class="navbar-wrapper">
+
+                <a class="navbar-brand" href="javascript:;" style="color: #2d2d2d">
+                    <img th:src="@{/img/logo.png}" width="30" height="30" class="d-inline-block align-top" style="margin-right: 15px" alt="Logo HGuN"/>
+                    Registro de Ocorrência
+                </a>
+            </div>
+            <div class="collapse navbar-collapse justify-content-end" id="navigation" style="margin-right: 50px">
+
+                <a class="btn btn-outline-primary my-2 my-sm-0" style="color: #51cbce">Entrar</a>
+
+            </div>
+        </div>
+    </nav>
+</body>

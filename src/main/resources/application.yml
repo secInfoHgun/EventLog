@@ -1,0 +1,23 @@
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/event-log
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+auth-api:
+  username: admin
+  password: admin
+#
+#arquivos:
+#  produtor: produtor/imagens/produtos/
+#  cecafes: cecafes/imagens/produtos/
