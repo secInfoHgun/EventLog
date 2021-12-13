@@ -1,12 +1,11 @@
 package com.hgun.sti.models;
 
-import com.hgun.sti.models.types.TipoDano;
-import com.hgun.sti.models.types.TipoIncidencia;
-import com.hgun.sti.models.types.TipoOcorrencia;
+import com.hgun.sti.models.types.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -16,34 +15,35 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@SuperBuilder
 @Entity
 @Table(name="ocorrencias")
 public class Ocorrencia {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
-    public Paciente paciente;
+    Paciente paciente;
 
     @NotBlank
-    public String titulo;
+    String resumo;
 
     @NotBlank
-    public String descricao;
+    String descricao;
 
-    public String fatorContribuinte;
-
-    @NotNull
-    public Boolean pacienteFaleceu;
+    String fatorContribuinte;
 
     @NotNull
-    public Boolean pacienteFoiInternado;
+    Boolean pacienteFaleceu;
 
     @NotNull
-    public Date data;
+    Boolean pacienteFoiInternado;
+
+    @NotNull
+    Date data;
 
     @NonNull
     @OneToOne
@@ -56,4 +56,12 @@ public class Ocorrencia {
     @NonNull
     @OneToOne
     TipoDano tipoDano;
+
+    @NonNull
+    @OneToOne
+    TipoSetor tipoSetor;
+
+    @NonNull
+    @OneToOne
+    TipoFaseAssistencia tipoFaseAssistencia;
 }
