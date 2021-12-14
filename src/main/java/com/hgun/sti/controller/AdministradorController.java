@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdministradorController {
 
     @GetMapping
-    public String home(){
+    public String homeadministrador(){
         return "dashboard.html";
     }
+
+    @GetMapping("/ocorrencias")
+    public String ocorrenciaslistpage(){
+        return "ocorrencia/listagemOcorrencia.html";
+    }
+
 
 
 }

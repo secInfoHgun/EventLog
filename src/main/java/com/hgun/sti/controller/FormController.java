@@ -51,7 +51,8 @@ public class FormController {
 
     @PostMapping
     public String cadastro(@ModelAttribute Ocorrencia ocorrencia){
-        ocorrenciaRepository.save(ocorrencia);
+        System.out.println(ocorrencia.toString());
+//        ocorrenciaRepository.save(ocorrencia);
         return "redirect:/";
     }
 }
