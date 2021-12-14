@@ -15,7 +15,7 @@ public class PacienteDTO {
     Long id;
     String prontuario;
     String nome;
-    Integer idade;
+    String idade;
     Character sexo;
 
     public static Paciente fromDTO(PacienteDTO paciente){

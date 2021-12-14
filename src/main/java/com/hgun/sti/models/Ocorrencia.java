@@ -42,8 +42,11 @@ public class Ocorrencia {
     @NotNull
     Boolean pacienteFoiInternado;
 
-    @NotNull
-    Date data;
+    @NotBlank
+    String data;
+
+    @NotBlank
+    String hora;
 
     @NonNull
     @OneToOne

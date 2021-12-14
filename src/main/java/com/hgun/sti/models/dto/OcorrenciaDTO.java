@@ -19,7 +19,8 @@ public class OcorrenciaDTO {
     String fatorContribuinte;
     Boolean pacienteFaleceu;
     Boolean pacienteFoiInternado;
-    Date data;
+    String data;
+    String hora;
     TipoOcorrencia tipoOcorrencia;
     TipoIncidencia tipoIncidencia;
     TipoDano tipoDano;
@@ -36,6 +37,7 @@ public class OcorrenciaDTO {
                 .pacienteFaleceu(ocorrencia.getPacienteFaleceu())
                 .pacienteFoiInternado(ocorrencia.getPacienteFoiInternado())
                 .data(ocorrencia.getData())
+                .hora(ocorrencia.getHora())
                 .tipoOcorrencia(ocorrencia.getTipoOcorrencia())
                 .tipoIncidencia(ocorrencia.getTipoIncidencia())
                 .tipoDano(ocorrencia.getTipoDano())
@@ -54,6 +56,7 @@ public class OcorrenciaDTO {
                 .pacienteFaleceu(ocorrencia.getPacienteFaleceu())
                 .pacienteFoiInternado(ocorrencia.getPacienteFoiInternado())
                 .data(ocorrencia.getData())
+                .hora(ocorrencia.getHora())
                 .tipoOcorrencia(ocorrencia.getTipoOcorrencia())
                 .tipoIncidencia(ocorrencia.getTipoIncidencia())
                 .tipoDano(ocorrencia.getTipoDano())

@@ -27,8 +27,8 @@ public class Paciente {
     @NotBlank
     String nome;
 
-    @NotNull
-    Integer idade;
+    @NotBlank
+    String idade;
 
     @NotBlank
     Character sexo;
