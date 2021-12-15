@@ -7,7 +7,6 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,17 +18,17 @@ public class Paciente {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    public Long id;
 
     @NotBlank
-    String prontuario;
+    public String prontuario;
 
     @NotBlank
-    String nome;
+    public String nome;
 
     @NotBlank
-    String idade;
+    public String idade;
 
     @NotBlank
-    Character sexo;
+    public Character sexo;
 }

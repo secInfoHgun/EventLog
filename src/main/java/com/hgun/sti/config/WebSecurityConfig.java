@@ -23,7 +23,10 @@ import java.io.IOException;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
-    // Configurações para roles e autenticação
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsServiceImpl();
+    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -57,6 +60,31 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
         http.authorizeRequests()
-                .antMatchers(staticResources).permitAll();
+                .antMatchers(staticResources).permitAll()
+                .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers(HttpMethod.POST, "/").permitAll()
+                .antMatchers(HttpMethod.GET, "/administrador").hasAnyAuthority("ADMIN") //tratar erro de user que tentou acessar
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().loginPage("/login")
+                .successHandler(sucessoLogin())
+                .permitAll()
+                .and()
+                .logout().invalidateHttpSession(true).logoutSuccessUrl("/").deleteCookies("JSESSIONID", "usuario")
+                .and()
+                .exceptionHandling().accessDeniedPage("/403");
+    }
+
+    private AuthenticationSuccessHandler sucessoLogin(){
+        AuthenticationSuccessHandler atsh = new AuthenticationSuccessHandler() {
+            @Override
+            public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+                Cookie c = new Cookie("usuario", authentication.getName());
+                response.addCookie(c);
+                response.sendRedirect("/administrador");
+            }
+        };
+
+        return atsh;
     }
 }

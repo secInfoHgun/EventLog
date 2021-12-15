@@ -29,6 +29,9 @@
               <span class="navbar-toggler-bar navbar-kebab"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navigation">
+              <form th:action="@{/logout}" method="post">
+                <a onclick="this.parentNode.submit();" style="cursor: pointer" ><i class="fa fa-sign-out"></i> Sair</a>
+              </form>
               <form>
                 <div class="input-group no-border">
                   <input type="text" value="" class="form-control" placeholder="Search...">

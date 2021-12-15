@@ -14,9 +14,4 @@ public class LoginController {
     public String loginPage(){
         return "login.html";
     }
-
-    @PostMapping
-    public String login(Model model){
-        return "";
-    }
 }

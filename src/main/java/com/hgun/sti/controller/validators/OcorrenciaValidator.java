@@ -1,20 +1,19 @@
 package com.hgun.sti.controller.validators;
 
 import com.hgun.sti.models.Ocorrencia;
+import com.hgun.sti.models.errors.OcorrenciaError;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 
 public class OcorrenciaValidator {
-    public static BindingResult validarOcorrencia(Ocorrencia ocorrencia, BindingResult erros){
+    public static OcorrenciaError validarOcorrencia(Ocorrencia ocorrencia){
 
-        if(ocorrencia.getPaciente() == null){
-            erros.addError(new ObjectError("paciente", "O paciente das ocorrências não pode estar vazio!"));
-        }else{
-            erros = PacienteValidator.validarPaciente(ocorrencia.getPaciente(), erros);
-        }
+        var ocorrenciaError = new OcorrenciaError();
+
+        ocorrenciaError.setPaciente(PacienteValidator.validarPaciente(ocorrencia.getPaciente()));
 
         if(ocorrencia.getTipoSetor() == null){
-            erros.addError(new ObjectError("setor", "O setor não pode ser vazio!"));
+            ocorrenciaError.setTipoSetor("O setor não pode ser vazio!");
         }
 
         //data
@@ -22,29 +21,41 @@ public class OcorrenciaValidator {
         //hora
 
         if(ocorrencia.getResumo() == null || ocorrencia.getResumo().isEmpty()){
-            erros.addError(new ObjectError("resumo", "O resumo da ocorrência não pode ser vazio!"));
+            ocorrenciaError.setResumo("O resumo da ocorrência não pode ser vazio!");
+        }else if(ocorrencia.getResumo().length() < 15){
+            ocorrenciaError.setResumo("O resumo da ocorrência está muito curto! (min: 15 caracteres)");
         }
 
         if(ocorrencia.getTipoOcorrencia() == null){
-            erros.addError(new ObjectError("ocorrencia", "O tipo de ocorrência não pode ser vazio!"));
+            ocorrenciaError.setTipoOcorrencia("O tipo de ocorrência não pode ser vazio!");
         }
 
         if(ocorrencia.getTipoFaseAssistencia() == null){
-            erros.addError(new ObjectError("faseAssistencia", "A fase de assistência não pode ser vazia!"));
+            ocorrenciaError.setTipoFaseAssistencia("A fase de assistência não pode ser vazia!");
         }
 
         if(ocorrencia.getTipoIncidencia() == null){
-            erros.addError(new ObjectError("incidencia", "O tipo de incidência não pode ser vazio!"));
+            ocorrenciaError.setTipoIncidencia("O tipo de incidência não pode ser vazio!");
         }
 
         if(ocorrencia.getTipoDano() == null){
-            erros.addError(new ObjectError("dano", "O grau de dano não pode ser vazio!"));
+            ocorrenciaError.setTipoDano("O grau de dano não pode ser vazio!");
         }
 
         if(ocorrencia.getDescricao() == null || ocorrencia.getDescricao().isEmpty()){
-            erros.addError(new ObjectError("descricao", "A descrição da ocorrência não pode ser vazia!"));
+            ocorrenciaError.setDescricao("A descrição da ocorrência não pode ser vazia!");
+        }else if(ocorrencia.getDescricao().length() < 15){
+            ocorrenciaError.setDescricao("A descrição da ocorrência está muito curta! (min: 15 caracteres)");
         }
 
-        return erros;
+        if(ocorrencia.getFatorContribuinte() != null && !ocorrencia.getFatorContribuinte().isEmpty()){
+            if(ocorrencia.getFatorContribuinte().length() < 15){
+                ocorrenciaError.setFatorContribuinte("O fator contribuinte está muito curto! (min: 15 caracteres)");
+            }else if(ocorrencia.getFatorContribuinte().matches("^[0-9]")){
+                ocorrenciaError.setFatorContribuinte("O fator contribuinte está inválido!");
+            }
+        }
+
+        return ocorrenciaError;
     }
 }

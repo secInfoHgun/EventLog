@@ -1,5 +1,6 @@
-package com.hgun.sti.models.types;
+package com.hgun.sti.models;
 
+import com.hgun.sti.models.types.AbstractTipo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +11,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name="tipo_role")
-public class TipoRole extends AbstractTipo{
+@Table(name="roles")
+public class Role{
     @Id
     @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    public Long id;
+    public String name;
 }

@@ -22,49 +22,49 @@ public class Ocorrencia {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    public Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @NotNull
-    Paciente paciente;
+    public Paciente paciente;
 
     @NotBlank
-    String resumo;
+    public String resumo;
 
     @NotBlank
-    String descricao;
+    public String descricao;
 
-    String fatorContribuinte;
+    public String fatorContribuinte;
 
     @NotNull
-    Boolean pacienteFaleceu;
+    public Boolean pacienteFaleceu;
 
     @NotNull
-    Boolean pacienteFoiInternado;
+    public Boolean pacienteFoiInternado;
 
     @NotBlank
-    String data;
+    public String data;
 
     @NotBlank
-    String hora;
+    public String hora;
 
     @NonNull
     @OneToOne
-    TipoOcorrencia tipoOcorrencia;
+    public TipoOcorrencia tipoOcorrencia;
 
     @NonNull
     @OneToOne
-    TipoIncidencia tipoIncidencia;
+    public TipoIncidencia tipoIncidencia;
 
     @NonNull
     @OneToOne
-    TipoDano tipoDano;
+    public TipoDano tipoDano;
 
     @NonNull
     @OneToOne
-    TipoSetor tipoSetor;
+    public TipoSetor tipoSetor;
 
     @NonNull
     @OneToOne
-    TipoFaseAssistencia tipoFaseAssistencia;
+    public TipoFaseAssistencia tipoFaseAssistencia;
 }

@@ -13,6 +13,6 @@ import javax.persistence.MappedSuperclass;
 @NoArgsConstructor
 @SuperBuilder
 public abstract class AbstractTipo {
-    String nome;
-    String descricao;
+    public String nome;
+    public String descricao;
 }

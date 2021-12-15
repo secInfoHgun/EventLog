@@ -1,6 +1,5 @@
 package com.hgun.sti.models;
 
-import com.hgun.sti.models.types.TipoRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +21,7 @@ public class Usuario {
 
     private String login;
     private String senha;
+    private boolean ativo;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -29,5 +29,10 @@ public class Usuario {
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<TipoRole> roles = new HashSet<>();
+
+    private Set<Role> roles = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
 }

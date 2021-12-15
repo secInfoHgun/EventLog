@@ -14,5 +14,5 @@ import javax.persistence.*;
 public class TipoIncidencia extends AbstractTipo{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    public Long id;
 }

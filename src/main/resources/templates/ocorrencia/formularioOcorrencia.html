@@ -34,19 +34,27 @@
                                 <div class="form-group">
                                     <label style="color: #2a2b2d"><b>*</b> Nome completo do Paciente</label>
                                     <input type="text" class="form-control"  required th:field="*{paciente.nome}" >
-                                    <label style="color: red" th:if="${erroNome != null}" th:text="${erroNome}"></label>
+                                    <div th:if="${erros.paciente != null}">
+                                        <label style="color: red" th:if="${erros.paciente.nome != null}" th:text="${erros.paciente.nome}"></label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-2 pl-1">
                                 <div class="form-group">
                                     <label style="color: #2a2b2d"><b>*</b> Prontuário</label>
                                     <input type="text" class="form-control" required th:field="*{paciente.prontuario}">
+                                    <div th:if="${erros.paciente != null}">
+                                        <label style="color: red" th:if="${erros.paciente.prontuario != null}" th:text="${erros.paciente.prontuario}"></label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-2 pl-1">
                                 <div class="form-group">
                                     <label style="color: #2a2b2d"><b>*</b> Idade</label>
                                     <input type="text" class="form-control" data-mask="00 ano(s) 00 mes(es)" required th:field="*{paciente.idade}">
+                                    <div th:if="${erros.paciente != null}">
+                                        <label style="color: red" th:if="${erros.paciente.idade != null}" th:text="${erros.paciente.idade}"></label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-2 pl-1">
@@ -57,6 +65,9 @@
                                         <option th:value="M">Masculino</option>
                                         <option th:value="F">Feminino</option>
                                     </select>
+                                    <div th:if="${erros.paciente != null}">
+                                        <label style="color: red" th:if="${erros.paciente.sexo != null}" th:text="${erros.paciente.sexo}"></label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -70,6 +81,7 @@
                                         <option th:value="null"></option>
                                         <option th:value="${tipo.id}" th:each="tipo : ${listaTipoSetor}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
                                     </select>
+                                    <label style="color: red" th:if="${erros.tipoSetor != null}" th:text="${erros.tipoSetor}"></label>
                                 </div>
                             </div>
                             <div class="col-md-2 pl-1">
@@ -92,6 +104,7 @@
                                 <div class="form-group">
                                     <label style="color: #2a2b2d"><b>*</b> Resumo da ocorrência</label>
                                     <textarea class="form-control" required th:field="*{resumo}"></textarea>
+                                    <label style="color: red" th:if="${erros.resumo != null}" th:text="${erros.resumo}"></label>
                                 </div>
                             </div>
                         </div>
@@ -103,6 +116,7 @@
                                         <option th:value="null"></option>
                                         <option th:value="${tipo.id}" th:each="tipo : ${listaTipoOcorrencia}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
                                     </select>
+                                    <label style="color: red" th:if="${erros.tipoOcorrencia != null}" th:text="${erros.tipoOcorrencia}"></label>
                                 </div>
                             </div>
                             <div class="col-md-7 pl-1">
@@ -112,6 +126,7 @@
                                         <option th:value="null"></option>
                                         <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFaseAssistencia}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
                                     </select>
+                                    <label style="color: red" th:if="${erros.tipoFaseAssistencia != null}" th:text="${erros.tipoFaseAssistencia}"></label>
                                 </div>
                             </div>
                         </div>
@@ -123,6 +138,7 @@
                                         <option th:value="null"></option>
                                         <option th:value="${tipo.id}" th:each="tipo : ${listaTipoIncidencia}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
                                     </select>
+                                    <label style="color: red" th:if="${erros.tipoIncidencia != null}" th:text="${erros.tipoIncidencia}"></label>
                                 </div>
                             </div>
                             <div class="col-md-5 pl-1">
@@ -132,6 +148,7 @@
                                         <option th:value="null"></option>
                                         <option th:value="${tipo.id}" th:each="tipo : ${listaTipoDano}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
                                     </select>
+                                    <label style="color: red" th:if="${erros.tipoDano != null}" th:text="${erros.tipoDano}"></label>
                                 </div>
                             </div>
                         </div>
@@ -140,6 +157,7 @@
                                 <div class="form-group">
                                     <label style="color: #2a2b2d"><b>*</b> Descrição da ocorrência</label>
                                     <textarea class="form-control" required th:field="*{descricao}"></textarea>
+                                    <label style="color: red" th:if="${erros.descricao != null}" th:text="${erros.descricao}"></label>
                                 </div>
                             </div>
                         </div>
@@ -149,6 +167,7 @@
                                 <div class="form-group">
                                     <label style="color: #2a2b2d">Se houver fator contribuinte, qual foi?</label>
                                     <input type="text" class="form-control" th:field="*{fatorContribuinte}">
+                                    <label style="color: red" th:if="${erros.fatorContribuinte != null}" th:text="${erros.fatorContribuinte}"></label>
                                 </div>
                             </div>
 
