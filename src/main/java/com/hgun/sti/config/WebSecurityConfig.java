@@ -63,7 +63,8 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
                 .antMatchers(staticResources).permitAll()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
                 .antMatchers(HttpMethod.POST, "/").permitAll()
-                .antMatchers(HttpMethod.GET, "/administrador").hasAnyAuthority("ADMIN") //tratar erro de user que tentou acessar
+                .antMatchers(HttpMethod.GET, "/administrador").hasAnyAuthority("ADMIN")
+                .antMatchers(HttpMethod.GET, "/administrador/ocorrencias").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")

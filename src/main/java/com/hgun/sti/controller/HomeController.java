@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/")
-public class FormController {
+public class HomeController {
 
     @Autowired
     private TipoOcorrenciaRepository tipoOcorrenciaRepository;
@@ -56,7 +56,7 @@ public class FormController {
         model.addAttribute("listaTipoFaseAssistencia", tipoFaseAssistenciaRepository.findAll());
         model.addAttribute("listaTipoSetor", tipoSetorRepository.findAll());
 
-        return "ocorrencia/formularioOcorrencia.html";
+        return "home.html";
     }
 
     @PostMapping
