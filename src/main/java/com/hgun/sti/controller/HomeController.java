@@ -67,7 +67,18 @@ public class HomeController {
             redirectAttributes.addFlashAttribute("erros", erros);
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
         }else{
+
+            var formPaciente = ocorrencia.getPaciente();
+
+            var pacienteBanco = pacienteRepository.getPacienteByProntuario(formPaciente.getProntuario());
+
+            if(pacienteBanco == null){
+                pacienteBanco = pacienteRepository.save(formPaciente);
+            }
+
+            ocorrencia.setPaciente(pacienteBanco);
             ocorrenciaRepository.save(ocorrencia);
+
         }
 
         return "redirect:/";

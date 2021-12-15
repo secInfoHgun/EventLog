@@ -88,12 +88,14 @@
                                 <div class="form-group">
                                     <label style="color: #2a2b2d"><b>*</b> Data</label>
                                     <input type="text" class="form-control" data-mask="00/00/0000" required th:field="*{data}">
+                                    <label style="color: red" th:if="${erros.data != null}" th:text="${erros.data}"></label>
                                 </div>
                             </div>
                             <div class="col-md-1 pl-1">
                                 <div class="form-group">
-                                    <label style="color: #2a2b2d">Hora</label>
+                                    <label style="color: #2a2b2d"><b>*</b> Hora</label>
                                     <input type="text" class="form-control" data-mask="00:00" required th:field="*{hora}">
+                                    <label style="color: red" th:if="${erros.hora != null}" th:text="${erros.hora}"></label>
                                 </div>
                             </div>
                         </div>
