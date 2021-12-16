@@ -12,6 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
 @Controller
 @RequestMapping("/administrador")
 public class AdministradorController {
@@ -45,8 +49,11 @@ public class AdministradorController {
     @GetMapping("/ocorrencias")
     public String ocorrenciaslistpage(Model model){
 
-        model.addAttribute("ocorrenciaFiltro", new Ocorrencia());
-        model.addAttribute("ocorrencias", ocorrenciaRepository.getAll());
+        if(model.getAttribute("ocorrencias") == null){
+            model.addAttribute("ocorrenciaFiltro", new Ocorrencia());
+            model.addAttribute("ocorrencias", ocorrenciaRepository.getAll());
+        }
+
         model.addAttribute("listaTipoOcorrencia", tipoOcorrenciaRepository.findAll());
         model.addAttribute("listaTipoIncidencia", tipoIncidenciaRepository.findAll());
         model.addAttribute("listaTipoDano", tipoDanoRepository.findAll());
@@ -116,5 +123,61 @@ public class AdministradorController {
         redirectAttributes.addFlashAttribute("info", true);
 
         return "redirect:/administrador/ocorrencias/form";
+    }
+
+    @PostMapping("/ocorrencias/listfilter")
+    public String ocorrenciaslistfilter(@ModelAttribute Ocorrencia ocorrenciaFilter, RedirectAttributes redirectAttributes){
+       var ocorrencias = ocorrenciaRepository.getAll();
+
+        if(!ocorrencias.isEmpty()){
+            if(ocorrenciaFilter.paciente.prontuario != null && !ocorrenciaFilter.paciente.prontuario.isEmpty() && ocorrenciaFilter.getPaciente().getProntuario().equals("")){
+                ocorrencias.removeIf(o -> o.paciente.prontuario != ocorrenciaFilter.paciente.prontuario);
+            }
+
+            if(ocorrenciaFilter.tipoSetor != null && ocorrenciaFilter.tipoSetor.id != null){
+                ocorrencias.removeIf(o -> o.tipoSetor.id != ocorrenciaFilter.tipoSetor.id);
+            }
+
+            if(ocorrenciaFilter.data != null && ocorrenciaFilter.data.isEmpty() && !ocorrenciaFilter.data.equals("")){
+                ocorrencias.removeIf(o -> o.data != ocorrenciaFilter.data);
+            }
+
+            if(ocorrenciaFilter.hora != null && ocorrenciaFilter.hora.isEmpty() && !ocorrenciaFilter.hora.equals("")){
+                ocorrencias.removeIf(o -> o.hora != ocorrenciaFilter.hora);
+            }
+
+            if(ocorrenciaFilter.tipoOcorrencia != null && ocorrenciaFilter.tipoOcorrencia.id != null){
+                ocorrencias.removeIf(o -> o.tipoOcorrencia.id != ocorrenciaFilter.tipoOcorrencia.id);
+            }
+
+            if(ocorrenciaFilter.tipoFaseAssistencia != null && ocorrenciaFilter.tipoFaseAssistencia.id != null){
+                ocorrencias.removeIf(o -> o.tipoFaseAssistencia.id != ocorrenciaFilter.tipoFaseAssistencia.id);
+            }
+
+            if(ocorrenciaFilter.tipoIncidencia != null && ocorrenciaFilter.tipoIncidencia.id != null){
+                ocorrencias.removeIf(o -> o.tipoIncidencia.id != ocorrenciaFilter.tipoIncidencia.id);
+            }
+
+            if(ocorrenciaFilter.tipoDano != null && ocorrenciaFilter.tipoDano.id != null){
+                ocorrencias.removeIf(o -> o.tipoDano.id != ocorrenciaFilter.tipoDano.id);
+            }
+
+            if(ocorrenciaFilter.pacienteFoiInternado != null && ocorrenciaFilter.pacienteFoiInternado != false){
+                ocorrencias.removeIf(o -> o.pacienteFoiInternado != ocorrenciaFilter.pacienteFoiInternado);
+            }
+
+            if(ocorrenciaFilter.pacienteFaleceu != null && ocorrenciaFilter.pacienteFaleceu != false){
+                ocorrencias.removeIf(o -> o.pacienteFaleceu != ocorrenciaFilter.pacienteFaleceu);
+            }
+
+            if(ocorrenciaFilter.visualizada != null && ocorrenciaFilter.visualizada != false){
+                ocorrencias.removeIf(o -> o.visualizada != ocorrenciaFilter.visualizada);
+            }
+        }
+
+        redirectAttributes.addFlashAttribute("ocorrenciaFiltro", ocorrenciaFilter);
+        redirectAttributes.addFlashAttribute("ocorrencias", ocorrencias);
+
+        return "redirect:/administrador/ocorrencias";
     }
 }
