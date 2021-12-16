@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
     <div th:replace="fragments/head :: head('EventLog - Ocorrências')"></div>
 
@@ -11,10 +11,202 @@
 
             <div class="main-panel">
 
-                <div th:replace="fragments/header :: header()"></div>
+                <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+                    <div class="container-fluid">
+                        <div class="navbar-wrapper">
+                            <a class="navbar-brand">Ocorrências</a>
+                        </div>
+                        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/administrador/ocorrencias/form}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                        </svg>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
 
                 <main class="content">
+                    <main class="container">
+                        <div class="card card-user" style="margin-top: 40px">
+                            <div class="card-body" style="padding: 40px">
+                                <form method="post" th:action="@{/administrador/ocorrencias/form}" th:object="${ocorrencia}">
+                                    <!-- Dados do paciente -->
+                                    <div class="row">
+                                        <div class="col-md-6 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Nome completo do paciente</label>
+                                                <input type="text" class="form-control" required th:field="*{paciente.nome}" th:disabled="${info}">
+                                                <div th:if="${erros.paciente != null}">
+                                                    <label style="color: red" th:if="${erros.paciente.nome != null}" th:text="${erros.paciente.nome}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Prontuário</label>
+                                                <input type="text" class="form-control" required th:field="*{paciente.prontuario}" th:disabled="${info}">
+                                                <div th:if="${erros.paciente != null}">
+                                                    <label style="color: red" th:if="${erros.paciente.prontuario != null}" th:text="${erros.paciente.prontuario}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Idade</label>
+                                                <input type="text" class="form-control" data-mask="00 ano(s) 00 mes(es)" required th:field="*{paciente.idade}" th:disabled="${info}">
+                                                <div th:if="${erros.paciente != null}">
+                                                    <label style="color: red" th:if="${erros.paciente.idade != null}" th:text="${erros.paciente.idade}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Sexo</label>
+                                                <select class="form-control" required th:field="*{paciente.sexo}" th:disabled="${info}">
+                                                    <option th:value="null" required></option>
+                                                    <option th:value="M">Masculino</option>
+                                                    <option th:value="F">Feminino</option>
+                                                </select>
+                                                <div th:if="${erros.paciente != null}">
+                                                    <label style="color: red" th:if="${erros.paciente.sexo != null}" th:text="${erros.paciente.sexo}"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <!-- Dados de onde e quando foi a ocorrencia -->
+                                    <div class="row">
+                                        <div class="col-md-9 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Setor da ocorrência</label>
+                                                <select class="form-control" th:field="*{tipoSetor.id}" required th:disabled="${info}">
+                                                    <option th:value="null"></option>
+                                                    <option th:value="${tipo.id}" th:each="tipo : ${listaTipoSetor}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                                </select>
+                                                <label style="color: red" th:if="${erros.tipoSetor != null}" th:text="${erros.tipoSetor}"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Data</label>
+                                                <input type="text" class="form-control" data-mask="00/00/0000" required th:field="*{data}" th:disabled="${info}">
+                                                <label style="color: red" th:if="${erros.data != null}" th:text="${erros.data}"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Hora</label>
+                                                <input type="text" class="form-control" data-mask="00:00" required th:field="*{hora}" th:disabled="${info}">
+                                                <label style="color: red" th:if="${erros.hora != null}" th:text="${erros.hora}"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Dados que descrevem a ocorrencia -->
+                                    <div class="row">
+                                        <div class="col-md-12 px-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Resumo da ocorrência</label>
+                                                <textarea class="form-control" required th:field="*{resumo}" th:disabled="${info}"></textarea>
+                                                <label style="color: red" th:if="${erros.resumo != null}" th:text="${erros.resumo}"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Tipo de ocorrência</label>
+                                                <select class="form-control" required th:field="*{tipoOcorrencia.id}" th:disabled="${info}">
+                                                    <option th:value="null"></option>
+                                                    <option th:value="${tipo.id}" th:each="tipo : ${listaTipoOcorrencia}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                                </select>
+                                                <label style="color: red" th:if="${erros.tipoOcorrencia != null}" th:text="${erros.tipoOcorrencia}"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Em que fase da assistência ocorreu?</label>
+                                                <select class="form-control" required th:field="*{tipoFaseAssistencia.id}" th:disabled="${info}">
+                                                    <option th:value="null"></option>
+                                                    <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFaseAssistencia}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                                </select>
+                                                <label style="color: red" th:if="${erros.tipoFaseAssistencia != null}" th:text="${erros.tipoFaseAssistencia}"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-7 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Tipo Incidência <small>(com/sem Dano)</small></label>
+                                                <select class="form-control" required th:field="*{tipoIncidencia.id}" th:disabled="${info}">
+                                                    <option th:value="null"></option>
+                                                    <option th:value="${tipo.id}" th:each="tipo : ${listaTipoIncidencia}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                                </select>
+                                                <label style="color: red" th:if="${erros.tipoIncidencia != null}" th:text="${erros.tipoIncidencia}"></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 pl-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Característica <small>(Grau do Dano)</small></label>
+                                                <select class="form-control" required th:field="*{tipoDano.id}" th:disabled="${info}">
+                                                    <option th:value="null"></option>
+                                                    <option th:value="${tipo.id}" th:each="tipo : ${listaTipoDano}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                                </select>
+                                                <label style="color: red" th:if="${erros.tipoDano != null}" th:text="${erros.tipoDano}"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 px-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d"><b>*</b> Descrição da ocorrência</label>
+                                                <textarea class="form-control" required th:field="*{descricao}" th:disabled="${info}"></textarea>
+                                                <label style="color: red" th:if="${erros.descricao != null}" th:text="${erros.descricao}"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 px-1">
+                                            <div class="form-group">
+                                                <label style="color: #2a2b2d">Se houver fator contribuinte, qual foi?</label>
+                                                <input type="text" class="form-control" th:field="*{fatorContribuinte}" th:disabled="${info}">
+                                                <label style="color: red" th:if="${erros.fatorContribuinte != null}" th:text="${erros.fatorContribuinte}"></label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 px-1">
+                                            <div style="margin-top: 30px; margin-left: 60px">
+                                                <input class="form-check-input" type="checkbox" th:field="*{pacienteFoiInternado}" th:checked="${pacienteFoiInternado}" th:disabled="${info}" style="width: 20px; height: 20px">
+                                                <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d">
+                                                    O ocorrido levou a internação
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 px-1">
+                                            <div style="margin-top: 30px; margin-left: 60px">
+                                                <input class="form-check-input" type="checkbox" th:field="*{pacienteFaleceu}" th:checked="${pacienteFaleceu}" th:disabled="${info}" style="width: 20px; height: 20px">
+                                                <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d">
+                                                    O ocorrido levou a óbito
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" th:if="${!info}">
+                                        <div class="ml-auto mr-auto">
+                                            <button type="submit" class="btn btn-primary mx-auto" style="width: 200px; height: 40px; font-size: 14px" >Enviar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </main>
                 </main>
             </div>
         </div>

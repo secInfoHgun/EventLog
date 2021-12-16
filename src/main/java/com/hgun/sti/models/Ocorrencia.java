@@ -48,6 +48,9 @@ public class Ocorrencia {
     @NotBlank
     public String hora;
 
+    @NotNull
+    public Boolean visualizada;
+
     @NonNull
     @OneToOne
     public TipoOcorrencia tipoOcorrencia;

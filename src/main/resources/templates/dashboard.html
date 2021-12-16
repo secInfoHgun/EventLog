@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
   <div th:replace="fragments/head :: head('EventLog - Dashboard')"></div>
 
@@ -8,6 +8,10 @@
     <div class="wrapper ">
 
       <div th:replace="fragments/fragmentMenu/menu :: menu(1)"></div>
+
+      <!--                <form th:action="@{/logout}" method="post">-->
+      <!--                    <a onclick="this.parentNode.submit();" style="cursor: pointer" ><i class="fa fa-sign-out"></i> Sair</a>-->
+      <!--                </form>-->
 
       <div class="main-panel">
         <!-- Navbar -->

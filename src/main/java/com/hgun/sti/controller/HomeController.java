@@ -77,6 +77,7 @@ public class HomeController {
             }
 
             ocorrencia.setPaciente(pacienteBanco);
+            ocorrencia.setVisualizada(false);
             ocorrenciaRepository.save(ocorrencia);
 
         }

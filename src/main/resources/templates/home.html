@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
     <div th:replace="fragments/head :: head('EventLog - Formulário')"></div>
 
@@ -32,7 +32,7 @@
                         <div class="row">
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
-                                    <label style="color: #2a2b2d"><b>*</b> Nome completo do Paciente</label>
+                                    <label style="color: #2a2b2d"><b>*</b> Nome completo do paciente</label>
                                     <input type="text" class="form-control"  required th:field="*{paciente.nome}" >
                                     <div th:if="${erros.paciente != null}">
                                         <label style="color: red" th:if="${erros.paciente.nome != null}" th:text="${erros.paciente.nome}"></label>
