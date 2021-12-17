@@ -12,7 +12,7 @@ public class PacienteValidator {
             pacienteError.setNome("O nome não pode estar vazio!");
         }else if(paciente.getNome().length() < 4){
             pacienteError.setNome("O nome do paciente está muito curto! (min: 4 letras)");
-        }else if(!paciente.getNome().matches("[a-zA-Z\s]+")){
+        }else if(!paciente.getNome().matches("^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}")){
             pacienteError.setNome("O nome do paciente deve conter apenas letras e espaços");
         }
 

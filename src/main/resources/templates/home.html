@@ -105,7 +105,7 @@
                             <div class="col-md-12 px-1">
                                 <div class="form-group">
                                     <label style="color: #2a2b2d"><b>*</b> Resumo da ocorrência</label>
-                                    <textarea th:style="${ erros.resumo != null ? 'border-color: red' : ''}" required th:field="*{resumo}"></textarea>
+                                    <textarea th:style="${ erros.resumo != null ? 'border-color: red' : ''}" class="form-control" required th:field="*{resumo}"></textarea>
                                     <label style="color: red" th:if="${erros.resumo != null}" th:text="${erros.resumo}"></label>
                                 </div>
                             </div>

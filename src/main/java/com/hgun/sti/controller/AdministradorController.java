@@ -131,8 +131,8 @@ public class AdministradorController {
        var ocorrencias = ocorrenciaRepository.getAll();
 
         if(!ocorrencias.isEmpty()){
-            if(ocorrenciaFilter.paciente.prontuario != null && !ocorrenciaFilter.paciente.prontuario.isEmpty() && ocorrenciaFilter.getPaciente().getProntuario().equals("")){
-                ocorrencias.removeIf(o -> o.paciente.prontuario != ocorrenciaFilter.paciente.prontuario);
+            if(ocorrenciaFilter.paciente.prontuario != null && !ocorrenciaFilter.paciente.prontuario.isEmpty() && !ocorrenciaFilter.getPaciente().getProntuario().equals("")){
+                ocorrencias.removeIf(o -> !o.paciente.prontuario.equals(ocorrenciaFilter.paciente.prontuario));
             }
 
             if(ocorrenciaFilter.tipoSetor != null && ocorrenciaFilter.tipoSetor.id != null){
@@ -140,11 +140,11 @@ public class AdministradorController {
             }
 
             if(ocorrenciaFilter.data != null && ocorrenciaFilter.data.isEmpty() && !ocorrenciaFilter.data.equals("")){
-                ocorrencias.removeIf(o -> o.data != ocorrenciaFilter.data);
+                ocorrencias.removeIf(o -> !o.data.equals(ocorrenciaFilter.data));
             }
 
             if(ocorrenciaFilter.hora != null && ocorrenciaFilter.hora.isEmpty() && !ocorrenciaFilter.hora.equals("")){
-                ocorrencias.removeIf(o -> o.hora != ocorrenciaFilter.hora);
+                ocorrencias.removeIf(o -> o.hora.equals(ocorrenciaFilter.hora));
             }
 
             if(ocorrenciaFilter.tipoOcorrencia != null && ocorrenciaFilter.tipoOcorrencia.id != null){
