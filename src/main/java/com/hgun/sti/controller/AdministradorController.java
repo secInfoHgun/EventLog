@@ -88,6 +88,7 @@ public class AdministradorController {
             redirectAttributes.addFlashAttribute("erros", erros);
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
             redirectAttributes.addFlashAttribute("info", false);
+            return "redirect:/administrador/ocorrencias/form";
         }else{
 
             var formPaciente = ocorrencia.getPaciente();
