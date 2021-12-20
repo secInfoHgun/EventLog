@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface PacienteRepository extends JpaRepository<Paciente, Long> {
-    @Query("SELECT p FROM Paciente p WHERE p.prontuario = :prontuario")
-    public Paciente getPacienteByProntuario(@Param("prontuario") String prontuario);
+    @Query("SELECT p FROM Paciente p WHERE p.preccp = :prontuario")
+    public Paciente getPacienteByPreccp(@Param("prontuario") String preccp);
 }

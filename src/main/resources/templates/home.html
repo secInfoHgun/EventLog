@@ -41,10 +41,10 @@
                             </div>
                             <div class="col-md-2 pl-1">
                                 <div class="form-group">
-                                    <label style="color: #2a2b2d"><b>*</b> Prontuário</label>
-                                    <input type="text" th:class="${ erros.paciente != null && erros.paciente.prontuario != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{paciente.prontuario}">
+                                    <label style="color: #2a2b2d"><b>*</b> PRECCP</label>
+                                    <input type="text" th:class="${ erros.paciente != null && erros.paciente.preccp != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{paciente.preccp}">
                                     <div th:if="${erros.paciente != null}">
-                                        <label style="color: red" th:if="${erros.paciente.prontuario != null}" th:text="${erros.paciente.prontuario}"></label>
+                                        <label style="color: red" th:if="${erros.paciente.preccp != null}" th:text="${erros.paciente.preccp}"></label>
                                     </div>
                                 </div>
                             </div>

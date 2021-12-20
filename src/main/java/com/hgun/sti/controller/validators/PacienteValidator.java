@@ -16,10 +16,10 @@ public class PacienteValidator {
             pacienteError.setNome("O nome do paciente deve conter apenas letras e espaços");
         }
 
-        if(paciente.getProntuario() == null || paciente.getProntuario().isEmpty()){
-            pacienteError.setProntuario("O prontuário não pode estar vazio!");
-        }else if(!paciente.getProntuario().matches("^[\\$]?[-+]?[\\d\\.,]*[\\.,]?\\d+$")){
-            pacienteError.setProntuario("O prontuário deve conter apenas números!");
+        if(paciente.getPreccp() == null || paciente.getPreccp().isEmpty()){
+            pacienteError.setPreccp("O prontuário não pode estar vazio!");
+        }else if(!paciente.getPreccp().matches("^[\\$]?[-+]?[\\d\\.,]*[\\.,]?\\d+$")){
+            pacienteError.setPreccp("O prontuário deve conter apenas números!");
         }
 
         pacienteError.setIdade(validaIdade(paciente.getIdade()));
@@ -32,12 +32,14 @@ public class PacienteValidator {
     }
 
     public static String validaIdade(String idade){
+        if(idade == null || idade.isEmpty()){
+            return "A idade não pode ser vazia!";
+        }
+
         var anos = Integer.parseInt(idade.split(" ")[0]);
         var meses = Integer.parseInt(idade.split(" ")[2]);
 
-        if(idade == null || idade.isEmpty()){
-            return "A idade não pode ser vazia!";
-        }else if(idade.equals("00 ano(s) 00 mes(s)") || anos < 0 || meses > 11 || meses < 0){
+        if(idade.equals("00 ano(s) 00 mes(s)") || anos < 0 || meses > 11 || meses < 0){
             return "A idade é inválida!";
         }
 

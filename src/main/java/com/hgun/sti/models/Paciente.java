@@ -21,7 +21,7 @@ public class Paciente {
     public Long id;
 
     @NotBlank
-    public String prontuario;
+    public String preccp;
 
     @NotBlank
     public String nome;

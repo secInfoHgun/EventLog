@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PacienteDTO {
     Long id;
-    String prontuario;
+    String preccp;
     String nome;
     String idade;
     Character sexo;
@@ -21,7 +21,7 @@ public class PacienteDTO {
     public static Paciente fromDTO(PacienteDTO paciente){
         return Paciente.builder()
                 .id(paciente.getId())
-                .prontuario(paciente.getProntuario())
+                .preccp(paciente.getPreccp())
                 .nome(paciente.getNome())
                 .idade(paciente.getIdade())
                 .sexo(paciente.getSexo())
@@ -31,7 +31,7 @@ public class PacienteDTO {
     public static PacienteDTO toDTO(Paciente paciente){
         return PacienteDTO.builder()
                 .id(paciente.getId())
-                .prontuario(paciente.getProntuario())
+                .preccp(paciente.getPreccp())
                 .nome(paciente.getNome())
                 .idade(paciente.getIdade())
                 .sexo(paciente.getSexo())

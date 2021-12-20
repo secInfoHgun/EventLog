@@ -93,7 +93,7 @@ public class AdministradorController {
 
             var formPaciente = ocorrencia.getPaciente();
 
-            var pacienteBanco = pacienteRepository.getPacienteByProntuario(formPaciente.getProntuario());
+            var pacienteBanco = pacienteRepository.getPacienteByPreccp(formPaciente.getPreccp());
 
             if(pacienteBanco == null){
                 pacienteBanco = pacienteRepository.save(formPaciente);
@@ -131,8 +131,8 @@ public class AdministradorController {
        var ocorrencias = ocorrenciaRepository.getAll();
 
         if(!ocorrencias.isEmpty()){
-            if(ocorrenciaFilter.paciente.prontuario != null && !ocorrenciaFilter.paciente.prontuario.isEmpty() && !ocorrenciaFilter.getPaciente().getProntuario().equals("")){
-                ocorrencias.removeIf(o -> !o.paciente.prontuario.equals(ocorrenciaFilter.paciente.prontuario));
+            if(ocorrenciaFilter.paciente.preccp != null && !ocorrenciaFilter.paciente.preccp.isEmpty() && !ocorrenciaFilter.paciente.preccp.equals("")){
+                ocorrencias.removeIf(o -> !o.paciente.preccp.equals(ocorrenciaFilter.paciente.preccp));
             }
 
             if(ocorrenciaFilter.tipoSetor != null && ocorrenciaFilter.tipoSetor.id != null){

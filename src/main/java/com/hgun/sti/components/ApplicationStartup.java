@@ -93,6 +93,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoDano.isEmpty()){
             String[][] aux = {
+                {"NENHUM", ""},
                 {"LEVE", "O paciente apresentou sintomas leves, danos mínimos ou intermediários de curta duração"},
                 {"MODERADO", "O paciente necessitou de intervenção, prolongamento da internação, perda de função"},
                 {"GRAVE", "Foi necessária intervenção para salvar a vida, grande intervenção médico-cirúrgica ou casou grandes danos permanentes"},

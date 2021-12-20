@@ -70,7 +70,7 @@ public class HomeController {
 
             var formPaciente = ocorrencia.getPaciente();
 
-            var pacienteBanco = pacienteRepository.getPacienteByProntuario(formPaciente.getProntuario());
+            var pacienteBanco = pacienteRepository.getPacienteByPreccp(formPaciente.getPreccp());
 
             if(pacienteBanco == null){
                 pacienteBanco = pacienteRepository.save(formPaciente);

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class PacienteError {
 
-    public String prontuario;
+    public String preccp;
 
     public String nome;
 
@@ -18,7 +18,7 @@ public class PacienteError {
     public String sexo;
 
     public boolean isEmpty(){
-        if(prontuario != null && !prontuario.isEmpty()){
+        if(preccp != null && !preccp.isEmpty()){
             return false;
         }else if(nome != null && !nome.isEmpty()){
             return false;
