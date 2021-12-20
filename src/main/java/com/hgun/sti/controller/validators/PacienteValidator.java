@@ -17,9 +17,9 @@ public class PacienteValidator {
         }
 
         if(paciente.getPreccp() == null || paciente.getPreccp().isEmpty()){
-            pacienteError.setPreccp("O prontuário não pode estar vazio!");
+            pacienteError.setPreccp("O PRECCP não pode estar vazio!");
         }else if(!paciente.getPreccp().matches("^[\\$]?[-+]?[\\d\\.,]*[\\.,]?\\d+$")){
-            pacienteError.setPreccp("O prontuário deve conter apenas números!");
+            pacienteError.setPreccp("O PRECCP deve conter apenas números!");
         }
 
         pacienteError.setIdade(validaIdade(paciente.getIdade()));
