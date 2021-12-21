@@ -103,6 +103,8 @@ public class AdministradorController {
             ocorrencia.setVisualizada(false);
             ocorrenciaRepository.save(ocorrencia);
 
+            redirectAttributes.addFlashAttribute("cadastrou", true);
+
         }
 
         return "redirect:/administrador/ocorrencias";
@@ -112,8 +114,6 @@ public class AdministradorController {
     public String ocorrenciasformpage(@PathVariable Long id, RedirectAttributes redirectAttributes){
 
         var ocorrencia = ocorrenciaRepository.getById(id);
-
-        System.out.println(ocorrencia);
 
         ocorrencia.setVisualizada(true);
 
@@ -139,12 +139,12 @@ public class AdministradorController {
                 ocorrencias.removeIf(o -> o.tipoSetor.id != ocorrenciaFilter.tipoSetor.id);
             }
 
-            if(ocorrenciaFilter.data != null && ocorrenciaFilter.data.isEmpty() && !ocorrenciaFilter.data.equals("")){
+            if(ocorrenciaFilter.data != null && !ocorrenciaFilter.data.isEmpty() && !ocorrenciaFilter.data.equals("")){
                 ocorrencias.removeIf(o -> !o.data.equals(ocorrenciaFilter.data));
             }
 
-            if(ocorrenciaFilter.hora != null && ocorrenciaFilter.hora.isEmpty() && !ocorrenciaFilter.hora.equals("")){
-                ocorrencias.removeIf(o -> o.hora.equals(ocorrenciaFilter.hora));
+            if(ocorrenciaFilter.hora != null && !ocorrenciaFilter.hora.isEmpty() && !ocorrenciaFilter.hora.equals("")){
+                ocorrencias.removeIf(o -> !o.hora.equals(ocorrenciaFilter.hora));
             }
 
             if(ocorrenciaFilter.tipoOcorrencia != null && ocorrenciaFilter.tipoOcorrencia.id != null){

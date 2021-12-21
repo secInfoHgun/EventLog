@@ -80,6 +80,8 @@ public class HomeController {
             ocorrencia.setVisualizada(false);
             ocorrenciaRepository.save(ocorrencia);
 
+            redirectAttributes.addFlashAttribute("cadastrou", true);
+
         }
 
         return "redirect:/";
