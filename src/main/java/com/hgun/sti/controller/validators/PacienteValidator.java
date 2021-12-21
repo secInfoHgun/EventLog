@@ -37,9 +37,8 @@ public class PacienteValidator {
         }
 
         var anos = Integer.parseInt(idade.split(" ")[0]);
-        var meses = Integer.parseInt(idade.split(" ")[2]);
 
-        if(idade.equals("00 ano(s) 00 mes(s)") || anos < 0 || meses > 11 || meses < 0){
+        if(idade.equals("00 ano(s)") || anos < 0){
             return "A idade é inválida!";
         }
 
