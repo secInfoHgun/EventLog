@@ -104,7 +104,7 @@
                         <div class="row">
                             <div class="col-md-12 px-1">
                                 <div class="form-group">
-                                    <label style="color: #2a2b2d"><b>*</b> Resumo da ocorrência</label>
+                                    <label style="color: #2a2b2d"><b>*</b> Resumo da ocorrência / descrição do incidente</label>
                                     <textarea th:style="${ erros.resumo != null ? 'border-color: red' : ''}" class="form-control" required th:field="*{resumo}"></textarea>
                                     <label style="color: red" th:if="${erros.resumo != null}" th:text="${erros.resumo}"></label>
                                 </div>
@@ -157,7 +157,7 @@
                         <div class="row">
                             <div class="col-md-12 px-1">
                                 <div class="form-group">
-                                    <label style="color: #2a2b2d"><b>*</b> Descrição da ocorrência</label>
+                                    <label style="color: #2a2b2d"><b>*</b> Quais medidas foram tomadas no momento do incidente / evento adverso?</label>
                                     <textarea th:style="${ erros.descricao != null ? 'border-color: red' : ''}" class="form-control" required th:field="*{descricao}"></textarea>
                                     <label style="color: red" th:if="${erros.descricao != null}" th:text="${erros.descricao}"></label>
                                 </div>
