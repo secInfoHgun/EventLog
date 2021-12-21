@@ -2,6 +2,7 @@ package com.hgun.sti.controller;
 
 import com.hgun.sti.controller.validators.OcorrenciaValidator;
 import com.hgun.sti.models.Ocorrencia;
+import com.hgun.sti.models.Paciente;
 import com.hgun.sti.models.errors.OcorrenciaError;
 import com.hgun.sti.repository.OcorrenciaRepository;
 import com.hgun.sti.repository.PacienteRepository;
@@ -69,11 +70,15 @@ public class HomeController {
         }else{
 
             var formPaciente = ocorrencia.getPaciente();
+            Paciente pacienteBanco;
 
-            var pacienteBanco = pacienteRepository.getPacienteByPreccp(formPaciente.getPreccp());
-
-            if(pacienteBanco == null){
+            if(formPaciente.preccp == null || formPaciente.preccp.isEmpty()){
                 pacienteBanco = pacienteRepository.save(formPaciente);
+            }else {
+                pacienteBanco = pacienteRepository.getPacienteByPreccp(formPaciente.getPreccp());
+                if(pacienteBanco == null){
+                    pacienteBanco = pacienteRepository.save(formPaciente);
+                }
             }
 
             ocorrencia.setPaciente(pacienteBanco);
@@ -81,7 +86,6 @@ public class HomeController {
             ocorrenciaRepository.save(ocorrencia);
 
             redirectAttributes.addFlashAttribute("cadastrou", true);
-
         }
 
         return "redirect:/";
