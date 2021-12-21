@@ -16,8 +16,10 @@ public class PacienteValidator {
             pacienteError.setNome("O nome do paciente deve conter apenas letras e espaços");
         }
 
-        if(!paciente.getPreccp().matches("^[\\$]?[-+]?[\\d\\.,]*[\\.,]?\\d+$")){
-            pacienteError.setPreccp("O PRECCP deve conter apenas números!");
+        if(paciente.preccp != null && !paciente.preccp.isEmpty() && !paciente.preccp.equals("") ){
+            if(!paciente.getPreccp().matches("^[\\$]?[-+]?[\\d\\.,]*[\\.,]?\\d+$")){
+                pacienteError.setPreccp("O PRECCP deve conter apenas números!");
+            }
         }
 
         pacienteError.setIdade(validaIdade(paciente.getIdade()));
