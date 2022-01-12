@@ -31,8 +31,22 @@
                 </nav>
 
                 <main class="content">
-                    <main class="container">
-                        <div class="card card-user" style="margin-top: 40px">
+                    <main class="container" style="margin-top: 40px">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item" style="margin-right: 3px">
+                                <a class="nav-link active" aria-current="page">Ocorrência</a>
+                            </li>
+                            <li class="nav-item" style="margin-right: 3px" aria-current="page">
+                                <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" href="#">Análise</a>
+                            </li>
+                            <li class="nav-item" style="margin-right: 3px" aria-current="page">
+                                <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" href="#">Providências</a>
+                            </li>
+                            <li th:if="${ocorrencia.pacienteFaleceu}" style="margin-right: 3px" class="nav-item" aria-current="page">
+                                <a class="nav-link"  style="background-color: #E3E3E3; color: #66615B" href="#">Em caso de óbito</a>
+                            </li>
+                        </ul>
+                        <div class="card card-user" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border: 1px solid #dee2e6; border-top-color: white;">
                             <div class="card-body" style="padding: 40px">
                                 <form method="post" th:action="@{/administrador/ocorrencias/form}" th:object="${ocorrencia}">
                                     <!-- Dados do paciente -->
