@@ -16,8 +16,6 @@ public class ProvidenciaOcorrenciaError {
 
     public String acoesParaReduzirRiscos;
 
-    public String naoCaracterizaEventoAdverso;
-
     public String fatoresAtenuantesDaOcorrencia;
 
     public String data;
@@ -26,8 +24,6 @@ public class ProvidenciaOcorrenciaError {
         if(acoesDeMelhoria != null && !acoesDeMelhoria.isEmpty()){
             return false;
         }else if(acoesParaReduzirRiscos != null && !acoesParaReduzirRiscos.isEmpty()){
-            return false;
-        }else if(naoCaracterizaEventoAdverso != null && !naoCaracterizaEventoAdverso.isEmpty()){
             return false;
         }else if(fatoresAtenuantesDaOcorrencia != null && !fatoresAtenuantesDaOcorrencia.isEmpty()){
             return false;

@@ -25,13 +25,17 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     @Autowired
     private TipoSetorRepository tipoSetorRepository;
 
+    @Autowired
+    private TipoLesaoRepository tipoLesaoRepository;
+
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent event) {
         var listaTipoOcorrencia = tipoOcorrenciaRepository.findAll();
         var listaTipoIncidencia = tipoIncidenciaRepository.findAll();
         var listaTipoDano = tipoDanoRepository.findAll();
         var listaTipoFaseAssistencia = tipoFaseAssistenciaRepository.findAll();
-        var listaSetor = tipoSetorRepository.findAll();
+        var listaTipoSetor = tipoSetorRepository.findAll();
+        var listaTipoLesao = tipoLesaoRepository.findAll();
 
         if(listaTipoOcorrencia.isEmpty()){
             String[][] aux = {
@@ -133,7 +137,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             System.out.println("cadastrei os tipos de fase de assistencia");
         }
 
-        if(listaSetor.isEmpty()){
+        if(listaTipoSetor.isEmpty()){
             String[][] aux = {
                     {"1º ANDAR", ""},
                     {"2º ANDAR", ""},
@@ -175,6 +179,23 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             }
 
             System.out.println("cadastrei os tipos de setor");
+        }
+
+        if(listaTipoLesao.isEmpty()){
+            String[][] aux = {
+                    {"Houve Lesão Permanente", ""},
+                    {"Houve Lesão Temporária", ""},
+                    {"Não Houve Lesão", ""}
+            };
+
+            for (String[] i: aux) {
+                var tipoLesao =  new TipoLesao();
+                tipoLesao.setNome(i[0]);
+                tipoLesao.setDescricao(i[1]);
+                tipoLesaoRepository.save(tipoLesao);
+            }
+
+            System.out.println("cadastrei os tipos de fase de assistencia");
         }
 
         return;
