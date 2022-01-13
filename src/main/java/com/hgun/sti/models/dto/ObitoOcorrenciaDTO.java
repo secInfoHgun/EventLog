@@ -1,7 +1,6 @@
 package com.hgun.sti.models.dto;
 
 import com.hgun.sti.models.ObitoOcorrencia;
-import com.hgun.sti.models.ProvidenciaOcorrencia;
 import com.hgun.sti.models.types.TipoLesao;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

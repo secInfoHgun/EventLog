@@ -5,8 +5,6 @@ import com.hgun.sti.controller.validators.utils.HoraValidator;
 import com.hgun.sti.models.Ocorrencia;
 import com.hgun.sti.models.errors.OcorrenciaError;
 
-import java.time.LocalDateTime;
-
 public class OcorrenciaValidator {
     public static OcorrenciaError validarOcorrencia(Ocorrencia ocorrencia){
 

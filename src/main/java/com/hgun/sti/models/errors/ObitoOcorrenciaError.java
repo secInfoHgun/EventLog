@@ -1,13 +1,8 @@
 package com.hgun.sti.models.errors;
 
-import com.hgun.sti.models.types.TipoLesao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor

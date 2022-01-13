@@ -5,8 +5,6 @@ import com.hgun.sti.models.Paciente;
 import com.hgun.sti.models.types.*;
 import lombok.*;
 
-import java.util.Date;
-
 @Builder
 @Data
 @AllArgsConstructor

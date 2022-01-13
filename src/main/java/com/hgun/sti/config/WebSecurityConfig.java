@@ -77,7 +77,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
     }
 
     private AuthenticationSuccessHandler sucessoLogin(){
-        AuthenticationSuccessHandler atsh = new AuthenticationSuccessHandler() {
+        return new AuthenticationSuccessHandler() {
             @Override
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                 Cookie c = new Cookie("usuario", authentication.getName());
@@ -85,7 +85,5 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
                 response.sendRedirect("/administrador/ocorrencias");
             }
         };
-
-        return atsh;
     }
 }

@@ -1,6 +1,5 @@
 package com.hgun.sti.models.dto;
 
-import com.hgun.sti.models.Ocorrencia;
 import com.hgun.sti.models.Paciente;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
