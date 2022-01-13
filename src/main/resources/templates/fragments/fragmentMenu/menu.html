@@ -20,6 +20,11 @@
                 <li th:replace="fragments/fragmentMenu/li :: li(${indice == 2}, '/administrador/ocorrencias', 'nc-icon nc-tile-56', 'Ocorrências')"></li>
 
             </ul>
+
+            <ul class="nav fixed-bottom" style="margin-bottom: 20px">
+                <li th:replace="fragments/fragmentMenu/li :: li(${indice == 0}, '/logout', 'fa fa-sign-out', 'Sair')"></li>
+            </ul>
+
         </div>
     </div>
 

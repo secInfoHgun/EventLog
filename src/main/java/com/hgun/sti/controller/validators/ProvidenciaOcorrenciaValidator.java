@@ -9,20 +9,23 @@ public class ProvidenciaOcorrenciaValidator {
 
         var providenciaOcorrenciaError = new ProvidenciaOcorrenciaError();
 
-        // verificar com a CAP se as providencias são obrigatóroias ou facultativas,
-        // visto que existe uma opção de declarar que tal situação náo caracteriza um evento adverso
+        if(providenciaOcorrencia.getAcoesDeMelhoria() != null && !providenciaOcorrencia.getAcoesDeMelhoria().isEmpty()){
+            if(providenciaOcorrencia.getAcoesDeMelhoria().length() < 4){
+                providenciaOcorrenciaError.setAcoesDeMelhoria("As ações de melhoria está muito curta! (min: 4 caracteres)");
+            }
+        }
 
-        // acoesDeMelhoria;
-        // acoesParaReduzirRiscos;
-        // fatoresAtenuantesDaOcorrencia;
+        if(providenciaOcorrencia.getAcoesParaReduzirRiscos() != null && !providenciaOcorrencia.getAcoesParaReduzirRiscos().isEmpty()){
+            if(providenciaOcorrencia.getAcoesParaReduzirRiscos().length() < 4){
+                providenciaOcorrenciaError.setAcoesParaReduzirRiscos("As ações para reduzir riscos está muito curta! (min: 4 caracteres)");
+            }
+        }
 
-        //        if(ocorrencia.getFatorContribuinte() != null && !ocorrencia.getFatorContribuinte().isEmpty()){
-        //            if(ocorrencia.getFatorContribuinte().length() < 15){
-        //                ocorrenciaError.setFatorContribuinte("O fator contribuinte está muito curto! (min: 15 caracteres)");
-        //            }else if(ocorrencia.getFatorContribuinte().matches("^[0-9]")){
-        //                ocorrenciaError.setFatorContribuinte("O fator contribuinte está inválido!");
-        //            }
-        //        }
+        if(providenciaOcorrencia.getFatoresAtenuantesDaOcorrencia() != null && !providenciaOcorrencia.getFatoresAtenuantesDaOcorrencia().isEmpty()){
+            if(providenciaOcorrencia.getFatoresAtenuantesDaOcorrencia().length() < 4){
+                providenciaOcorrenciaError.setFatoresAtenuantesDaOcorrencia("Os fatores atenuantes da ocorrência está muito curto! (min: 4 caracteres)");
+            }
+        }
 
         providenciaOcorrenciaError.setData(DataValidator.validarData(providenciaOcorrencia.getData()));
 
