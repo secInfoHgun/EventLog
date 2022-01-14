@@ -4,7 +4,6 @@ import com.hgun.sti.models.types.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -49,23 +48,32 @@ public class Ocorrencia {
     @NotNull
     public Boolean visualizada;
 
-    @NonNull
+    @NotNull
     @OneToOne
     public TipoOcorrencia tipoOcorrencia;
 
-    @NonNull
+    @NotNull
     @OneToOne
     public TipoIncidencia tipoIncidencia;
 
-    @NonNull
+    @NotNull
     @OneToOne
     public TipoDano tipoDano;
 
-    @NonNull
+    @NotNull
     @OneToOne
     public TipoSetor tipoSetor;
 
-    @NonNull
+    @NotNull
     @OneToOne
     public TipoFaseAssistencia tipoFaseAssistencia;
+
+    @OneToOne
+    public Analise analise;
+
+    @OneToOne
+    public Providencia providencia;
+
+    @OneToOne
+    public Obito obito;
 }

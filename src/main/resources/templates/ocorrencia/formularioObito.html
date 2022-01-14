@@ -34,13 +34,13 @@
             <main class="container" style="margin-top: 40px">
                 <ul class="nav nav-tabs">
                     <li class="nav-item" style="margin-right: 3px">
-                        <a  class="nav-link"  style="background-color: #E3E3E3; color: #66615B" href="#">Ocorrência</a>
+                        <a  class="nav-link"  style="background-color: #E3E3E3; color: #66615B" th:href="@{/administrador/ocorrencias/form}">Ocorrência</a>
                     </li>
                     <li class="nav-item" style="margin-right: 3px">
-                        <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" href="#">Análise</a>
+                        <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" th:href="@{/administrador/ocorrencias/analises/form}">Análise</a>
                     </li>
                     <li class="nav-item" style="margin-right: 3px">
-                        <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" href="#">Providências</a>
+                        <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" th:href="@{/administrador/ocorrencias/providencias/form}">Providências</a>
                     </li>
                     <li th:if="${ocorrencia.pacienteFaleceu}" style="margin-right: 3px" class="nav-item">
                         <a class="nav-link active" aria-current="page">Em caso de óbito</a>

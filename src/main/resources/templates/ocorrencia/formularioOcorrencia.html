@@ -38,13 +38,13 @@
                                 <a class="nav-link active" aria-current="page">Ocorrência</a>
                             </li>
                             <li class="nav-item" style="margin-right: 3px" aria-current="page">
-                                <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" href="#">Análise</a>
+                                <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" th:href="@{/administrador/ocorrencias/analises/form}">Análise</a>
                             </li>
                             <li class="nav-item" style="margin-right: 3px" aria-current="page">
-                                <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" href="#">Providências</a>
+                                <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" th:href="@{/administrador/ocorrencias/providencias/form}">Providências</a>
                             </li>
                             <li th:if="${ocorrencia.pacienteFaleceu}" style="margin-right: 3px" class="nav-item" aria-current="page">
-                                <a class="nav-link"  style="background-color: #E3E3E3; color: #66615B" href="#">Em caso de óbito</a>
+                                <a class="nav-link"  style="background-color: #E3E3E3; color: #66615B" th:href="@{/administrador/ocorrencias/obitos/form}">Em caso de óbito</a>
                             </li>
                         </ul>
                         <div class="card card-user" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border: 1px solid #dee2e6; border-top-color: white;">
