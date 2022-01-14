@@ -6,28 +6,27 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @SuperBuilder
 @Entity
-@Table(name="providencias_ocorrencias")
-public class ProvidenciaOcorrencia {
+@Table(name="analises")
+public class Analise {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
     @NotBlank
-    public String acoesDeMelhoria;
+    public String fatoresContribuintes;
 
     @NotBlank
-    public String acoesParaReduzirRiscos;
+    public String consequenciasOrganizacionais;
 
-    @NotNull
-    public Boolean naoCaracterizaEventoAdverso;
+    @NotBlank
+    public String identificacaoeAnaliseDeFatores;
 
     @NotBlank
     public String fatoresAtenuantesDaOcorrencia;

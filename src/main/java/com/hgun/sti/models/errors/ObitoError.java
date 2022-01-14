@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ObitoOcorrenciaError {
+public class ObitoError {
 
     public String dataDoObito;
 

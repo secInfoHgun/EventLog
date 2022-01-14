@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/administrador")
-public class AdministradorController {
+@RequestMapping("/administrador/ocorrencias")
+public class OcorrenciaController {
 
     @Autowired
     private TipoOcorrenciaRepository tipoOcorrenciaRepository;
@@ -39,11 +39,6 @@ public class AdministradorController {
     private PacienteRepository pacienteRepository;
 
     @GetMapping
-    public String homeadministrador(){
-        return "dashboard.html";
-    }
-
-    @GetMapping("/ocorrencias")
     public String ocorrenciaslistpage(Model model){
 
         if(model.getAttribute("ocorrencias") == null){
@@ -60,7 +55,7 @@ public class AdministradorController {
         return "ocorrencia/listagemOcorrencia.html";
     }
 
-    @GetMapping("/ocorrencias/form")
+    @GetMapping("/form")
     public String ocorrenciasformpage(Model model){
         if(model.getAttribute("ocorrencia") == null){
             model.addAttribute("ocorrencia", new Ocorrencia());
@@ -77,7 +72,7 @@ public class AdministradorController {
         return "ocorrencia/formularioOcorrencia.html";
     }
 
-    @PostMapping("/ocorrencias/form")
+    @PostMapping("/form")
     public String ocorrenciasformregister(@ModelAttribute Ocorrencia ocorrencia, RedirectAttributes redirectAttributes){
         var erros = OcorrenciaValidator.validarOcorrencia(ocorrencia);
 
@@ -109,7 +104,7 @@ public class AdministradorController {
         return "redirect:/administrador/ocorrencias";
     }
 
-    @GetMapping("/ocorrencias/info/{id}")
+    @GetMapping("/info/{id}")
     public String ocorrenciasformpage(@PathVariable Long id, RedirectAttributes redirectAttributes){
 
         var ocorrencia = ocorrenciaRepository.getById(id);
@@ -125,9 +120,9 @@ public class AdministradorController {
         return "redirect:/administrador/ocorrencias/form";
     }
 
-    @PostMapping("/ocorrencias/listfilter")
+    @PostMapping("/listfilter")
     public String ocorrenciaslistfilter(@ModelAttribute Ocorrencia ocorrenciaFilter, RedirectAttributes redirectAttributes){
-       var ocorrencias = ocorrenciaRepository.getAll();
+        var ocorrencias = ocorrenciaRepository.getAll();
 
         if(!ocorrencias.isEmpty()){
             if(ocorrenciaFilter.paciente.preccp != null && !ocorrenciaFilter.paciente.preccp.isEmpty() && !ocorrenciaFilter.paciente.preccp.equals("")){

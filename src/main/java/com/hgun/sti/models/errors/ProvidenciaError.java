@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ProvidenciaOcorrenciaError {
+public class ProvidenciaError {
 
     public String acoesDeMelhoria;
 

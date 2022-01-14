@@ -14,8 +14,8 @@ import javax.validation.constraints.NotNull;
 @Data
 @SuperBuilder
 @Entity
-@Table(name="obitos_ocorrencias")
-public class ObitoOcorrencia {
+@Table(name="obitos")
+public class Obito {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

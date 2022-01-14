@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AnaliseOcorrenciaError {
+public class AnaliseError {
 
     public String fatoresContribuintes;
 
