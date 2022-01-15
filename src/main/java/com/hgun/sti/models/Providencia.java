@@ -30,8 +30,11 @@ public class Providencia {
     public Boolean naoCaracterizaEventoAdverso;
 
     @NotBlank
-    public String fatoresAtenuantesDaOcorrencia;
+    public String outrasProvidencias;
 
     @NotBlank
     public String data;
+
+    @NotBlank
+    public String hora;
 }

@@ -1,6 +1,7 @@
 package com.hgun.sti.controller.validators;
 
 import com.hgun.sti.controller.validators.utils.DataValidator;
+import com.hgun.sti.controller.validators.utils.HoraValidator;
 import com.hgun.sti.models.Analise;
 import com.hgun.sti.models.errors.AnaliseError;
 
@@ -34,6 +35,8 @@ public class AnaliseValidator {
         }
 
         analiseError.setData(DataValidator.validarData(analise.getData()));
+
+        analiseError.setHora(HoraValidator.validarHora(analise.getHora()));
 
         return analiseError;
     }

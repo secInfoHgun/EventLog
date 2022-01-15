@@ -19,6 +19,8 @@ public class AnaliseError {
 
     public String data;
 
+    public String hora;
+
     public boolean isEmpty(){
         if(fatoresContribuintes != null && !fatoresContribuintes.isEmpty()){
             return false;
@@ -29,6 +31,8 @@ public class AnaliseError {
         }else if(fatoresAtenuantesDaOcorrencia != null && !fatoresAtenuantesDaOcorrencia.isEmpty()){
             return false;
         }else if(data != null && !data.isEmpty()){
+            return false;
+        }else if(hora != null && !hora.isEmpty()){
             return false;
         }else{
             return true;

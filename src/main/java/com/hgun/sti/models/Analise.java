@@ -33,4 +33,7 @@ public class Analise {
 
     @NotBlank
     public String data;
+
+    @NotBlank
+    public String hora;
 }

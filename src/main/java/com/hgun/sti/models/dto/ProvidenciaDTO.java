@@ -15,7 +15,7 @@ public class ProvidenciaDTO {
     String acoesDeMelhoria;
     String acoesParaReduzirRiscos;
     Boolean naoCaracterizaEventoAdverso;
-    String fatoresAtenuantesDaOcorrencia;
+    String outrasProvidencias;
     String data;
 
     public static Providencia fromDTO(ProvidenciaDTO providencia){
@@ -24,7 +24,7 @@ public class ProvidenciaDTO {
                 .acoesDeMelhoria(providencia.getAcoesDeMelhoria())
                 .acoesParaReduzirRiscos(providencia.getAcoesParaReduzirRiscos())
                 .naoCaracterizaEventoAdverso(providencia.getNaoCaracterizaEventoAdverso())
-                .fatoresAtenuantesDaOcorrencia(providencia.getFatoresAtenuantesDaOcorrencia())
+                .outrasProvidencias(providencia.getOutrasProvidencias())
                 .data(providencia.getData())
                 .build();
     }
@@ -35,7 +35,7 @@ public class ProvidenciaDTO {
                 .acoesDeMelhoria(providencia.getAcoesDeMelhoria())
                 .acoesParaReduzirRiscos(providencia.getAcoesParaReduzirRiscos())
                 .naoCaracterizaEventoAdverso(providencia.getNaoCaracterizaEventoAdverso())
-                .fatoresAtenuantesDaOcorrencia(providencia.getFatoresAtenuantesDaOcorrencia())
+                .outrasProvidencias(providencia.getOutrasProvidencias())
                 .data(providencia.getData())
                 .build();
     }

@@ -19,9 +19,18 @@
                 <div class="collapse navbar-collapse justify-content-end" id="navigation">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/administrador/ocorrencias/form}">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
-                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            <a class="nav-link" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-file-earmark-arrow-down" viewBox="0 0 16 16">
+                                    <path d="M8.5 6.5a.5.5 0 0 0-1 0v3.793L6.354 9.146a.5.5 0 1 0-.708.708l2 2a.5.5 0 0 0 .708 0l2-2a.5.5 0 0 0-.708-.708L8.5 10.293V6.5z"/>
+                                    <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                 </svg>
                             </a>
                         </li>
@@ -48,7 +57,66 @@
                 </ul>
                 <div class="card card-user" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border: 1px solid #dee2e6; border-top-color: white;">
                     <div class="card-body" style="padding: 40px">
+                        <form method="post" >
+                            <input class="invisible" id="id" name="id" placeholder="Id do produto">
 
+                            <!-- Na hora de mostrar aqui vai ter uma row com a data e um botão para editar -->
+
+                            <div class="row">
+                                <div class="col-md-4 px-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Datade cadastro</label>
+                                        <input type="text" th:class="${ 'form-control'}" data-mask="00/00/0000" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 px-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Hora de cadastro</label>
+                                        <input type="text" th:class="${'form-control'}" data-mask="00:00" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 px-1">
+                                    <div style="margin-top: 30px; margin-left: 60px">
+                                        <input class="form-check-input" type="checkbox" style="width: 20px; height: 20px">
+                                        <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d">
+                                            Não caracteriza um evento adverso
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 px-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Ações de melhoria</label>
+                                        <textarea th:class="form-control" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 px-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Ações para reduzir riscos</label>
+                                        <textarea th:class="form-control" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 px-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Outras providências</label>
+                                        <textarea th:class="form-control" required></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="ml-auto mr-auto">
+                                    <button type="submit" class="btn btn-primary mx-auto" style="width: 200px; height: 40px; font-size: 14px" >Enviar</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </main>

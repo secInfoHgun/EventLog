@@ -36,4 +36,7 @@ public class Obito {
 
     @NotBlank
     public String data;
+
+    @NotBlank
+    public String hora;
 }

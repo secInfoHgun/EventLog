@@ -1,6 +1,7 @@
 package com.hgun.sti.controller.validators;
 
 import com.hgun.sti.controller.validators.utils.DataValidator;
+import com.hgun.sti.controller.validators.utils.HoraValidator;
 import com.hgun.sti.models.Providencia;
 import com.hgun.sti.models.errors.ProvidenciaError;
 
@@ -21,13 +22,15 @@ public class ProvidenciaValidator {
             }
         }
 
-        if(providencia.getFatoresAtenuantesDaOcorrencia() != null && !providencia.getFatoresAtenuantesDaOcorrencia().isEmpty()){
-            if(providencia.getFatoresAtenuantesDaOcorrencia().length() < 4){
-                providenciaError.setFatoresAtenuantesDaOcorrencia("Os fatores atenuantes da ocorrência está muito curto! (min: 4 caracteres)");
+        if(providencia.getOutrasProvidencias() != null && !providencia.getOutrasProvidencias().isEmpty()){
+            if(providencia.getOutrasProvidencias().length() < 4){
+                providenciaError.setOutrasProvidencias("As outras providências estão muito curtas! (min: 4 caracteres)");
             }
         }
 
         providenciaError.setData(DataValidator.validarData(providencia.getData()));
+
+        providenciaError.setHora(HoraValidator.validarHora(providencia.getHora()));
 
         return providenciaError;
     }

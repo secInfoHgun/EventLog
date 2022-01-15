@@ -19,6 +19,8 @@ public class ObitoError {
 
     public String data;
 
+    public String hora;
+
     public boolean isEmpty(){
         if(dataDoObito != null && !dataDoObito.isEmpty()){
             return false;
@@ -29,6 +31,8 @@ public class ObitoError {
         }else if(causaDaMorte != null && !causaDaMorte.isEmpty()){
             return false;
         }else if(data != null && !data.isEmpty()){
+            return false;
+        }else if(hora != null && !hora.isEmpty()){
             return false;
         }else{
             return true;

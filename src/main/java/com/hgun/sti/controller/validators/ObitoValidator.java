@@ -1,6 +1,7 @@
 package com.hgun.sti.controller.validators;
 
 import com.hgun.sti.controller.validators.utils.DataValidator;
+import com.hgun.sti.controller.validators.utils.HoraValidator;
 import com.hgun.sti.models.Obito;
 import com.hgun.sti.models.errors.ObitoError;
 
@@ -30,6 +31,8 @@ public class ObitoValidator {
         obitoError.setDataDoObito(DataValidator.validarData(obito.getDataDoObito()));
 
         obitoError.setData(DataValidator.validarData(obito.getData()));
+
+        obitoError.setHora(HoraValidator.validarHora(obito.getHora()));
 
         return obitoError;
     }
