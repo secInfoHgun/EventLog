@@ -28,10 +28,6 @@ public class ProvidenciaValidator {
             }
         }
 
-        providenciaError.setData(DataValidator.validarData(providencia.getData()));
-
-        providenciaError.setHora(HoraValidator.validarHora(providencia.getHora()));
-
         return providenciaError;
     }
 

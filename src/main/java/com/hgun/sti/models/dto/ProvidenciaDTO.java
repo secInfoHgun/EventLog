@@ -17,6 +17,7 @@ public class ProvidenciaDTO {
     Boolean naoCaracterizaEventoAdverso;
     String outrasProvidencias;
     String data;
+    String hora;
 
     public static Providencia fromDTO(ProvidenciaDTO providencia){
         return Providencia.builder()
@@ -26,6 +27,7 @@ public class ProvidenciaDTO {
                 .naoCaracterizaEventoAdverso(providencia.getNaoCaracterizaEventoAdverso())
                 .outrasProvidencias(providencia.getOutrasProvidencias())
                 .data(providencia.getData())
+                .hora(providencia.getHora())
                 .build();
     }
 
@@ -37,6 +39,7 @@ public class ProvidenciaDTO {
                 .naoCaracterizaEventoAdverso(providencia.getNaoCaracterizaEventoAdverso())
                 .outrasProvidencias(providencia.getOutrasProvidencias())
                 .data(providencia.getData())
+                .hora(providencia.getHora())
                 .build();
     }
 }

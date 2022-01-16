@@ -30,10 +30,6 @@ public class ObitoValidator {
 
         obitoError.setDataDoObito(DataValidator.validarData(obito.getDataDoObito()));
 
-        obitoError.setData(DataValidator.validarData(obito.getData()));
-
-        obitoError.setHora(HoraValidator.validarHora(obito.getHora()));
-
         return obitoError;
     }
 }

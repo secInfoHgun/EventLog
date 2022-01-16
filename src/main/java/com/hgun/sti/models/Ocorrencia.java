@@ -67,13 +67,4 @@ public class Ocorrencia {
     @NotNull
     @OneToOne
     public TipoFaseAssistencia tipoFaseAssistencia;
-
-    @OneToOne
-    public Analise analise;
-
-    @OneToOne
-    public Providencia providencia;
-
-    @OneToOne
-    public Obito obito;
 }

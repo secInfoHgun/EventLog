@@ -39,4 +39,7 @@ public class Obito {
 
     @NotBlank
     public String hora;
+
+    @OneToOne
+    public Ocorrencia ocorrencia;
 }

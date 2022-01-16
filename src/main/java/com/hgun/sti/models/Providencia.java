@@ -37,4 +37,7 @@ public class Providencia {
 
     @NotBlank
     public String hora;
+
+    @OneToOne
+    public Ocorrencia ocorrencia;
 }

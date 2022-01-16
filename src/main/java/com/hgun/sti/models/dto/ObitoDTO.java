@@ -19,6 +19,7 @@ public class ObitoDTO {
     TipoLesao tipoLesao;
     String causaDaMorte;
     String data;
+    String hora;
 
     public static Obito fromDTO(ObitoDTO obito){
         return Obito.builder()
@@ -28,6 +29,7 @@ public class ObitoDTO {
                 .tipoLesao(obito.getTipoLesao())
                 .causaDaMorte(obito.getCausaDaMorte())
                 .data(obito.getData())
+                .hora(obito.getHora())
                 .build();
     }
 
@@ -39,6 +41,7 @@ public class ObitoDTO {
                 .tipoLesao(obito.getTipoLesao())
                 .causaDaMorte(obito.getCausaDaMorte())
                 .data(obito.getData())
+                .hora(obito.getHora())
                 .build();
     }
 }

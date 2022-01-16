@@ -34,10 +34,6 @@ public class AnaliseValidator {
             analiseError.setFatoresAtenuantesDaOcorrencia("O fator atenuante está muito curto! (min: 15 caracteres)");
         }
 
-        analiseError.setData(DataValidator.validarData(analise.getData()));
-
-        analiseError.setHora(HoraValidator.validarHora(analise.getHora()));
-
         return analiseError;
     }
 }

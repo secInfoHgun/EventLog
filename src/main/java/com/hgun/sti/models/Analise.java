@@ -36,4 +36,7 @@ public class Analise {
 
     @NotBlank
     public String hora;
+
+    @OneToOne
+    public Ocorrencia ocorrencia;
 }

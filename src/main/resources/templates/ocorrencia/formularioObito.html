@@ -27,7 +27,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" th:href="@{'/administrador/ocorrencias/obitos/edit/' + ${ocorrencia.id}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
@@ -43,13 +43,13 @@
             <main class="container" style="margin-top: 40px">
                 <ul class="nav nav-tabs">
                     <li class="nav-item" style="margin-right: 3px">
-                        <a  class="nav-link"  style="background-color: #E3E3E3; color: #66615B" th:href="@{/administrador/ocorrencias/form}">Ocorrência</a>
+                        <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" th:href="@{'/administrador/ocorrencias/info/' + ${ocorrencia.id}}">Ocorrência</a>
                     </li>
                     <li class="nav-item" style="margin-right: 3px">
-                        <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" th:href="@{/administrador/ocorrencias/analises/form}">Análise</a>
+                        <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" th:href="@{'/administrador/ocorrencias/analises/info/' + ${ocorrencia.id}}">Análise</a>
                     </li>
                     <li class="nav-item" style="margin-right: 3px">
-                        <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" th:href="@{/administrador/ocorrencias/providencias/form}">Providências</a>
+                        <a class="nav-link" style="background-color: #E3E3E3; color: #66615B" th:href="@{'/administrador/ocorrencias/providencias/info/' + ${ocorrencia.id}}">Providências</a>
                     </li>
                     <li th:if="${ocorrencia.pacienteFaleceu}" style="margin-right: 3px" class="nav-item">
                         <a class="nav-link active" aria-current="page">Em caso de óbito</a>
@@ -57,21 +57,20 @@
                 </ul>
                 <div class="card card-user" style="border-top-left-radius: 0px; border-top-right-radius: 0px; border: 1px solid #dee2e6; border-top-color: white;">
                     <div class="card-body" style="padding: 40px">
-                        <form method="post" >
-                            <input class="invisible" id="id" name="id" placeholder="Id do produto">
+                        <form method="post" th:action="@{'/administrador/ocorrencias/obitos/form/' + ${ocorrencia.id}}" th:object="${obito}">
+                            <input class="invisible" id="id" name="id" th:field="*{id}" placeholder="Id do obito">
 
                             <div class="row">
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label style="color: #2a2b2d">Datade cadastro</label>
-                                        <input type="text" th:class="${ 'form-control'}" data-mask="00/00/0000" disabled>
-                                        <!--                                        <label style="color: red" th:if="${erros.data != null}" th:text="${erros.data}"></label>-->
+                                        <input type="text" th:class="${'form-control'}" data-mask="00/00/0000" th:field="*{data}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label style="color: #2a2b2d">Hora de cadastro</label>
-                                        <input type="text" th:class="${'form-control'}" data-mask="00:00" disabled>
+                                        <input type="text" th:class="${'form-control'}" data-mask="00:00" th:field="*{hora}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -80,13 +79,15 @@
                                 <div class="col-md-8 px-1">
                                     <div class="form-group">
                                         <label style="color: #2a2b2d">Número da declaração de obito <b style="color: red">*</b></label>
-                                        <input type="text" th:class="${'form-control'}">
+                                        <input type="text" th:class="${ erros.numeroDaDeclaracao != null ? 'form-control errorInput' : 'form-control'}" th:field="*{numeroDaDeclaracao}" th:disabled="${info}">
+                                        <label style="color: red" th:if="${erros.numeroDaDeclaracao != null}" th:text="${erros.numeroDaDeclaracao}"></label>
                                     </div>
                                 </div>
                                 <div class="col-md-4 px-1">
                                     <div class="form-group">
                                         <label style="color: #2a2b2d">Data do obito <b style="color: red">*</b></label>
-                                        <input type="text" th:class="${'form-control'}" data-mask="00/00/0000">
+                                        <input type="text" th:class="${ erros.dataDoObito != null ? 'form-control errorInput' : 'form-control'}" data-mask="00/00/0000" required th:field="*{dataDoObito}" th:disabled="${info}">
+                                        <label style="color: red" th:if="${erros.dataDoObito != null}" th:text="${erros.dataDoObito}"></label>
                                     </div>
                                 </div>
                             </div>
@@ -95,9 +96,11 @@
                                 <div class="col-md-12 px-1">
                                     <div class="form-group">
                                         <label style="color: #2a2b2d">Tipo de lesão <b style="color: red">*</b></label>
-                                        <select th:class="${'form-control'}" required>
+                                        <select th:class="${ erros.tipoLesao != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoLesao.id}" th:disabled="${info}">
                                             <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoLesao}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
                                         </select>
+                                        <label style="color: red" th:if="${erros.tipoLesao != null}" th:text="${erros.tipoLesao}"></label>
                                     </div>
                                 </div>
                             </div>
@@ -106,11 +109,12 @@
                                 <div class="col-md-12 px-1">
                                     <div class="form-group">
                                         <label style="color: #2a2b2d">Causa da morte conforme a DO <small>(Declaração de Obito)</small> <b style="color: red">*</b></label>
-                                        <textarea th:class="form-control" required></textarea>
+                                        <textarea th:style="${ erros.causaDaMorte != null ? 'border-color: red' : ''}" class="form-control" required th:field="*{causaDaMorte}" th:disabled="${info}"></textarea>
+                                        <label style="color: red" th:if="${erros.causaDaMorte != null}" th:text="${erros.causaDaMorte}"></label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div class="row" th:if="${!info}">
                                 <div class="ml-auto mr-auto">
                                     <button type="submit" class="btn btn-primary mx-auto" style="width: 200px; height: 40px; font-size: 14px" >Enviar</button>
                                 </div>

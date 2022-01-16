@@ -17,6 +17,7 @@ public class AnaliseDTO {
     String identificacaoeAnaliseDeFatores;
     String fatoresAtenuantesDaOcorrencia;
     String data;
+    String hora;
 
     public static Analise fromDTO(AnaliseDTO analise){
         return Analise.builder()
@@ -26,6 +27,7 @@ public class AnaliseDTO {
                 .identificacaoeAnaliseDeFatores(analise.getIdentificacaoeAnaliseDeFatores())
                 .fatoresAtenuantesDaOcorrencia(analise.getFatoresAtenuantesDaOcorrencia())
                 .data(analise.getData())
+                .hora(analise.getHora())
                 .build();
     }
 
@@ -37,6 +39,7 @@ public class AnaliseDTO {
                 .identificacaoeAnaliseDeFatores(analise.getIdentificacaoeAnaliseDeFatores())
                 .fatoresAtenuantesDaOcorrencia(analise.getFatoresAtenuantesDaOcorrencia())
                 .data(analise.getData())
+                .hora(analise.getHora())
                 .build();
     }
 
