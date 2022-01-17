@@ -3,7 +3,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/eventlog
     username: postgres
-    password: postgres
+    password: P@sswd1941
   jpa:
     show-sql: false
     hibernate:
