@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface ObitoRepository extends JpaRepository<Obito, Long> {
     @Query("SELECT o FROM Obito o WHERE o.ocorrencia.id = :id")
-    public Obito getObitoByIdOcorrencia(@Param("id") Long id);
+    Obito getObitoByIdOcorrencia(@Param("id") Long id);
 }

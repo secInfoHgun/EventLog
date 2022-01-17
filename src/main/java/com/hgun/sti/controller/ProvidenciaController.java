@@ -4,7 +4,6 @@ import com.hgun.sti.controller.utils.FormatData;
 import com.hgun.sti.controller.utils.FormatHora;
 import com.hgun.sti.controller.validators.ProvidenciaValidator;
 import com.hgun.sti.models.Providencia;
-import com.hgun.sti.models.errors.AnaliseError;
 import com.hgun.sti.models.errors.ProvidenciaError;
 import com.hgun.sti.repository.OcorrenciaRepository;
 import com.hgun.sti.repository.ProvidenciaRepository;
@@ -39,10 +38,8 @@ public class ProvidenciaController {
 
     @PostMapping("/form/{id}")
     public String analisesformregister(@PathVariable Long id, @ModelAttribute Providencia providencia, RedirectAttributes redirectAttributes){
-        var ocorrencia = ocorrenciaRepository.getById(id);
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
         var erros = ProvidenciaValidator.validarProvidencia(providencia);
-
-        System.out.println(ocorrencia);
 
         if(!erros.isEmpty()){
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
@@ -53,7 +50,7 @@ public class ProvidenciaController {
         }
 
         providencia.setOcorrencia(ocorrencia);
-        var providenciaBanco = providenciaRepository.save(getProvidenciaComData(providencia));
+        providenciaRepository.save(getProvidenciaComData(providencia));
 
         return "redirect:/administrador/ocorrencias/providencias/info/"+id;
     }
@@ -61,11 +58,8 @@ public class ProvidenciaController {
     @GetMapping("/info/{id}")
     public String ocorrenciasformpage(@PathVariable Long id, RedirectAttributes redirectAttributes){
 
-        var ocorrencia = ocorrenciaRepository.getById(id);
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
         var providencia = providenciaRepository.getProvidenciaByIdOcorrencia(id);
-
-        System.out.println(ocorrencia);
-        System.out.println(providencia);
 
         if(providencia == null){
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
@@ -91,11 +85,8 @@ public class ProvidenciaController {
 
     @GetMapping("/edit/{id}")
     public String analisesEdit(@PathVariable Long id, RedirectAttributes redirectAttributes){
-        var ocorrencia = ocorrenciaRepository.getById(id);
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
         var providencia = providenciaRepository.getProvidenciaByIdOcorrencia(id);
-
-        System.out.println(ocorrencia);
-        System.out.println(providencia);
 
         if(providencia == null){
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
@@ -103,7 +94,7 @@ public class ProvidenciaController {
         }
 
         redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
-        redirectAttributes.addFlashAttribute("providencia", providencia);
+        redirectAttributes.addFlashAttribute("providencia", getProvidenciaComData(providencia));
         redirectAttributes.addFlashAttribute("erros", new ProvidenciaError());
         redirectAttributes.addFlashAttribute("info", false);
 

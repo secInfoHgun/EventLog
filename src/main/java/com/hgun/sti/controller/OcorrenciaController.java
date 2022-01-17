@@ -107,7 +107,7 @@ public class OcorrenciaController {
     @GetMapping("/info/{id}")
     public String ocorrenciasformpage(@PathVariable Long id, RedirectAttributes redirectAttributes){
 
-        var ocorrencia = ocorrenciaRepository.getById(id);
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
 
         ocorrencia.setVisualizada(true);
 

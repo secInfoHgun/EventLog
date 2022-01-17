@@ -38,10 +38,8 @@ public class AnaliseController {
 
     @PostMapping("/form/{id}")
     public String analisesformregister(@PathVariable Long id, @ModelAttribute Analise analise, RedirectAttributes redirectAttributes){
-        var ocorrencia = ocorrenciaRepository.getById(id);
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
         var erros = AnaliseValidator.validarAnalise(analise);
-
-        System.out.println(ocorrencia);
 
         if(!erros.isEmpty()){
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
@@ -52,7 +50,7 @@ public class AnaliseController {
         }
 
         analise.setOcorrencia(ocorrencia);
-        var analiseBanco = analiseRepository.save(getAnaliseComData(analise));
+        analiseRepository.save(getAnaliseComData(analise));
 
         return "redirect:/administrador/ocorrencias/analises/info/"+id;
     }
@@ -60,11 +58,8 @@ public class AnaliseController {
     @GetMapping("/info/{id}")
     public String analisesInfo(@PathVariable Long id, RedirectAttributes redirectAttributes){
 
-        var ocorrencia = ocorrenciaRepository.getById(id);
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
         var analise = analiseRepository.getAnaliseByIdOcorrencia(id);
-
-        System.out.println(ocorrencia);
-        System.out.println(analise);
 
         if(analise == null){
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
@@ -90,11 +85,8 @@ public class AnaliseController {
 
     @GetMapping("/edit/{id}")
     public String analisesEdit(@PathVariable Long id, RedirectAttributes redirectAttributes){
-        var ocorrencia = ocorrenciaRepository.getById(id);
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
         var analise = analiseRepository.getAnaliseByIdOcorrencia(id);
-
-        System.out.println(ocorrencia);
-        System.out.println(analise);
 
         if(analise == null){
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
@@ -102,7 +94,7 @@ public class AnaliseController {
         }
 
         redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
-        redirectAttributes.addFlashAttribute("analise", analise);
+        redirectAttributes.addFlashAttribute("analise", getAnaliseComData(analise));
         redirectAttributes.addFlashAttribute("erros", new AnaliseError());
         redirectAttributes.addFlashAttribute("info", false);
 

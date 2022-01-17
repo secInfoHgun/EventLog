@@ -1,10 +1,6 @@
 package com.hgun.sti.controller;
 
 import com.hgun.sti.components.ExportPDF;
-import com.hgun.sti.models.Analise;
-import com.hgun.sti.models.Obito;
-import com.hgun.sti.models.Ocorrencia;
-import com.hgun.sti.models.Providencia;
 import com.hgun.sti.repository.*;
 import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;

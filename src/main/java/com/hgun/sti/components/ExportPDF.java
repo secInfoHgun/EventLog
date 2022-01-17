@@ -1,20 +1,45 @@
 package com.hgun.sti.components;
 
 import com.hgun.sti.models.*;
+import com.hgun.sti.repository.types.*;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class ExportPDF {
 
+    @Autowired
+    private TipoOcorrenciaRepository tipoOcorrenciaRepository;
+
+    @Autowired
+    private TipoIncidenciaRepository tipoIncidenciaRepository;
+
+    @Autowired
+    private TipoDanoRepository tipoDanoRepository;
+
+    @Autowired
+    private TipoFaseAssistenciaRepository tipoFaseAssistenciaRepository;
+
+    @Autowired
+    private TipoSetorRepository tipoSetorRepository;
+
+    @Autowired
+    private TipoLesaoRepository tipoLesaoRepository;
+
     private Ocorrencia ocorrencia;
     private Analise analise;
     private Providencia providencia;
     private Obito obito;
 
-    public ExportPDF(Ocorrencia ocorrencia, Analise analise, Providencia providencia, Obito obito) {
+    public ExportPDF(
+            Ocorrencia ocorrencia,
+            Analise analise,
+            Providencia providencia,
+            Obito obito
+    ) {
         this.ocorrencia = ocorrencia;
         this.analise = analise;
         this.providencia = providencia;

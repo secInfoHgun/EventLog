@@ -4,7 +4,6 @@ import com.hgun.sti.controller.utils.FormatData;
 import com.hgun.sti.controller.utils.FormatHora;
 import com.hgun.sti.controller.validators.ObitoValidator;
 import com.hgun.sti.models.Obito;
-import com.hgun.sti.models.errors.AnaliseError;
 import com.hgun.sti.models.errors.ObitoError;
 import com.hgun.sti.repository.ObitoRepository;
 import com.hgun.sti.repository.OcorrenciaRepository;
@@ -46,10 +45,8 @@ public class ObitoController {
     @PostMapping("/form/{id}")
     public String analisesformregister(@PathVariable Long id, @ModelAttribute Obito obito, RedirectAttributes redirectAttributes){
 
-        var ocorrencia = ocorrenciaRepository.getById(id);
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
         var erros = ObitoValidator.validarObito(obito);
-
-        System.out.println(ocorrencia);
 
         if(!erros.isEmpty()){
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
@@ -68,11 +65,8 @@ public class ObitoController {
     @GetMapping("/info/{id}")
     public String ocorrenciasformpage(@PathVariable Long id, RedirectAttributes redirectAttributes){
 
-        var ocorrencia = ocorrenciaRepository.getById(id);
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
         var obito = obitoRepository.getObitoByIdOcorrencia(id);
-
-        System.out.println(ocorrencia);
-        System.out.println(obito);
 
         if(obito == null){
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
@@ -99,11 +93,8 @@ public class ObitoController {
     @GetMapping("/edit/{id}")
     public String analisesEdit(@PathVariable Long id, RedirectAttributes redirectAttributes){
 
-        var ocorrencia = ocorrenciaRepository.getById(id);
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
         var obito = obitoRepository.getObitoByIdOcorrencia(id);
-
-        System.out.println(ocorrencia);
-        System.out.println(obito);
 
         if(obito == null){
             redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
@@ -111,7 +102,7 @@ public class ObitoController {
         }
 
         redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
-        redirectAttributes.addFlashAttribute("obito", obito);
+        redirectAttributes.addFlashAttribute("obito", getObitoComData(obito));
         redirectAttributes.addFlashAttribute("erros", new ObitoError());
         redirectAttributes.addFlashAttribute("info", false);
 

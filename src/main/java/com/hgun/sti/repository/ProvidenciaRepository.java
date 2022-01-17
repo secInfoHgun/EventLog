@@ -7,5 +7,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface ProvidenciaRepository extends JpaRepository<Providencia, Long> {
     @Query("SELECT p FROM Providencia p WHERE p.ocorrencia.id = :id")
-    public Providencia getProvidenciaByIdOcorrencia(@Param("id") Long id);
+    Providencia getProvidenciaByIdOcorrencia(@Param("id") Long id);
 }
