@@ -1,7 +1,6 @@
 package com.hgun.sti.repository;
 
 import com.hgun.sti.models.Analise;
-import com.hgun.sti.models.Paciente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

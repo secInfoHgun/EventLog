@@ -51,7 +51,7 @@
                             <div class="col-md-2 pl-1">
                                 <div class="form-group">
                                     <label style="color: #2a2b2d">Idade <b style="color: red">*</b></label>
-                                    <input type="text" th:class="${ erros.paciente != null && erros.paciente.idade != null ? 'form-control errorInput' : 'form-control'}" data-mask="00 ano(s)" required th:field="*{paciente.idade}">
+                                    <input type="text" th:class="${ erros.paciente != null && erros.paciente.idade != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{paciente.idade}">
                                     <div th:if="${erros.paciente != null}">
                                         <label style="color: red" th:if="${erros.paciente.idade != null}" th:text="${erros.paciente.idade}"></label>
                                     </div>
