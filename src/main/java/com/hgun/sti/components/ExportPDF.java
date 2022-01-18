@@ -1,15 +1,21 @@
 package com.hgun.sti.components;
 
 import com.hgun.sti.models.*;
-import com.hgun.sti.repository.types.*;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Locale;
 
 public class ExportPDF {
+
+    private static final float identacao = 25;
+    private static final int fontSizeMin = 10;
+
 
     private Ocorrencia ocorrencia;
     private Analise analise;
@@ -28,184 +34,236 @@ public class ExportPDF {
         this.obito = obito;
     }
 
-    public Document headerDocument(Document document){
-        var font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-        font.setSize(18);
-        var p = new Paragraph("Hospital de Guarnição de Natal\n\n", font);
-        p.setAlignment(Paragraph.ALIGN_CENTER);
-        document.add(p);
+    private String formataNumeroNotificacao(Long id){
+        String result = null;
 
-        font.setSize(11);
-        p = new Paragraph("Notificação  de Incidente / Notificação  de Evento Adverso                                  Nº da notificação : " + ( this.ocorrencia.id < 10 ? ("0" + this.ocorrencia.id) : this.ocorrencia.id.toString()) , font);
-        p.setAlignment(Paragraph.ALIGN_LEFT);
-        document.add(p);
+        if(id < 10){
+            result = "000"+id;
+        }else if(id < 100){
+            result = "00"+id;
+        }else if(id < 1000){
+            result = "0"+id;
+        }else {
+            result = id.toString();
+        }
 
-        font = FontFactory.getFont(FontFactory.HELVETICA);
-        font.setSize(10);
-        p = new Paragraph("Data / Hora do Evento: " + this.ocorrencia.data + " - " + this.ocorrencia.hora , font);
-        p.setAlignment(Paragraph.ALIGN_RIGHT);
-        document.add(p);
+        return result;
+    }
+
+    private Paragraph getParagrafoNovo(
+            String texto,
+            boolean identado,
+            boolean centralizado,
+            boolean fontBold,
+            boolean alinhadoDireita
+    ){
+        Font font;
+
+        if(fontBold){
+            font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        }else {
+            font = FontFactory.getFont(FontFactory.HELVETICA);
+        }
+
+        font.setSize(fontSizeMin);
+
+        var result = new Paragraph(texto , font);
+
+        if(identado){
+            result.setIndentationLeft(identacao);
+        }
+
+        if(centralizado){
+            result.setAlignment(Paragraph.ALIGN_CENTER);
+        }
+
+        if(alinhadoDireita){
+            result.setAlignment(Paragraph.ALIGN_RIGHT);
+        }
+
+        return result;
+    }
+
+    private String getDataFormatada(){
+
+        var pattern = "EEEEE dd MMMMM yyyy";
+        var simpleDateFormat = new SimpleDateFormat(pattern, new Locale("pt","BR"));
+        var date = simpleDateFormat.format(new Date());
+
+        return "NATAL, " + date.toString();
+    }
+
+    private Image getImagemNova(String caminhoImagem) throws IOException {
+        Image image = Image.getInstance(caminhoImagem);
+        image.setAlignment(Image.ALIGN_CENTER);
+
+        return image;
+    }
+
+    public Document headerDocument(Document document) throws IOException {
+
+        document.add(getImagemNova("src/main/resources/static/img/brasao-da-republica-do-brasil.com.png"));
+
+        document.add(getParagrafoNovo("MINISTERIO DA DEFESA", false, true, true, false));
+
+        document.add(getParagrafoNovo("EXERCITO BRASILEIRO", false, true, true, false));
+
+        document.add(getParagrafoNovo("HOSPPITAL DE GUARNIÇÃO DE NATAL", false, true, true, false));
+
+
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+
+
+        document.add(getParagrafoNovo("Notificação  de Incidente / Notificação  de Evento Adverso                                               Nº da notificação : " + formataNumeroNotificacao(this.ocorrencia.id), false, false, true, false));
+
+        document.add(getParagrafoNovo("Data / Hora do Evento: " + this.ocorrencia.data + " - " + this.ocorrencia.hora, false, false, false, true));
 
         return document;
     }
 
     public Document dadosDoPaciente(Document document){
-        var font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-        font.setSize(10);
-        var p = new Paragraph("\n\nDados do paciente:", font);
-        document.add(p);
 
-        font = FontFactory.getFont(FontFactory.HELVETICA);
-        p = new Paragraph("Nome: " + this.ocorrencia.paciente.nome , font);
-        font.setSize(10);
-        document.add(p);
+        document.add(getParagrafoNovo("\n\nDados do paciente:", false, false, true, false));
 
-        p = new Paragraph(
-                "Sexo: " + (this.ocorrencia.paciente.sexo == 'M' ? "(X) Masculino ( ) Feminino" : "( ) Masculino (X) Feminino") +
-                        "                               " + "Idade: " + this.ocorrencia.paciente.idade + " anos" +
-                        "                               " + "Nº do PRECCP: " + (this.ocorrencia.paciente.preccp == null ? "-" : this.ocorrencia.paciente.preccp), font);
-        document.add(p);
+        document.add(getParagrafoNovo("Nome: " + this.ocorrencia.paciente.nome, false, false, false, false));
+
+        document.add(getParagrafoNovo("Sexo: " + (this.ocorrencia.paciente.sexo == 'M' ? "(X) Masculino ( ) Feminino" : "( ) Masculino (X) Feminino") +
+                "                              " + "Idade: " + this.ocorrencia.paciente.idade + " anos" +
+                "                              " + "Nº do PRECCP: " + (this.ocorrencia.paciente.preccp == null ? "-" : this.ocorrencia.paciente.preccp), false, false, false, false));
+
 
         return document;
     }
 
     public Document dadosOcorrencia(Document document){
-        var font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-        font.setSize(10);
-        var p = new Paragraph("\n\nDados da ocorrência:", font);
-        document.add(p);
 
-        font = FontFactory.getFont(FontFactory.HELVETICA);
-        p = new Paragraph(
-                "1. Tipo da ocorrência:\n" +
-                       this.ocorrencia.tipoOcorrencia.nome +
-                       (!this.ocorrencia.tipoOcorrencia.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoOcorrencia.descricao)+")" : ""), font);
-        font.setSize(10);
-        document.add(p);
+        document.add(getParagrafoNovo("\n\nDados da ocorrência:", false, false, true, false));
 
-        p = new Paragraph(
-                "\n2. Tipo da incidência (com / sem dano):\n" +
-                        this.ocorrencia.tipoIncidencia.nome +
-                        (!this.ocorrencia.tipoIncidencia.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoIncidencia.descricao)+")" : ""), font);
-        document.add(p);
+        document.add(getParagrafoNovo("1. Tipo da ocorrência:\n", false, false, false, false));
+        document.add(getParagrafoNovo(this.ocorrencia.tipoOcorrencia.nome + (!this.ocorrencia.tipoOcorrencia.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoOcorrencia.descricao)+")" : ""), true, false, false, false));
 
-        p = new Paragraph(
-                "\n3. Características do dano (grau do dano):\n" +
-                        this.ocorrencia.tipoDano.nome +
-                        (!this.ocorrencia.tipoDano.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoDano.descricao)+")" : ""), font);
-        document.add(p);
+        document.add(getParagrafoNovo("\n2. Tipo da incidência (com / sem dano):\n", false, false, false, false));
+        document.add(getParagrafoNovo(this.ocorrencia.tipoIncidencia.nome + (!this.ocorrencia.tipoIncidencia.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoIncidencia.descricao)+")" : ""), true, false, false, false));
 
-        p = new Paragraph(
-                "\n4. Setor onde o evento ocorreu:\n" +
-                        this.ocorrencia.tipoSetor.nome +
-                        (!this.ocorrencia.tipoSetor.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoSetor.descricao)+")" : ""), font);
-        document.add(p);
+        document.add(getParagrafoNovo("\n3. Características do dano (grau do dano):\n", false, false, false, false));
+        document.add(getParagrafoNovo(this.ocorrencia.tipoDano.nome + (!this.ocorrencia.tipoDano.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoDano.descricao)+")" : ""), true, false, false, false));
 
-        p = new Paragraph(
-                "\n5. Em que fase da assistência o evento ocorreu:\n" +
-                        this.ocorrencia.tipoFaseAssistencia.nome +
-                        (!this.ocorrencia.tipoFaseAssistencia.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoFaseAssistencia.descricao)+")" : ""), font);
-        document.add(p);
+        document.add(getParagrafoNovo("\n4. Setor onde o evento ocorreu:\n", false, false, false, false));
+        document.add(getParagrafoNovo(this.ocorrencia.tipoSetor.nome + (!this.ocorrencia.tipoSetor.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoSetor.descricao)+")" : ""), true, false, false, false));
 
-        p = new Paragraph("\n6. Resumo do evento:\n" + this.ocorrencia.resumo, font);
-        document.add(p);
+        document.add(getParagrafoNovo("\n5. Em que fase da assistência o evento ocorreu:\n", false, false, false, false));
+        document.add(getParagrafoNovo(this.ocorrencia.tipoFaseAssistencia.nome + (!this.ocorrencia.tipoFaseAssistencia.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoFaseAssistencia.descricao)+")" : ""), true, false, false, false));
 
-        p = new Paragraph("\n7. Descrição do evento:\n" + this.ocorrencia.descricao, font);
-        document.add(p);
+        document.add(getParagrafoNovo("\n6. Resumo do evento:\n", false, false, false, false));
+        document.add(getParagrafoNovo(this.ocorrencia.resumo, true, false, false, false));
 
-        p = new Paragraph("\n8. Fator contribuinte para a ocorrência do evento:\n" + (this.ocorrencia.fatorContribuinte == null ? "-" : this.ocorrencia.fatorContribuinte), font);
-        document.add(p);
+        document.add(getParagrafoNovo("\n7. Descrição do evento:\n", false, false, false, false));
+        document.add(getParagrafoNovo(this.ocorrencia.descricao, true, false, false, false));
 
-        p = new Paragraph("\n9. O paciente foi internado:\n\t" + (this.ocorrencia.pacienteFoiInternado ? "(X) Sim ( ) Não" : "( ) Sim (X) Não"), font);
-        document.add(p);
+        document.add(getParagrafoNovo("\n8. Fator contribuinte para a ocorrência do evento:\n", false, false, false, false));
+        document.add(getParagrafoNovo((this.ocorrencia.fatorContribuinte.isEmpty() ? "-" : this.ocorrencia.fatorContribuinte), true, false, false, false));
 
-        p = new Paragraph("\n10. O paciente foi a óbito:\n\t" + (this.ocorrencia.pacienteFaleceu ? "(X) Sim ( ) Não" : "( ) Sim (X) Não"), font);
-        document.add(p);
+        document.add(getParagrafoNovo("\n9. O paciente foi internado:\n", false, false, false, false));
+        document.add(getParagrafoNovo((this.ocorrencia.pacienteFoiInternado ? "(X) Sim ( ) Não" : "( ) Sim (X) Não"), true, false, false, false));
+
+        document.add(getParagrafoNovo("\n10. O paciente foi a óbito:\n", false, false, false, false));
+        document.add(getParagrafoNovo((this.ocorrencia.pacienteFaleceu ? "(X) Sim ( ) Não" : "( ) Sim (X) Não"), true, false, false, false));
 
         return document;
     }
 
     public Document dadosAnalise(Document document){
         if(this.analise != null){
-            var font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-            font.setSize(10);
-            var p = new Paragraph("\n\nDados da análise:", font);
-            document.add(p);
 
-            font = FontFactory.getFont(FontFactory.HELVETICA);
-            p = new Paragraph("1. Data / Hora que foi feito o registro da análise:\n\t" + this.analise.data + " - " + this.analise.hora , font);
-            font.setSize(10);
-            document.add(p);
+            document.add(getParagrafoNovo("\n\nDados da análise:", false, false, true, false));
 
-            p = new Paragraph("\n2. Fatores contribuintes para ocorrência:\n" + this.analise.fatoresContribuintes, font);
-            document.add(p);
+            document.add(getParagrafoNovo("1. Data / Hora que foi feito o registro da análise:\n", false, false, false, false));
+            document.add(getParagrafoNovo(this.analise.data + " - " + this.analise.hora , true, false, false, false));
 
-            p = new Paragraph("\n3. Consequências organizacionais:\n" + this.analise.consequenciasOrganizacionais, font);
-            document.add(p);
+            document.add(getParagrafoNovo("\n2. Fatores contribuintes para ocorrência:\n", false, false, false, false));
+            document.add(getParagrafoNovo(this.analise.fatoresContribuintes, true, false, false, false));
 
-            p = new Paragraph("\n4. Identificação e análise de fatores:\n" + this.analise.identificacaoeAnaliseDeFatores, font);
-            document.add(p);
+            document.add(getParagrafoNovo("\n3. Consequências organizacionais:\n", false, false, false, false));
+            document.add(getParagrafoNovo(this.analise.consequenciasOrganizacionais, true, false, false, false));
 
-            p = new Paragraph("\n5. Fatores atenuantes da ocorrência\n" + this.analise.fatoresAtenuantesDaOcorrencia, font);
-            document.add(p);
+            document.add(getParagrafoNovo("\n4. Identificação e análise de fatores:\n", false, false, false, false));
+            document.add(getParagrafoNovo(this.analise.identificacaoeAnaliseDeFatores, true, false, false, false));
+
+            document.add(getParagrafoNovo("\n5. Fatores atenuantes da ocorrência\n", false,false, false, false));
+            document.add(getParagrafoNovo(this.analise.fatoresAtenuantesDaOcorrencia, true, false, false, false));
         }
         return document;
     }
 
     public Document dadosProvidencia(Document document){
         if(this.providencia != null){
-            var font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-            font.setSize(10);
-            var p = new Paragraph("\n\nDados da providência:", font);
-            document.add(p);
 
-            font = FontFactory.getFont(FontFactory.HELVETICA);
-            p = new Paragraph("1. Data / Hora que foi feito o registro da providência:\n\t" + this.providencia.data + " - " + this.providencia.hora , font);
-            font.setSize(10);
-            document.add(p);
+            document.add(getParagrafoNovo("\n\nDados da providência:", false, false, true, false));
 
-            p = new Paragraph("\n2. Ações de melhoria:\n" + (this.providencia.acoesDeMelhoria == null ? "-" : this.providencia.acoesDeMelhoria), font);
-            document.add(p);
+            document.add(getParagrafoNovo("1. Data / Hora que foi feito o registro da providência:\n", false, false, false, false));
+            document.add(getParagrafoNovo(this.providencia.data + " - " + this.providencia.hora , true, false, false, false));
 
-            p = new Paragraph("\n3. Ações para reduzir riscos:\n" + (this.providencia.acoesParaReduzirRiscos == null ? "-" : this.providencia.acoesParaReduzirRiscos), font);
-            document.add(p);
+            document.add(getParagrafoNovo("\n2. Ações de melhoria:\n", false, false, false, false));
+            document.add(getParagrafoNovo((this.providencia.acoesDeMelhoria.isEmpty() ? "-" : this.providencia.acoesDeMelhoria), true, false, false, false));
 
-            p = new Paragraph("\n4. Não caracteriza um evento adverso:\n\t" + (this.providencia.naoCaracterizaEventoAdverso ? "(X) Sim ( ) Não" : "( ) Sim (X) Não"), font);
-            document.add(p);
+            document.add(getParagrafoNovo("\n3. Ações para reduzir riscos:\n", false, false, false, false));
+            document.add(getParagrafoNovo((this.providencia.acoesParaReduzirRiscos.isEmpty() ? "-" : this.providencia.acoesParaReduzirRiscos), true, false, false, false));
 
-            p = new Paragraph("\n5. Outras providências:\n" + (this.providencia.outrasProvidencias == null ? "-" : this.providencia.outrasProvidencias), font);
-            document.add(p);
+            document.add(getParagrafoNovo("\n4. Não caracteriza um evento adverso:\n", false, false, false, false));
+            document.add(getParagrafoNovo((this.providencia.naoCaracterizaEventoAdverso ? "(X) Sim ( ) Não" : "( ) Sim (X) Não"), true, false, false, false));
+
+            document.add(getParagrafoNovo("\n5. Outras providências:\n", false, false, false, false));
+            document.add(getParagrafoNovo((this.providencia.outrasProvidencias.isEmpty() ? "-" : this.providencia.outrasProvidencias), true, false, false, false));
         }
         return document;
     }
 
     public Document dadosObito(Document document){
         if(this.obito != null){
-            var font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
-            font.setSize(10);
-            var p = new Paragraph("\n\nDados do óbito:", font);
-            document.add(p);
 
-            font = FontFactory.getFont(FontFactory.HELVETICA);
-            p = new Paragraph("1. Data / Hora que foi feito o registro do óbito:\n\t" + this.obito.data + " - " + this.obito.hora , font);
-            font.setSize(10);
-            document.add(p);
+            document.add(getParagrafoNovo("\n\nDados do óbito:", false, false, true, false));
 
-            p = new Paragraph("\n2. Data do óbito:\n\t" + this.obito.dataDoObito, font);
-            document.add(p);
+            document.add(getParagrafoNovo("1. Data / Hora que foi feito o registro do óbito:\n", false, false, false, false));
+            document.add(getParagrafoNovo(this.obito.data + " - " + this.obito.hora , true, false, false, false));
 
-            p = new Paragraph("\n3. Número da declaração de óbito:\n" + this.obito.numeroDaDeclaracao, font);
-            document.add(p);
+            document.add(getParagrafoNovo("\n2. Data do óbito:\n", false, false, false, false));
+            document.add(getParagrafoNovo(this.obito.dataDoObito, true, false, false, false));
 
-            p = new Paragraph(
-                    "\n4. Tipo de lesão:\n" +
-                            this.obito.tipoLesao.nome +
-                            (!this.obito.tipoLesao.descricao.isEmpty() ? (" ("+this.obito.tipoLesao.descricao)+")" : ""), font);
-            document.add(p);
+            document.add(getParagrafoNovo("\n3. Número da declaração de óbito:\n", false, false, false, false));
+            document.add(getParagrafoNovo(this.obito.numeroDaDeclaracao, true, false, false, false));
 
-            p = new Paragraph("\n5. Causa da morte conforme a declaração de óbito:\n" + this.obito.causaDaMorte, font);
-            document.add(p);
+            document.add(getParagrafoNovo("\n4. Tipo de lesão:\n", false, false, false, false));
+            document.add(getParagrafoNovo(this.obito.tipoLesao.nome + (!this.obito.tipoLesao.descricao.isEmpty() ? (" ("+this.obito.tipoLesao.descricao)+")" : ""),true, false, false, false));
+
+            document.add(getParagrafoNovo("\n5. Causa da morte conforme a declaração de óbito:\n", false, false, false, false));
+            document.add(getParagrafoNovo(this.obito.causaDaMorte, true, false, false, false));
         }
+        return document;
+    }
+
+    public Document footerDocument(Document document) throws IOException {
+
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+
+        document.add(getParagrafoNovo("Equipe de análise do incidente / evento adverso:", false, false, false, false));
+        document.add(getParagrafoNovo("Assinatura / Carimbo", false, false, false, false));
+
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+        document.add(getParagrafoNovo("_____________________________________________________________", false, true, true, false));
+
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+        document.add(getParagrafoNovo("_____________________________________________________________", false, true, true, false));
+
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+        document.add(getParagrafoNovo("_____________________________________________________________", false, true, true, false));
+
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+
+        document.add(getParagrafoNovo(getDataFormatada(), false, true, false, false));
+
         return document;
     }
 
@@ -216,11 +274,14 @@ public class ExportPDF {
         document.open();
 
         document = headerDocument(document);
+
         document = dadosDoPaciente(document);
         document = dadosOcorrencia(document);
         document = dadosAnalise(document);
         document = dadosProvidencia(document);
         document = dadosObito(document);
+
+        document = footerDocument(document);
 
         document.close();
     }
