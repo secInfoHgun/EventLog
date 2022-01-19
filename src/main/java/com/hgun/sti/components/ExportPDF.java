@@ -107,7 +107,7 @@ public class ExportPDF {
 
         document.add(getParagrafoNovo("EXERCITO BRASILEIRO", false, true, true, false));
 
-        document.add(getParagrafoNovo("HOSPPITAL DE GUARNIÇÃO DE NATAL", false, true, true, false));
+        document.add(getParagrafoNovo("HOSPITAL DE GUARNIÇÃO DE NATAL", false, true, true, false));
 
 
         document.add(getParagrafoNovo(" ", false, false, false, false));
@@ -251,11 +251,14 @@ public class ExportPDF {
         document.add(getParagrafoNovo("Assinatura / Carimbo", false, false, false, false));
 
         document.add(getParagrafoNovo(" ", false, false, false, false));
-        document.add(getParagrafoNovo("_____________________________________________________________", false, true, true, false));
-
         document.add(getParagrafoNovo(" ", false, false, false, false));
         document.add(getParagrafoNovo("_____________________________________________________________", false, true, true, false));
 
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+        document.add(getParagrafoNovo(" ", false, false, false, false));
+        document.add(getParagrafoNovo("_____________________________________________________________", false, true, true, false));
+
+        document.add(getParagrafoNovo(" ", false, false, false, false));
         document.add(getParagrafoNovo(" ", false, false, false, false));
         document.add(getParagrafoNovo("_____________________________________________________________", false, true, true, false));
 
