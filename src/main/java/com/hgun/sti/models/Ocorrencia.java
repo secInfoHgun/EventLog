@@ -1,6 +1,7 @@
 package com.hgun.sti.models;
 
 import com.hgun.sti.models.types.*;
+import com.hgun.sti.models.types.identificacao.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

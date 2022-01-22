@@ -7,6 +7,7 @@ import com.hgun.sti.models.errors.OcorrenciaError;
 import com.hgun.sti.repository.OcorrenciaRepository;
 import com.hgun.sti.repository.PacienteRepository;
 import com.hgun.sti.repository.types.*;
+import com.hgun.sti.repository.types.identificacao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

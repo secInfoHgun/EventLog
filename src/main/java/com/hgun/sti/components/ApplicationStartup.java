@@ -1,7 +1,9 @@
 package com.hgun.sti.components;
 
 import com.hgun.sti.models.types.*;
+import com.hgun.sti.models.types.identificacao.*;
 import com.hgun.sti.repository.types.*;
+import com.hgun.sti.repository.types.identificacao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;

@@ -1,4 +1,4 @@
-package com.hgun.sti.models.types;
+package com.hgun.sti.models.types.fator.contribuinte;
 
 import com.hgun.sti.models.types.AbstractTipo;
 import lombok.AllArgsConstructor;
@@ -11,8 +11,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name="tipo_identificacao")
-public class TipoIdentificacao extends AbstractTipo {
+@Table(name="tipo_fator_contribuinte_comunicacao")
+public class TipoFatorContribuinteComunicacao extends AbstractTipo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;

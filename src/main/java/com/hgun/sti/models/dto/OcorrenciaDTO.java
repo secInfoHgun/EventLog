@@ -3,10 +3,9 @@ package com.hgun.sti.models.dto;
 import com.hgun.sti.models.Ocorrencia;
 import com.hgun.sti.models.Paciente;
 import com.hgun.sti.models.types.*;
+import com.hgun.sti.models.types.identificacao.TipoIdentificacao;
+import com.hgun.sti.models.types.identificacao.TipoIdentificador;
 import lombok.*;
-
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
 
 @Builder
 @Data
