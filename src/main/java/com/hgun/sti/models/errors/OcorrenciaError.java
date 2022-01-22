@@ -15,11 +15,17 @@ public class OcorrenciaError {
 
     public String descricao;
 
+    public String diagnostico;
+
     public String fatorContribuinte;
 
-    public String data;
+    public String dataDaOcorrencia;
 
-    public String hora;
+    public String horaDaOcorrencia;
+
+    public String dataDaInternacao;
+
+    public String horaDaInternacao;
 
     public String tipoOcorrencia;
 
@@ -31,6 +37,10 @@ public class OcorrenciaError {
 
     public String tipoFaseAssistencia;
 
+    public String tipoIdentificacao;
+
+    public String tipoIdentificador;
+
     public boolean isEmpty(){
         if(!paciente.isEmpty()){
             return false;
@@ -38,9 +48,15 @@ public class OcorrenciaError {
             return false;
         }else if(descricao != null && !descricao.isEmpty()){
             return false;
-        }else if(data != null && !data.isEmpty()){
+        }else if(diagnostico != null && !diagnostico.isEmpty()){
             return false;
-        }else if(hora != null && !hora.isEmpty()){
+        }else if(dataDaOcorrencia != null && !dataDaOcorrencia.isEmpty()){
+            return false;
+        }else if(horaDaOcorrencia != null && !horaDaOcorrencia.isEmpty()){
+            return false;
+        }else if(dataDaInternacao != null && !dataDaInternacao.isEmpty()){
+            return false;
+        }else if(horaDaInternacao != null && !horaDaInternacao.isEmpty()){
             return false;
         }else if(tipoOcorrencia != null && !tipoOcorrencia.isEmpty()){
             return false;
@@ -53,6 +69,10 @@ public class OcorrenciaError {
         }else if(tipoFaseAssistencia != null && !tipoFaseAssistencia.isEmpty()){
             return false;
         }else if(fatorContribuinte != null && !fatorContribuinte.isEmpty()){
+            return false;
+        }else if(tipoIdentificacao != null && !tipoIdentificacao.isEmpty()){
+            return false;
+        }else if(tipoIdentificador != null && !tipoIdentificador.isEmpty()){
             return false;
         }else{
             return true;

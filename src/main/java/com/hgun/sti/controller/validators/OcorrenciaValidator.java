@@ -16,14 +16,24 @@ public class OcorrenciaValidator {
             ocorrenciaError.setTipoSetor("O setor não pode ser vazio!");
         }
 
-        ocorrenciaError.setData(DataValidator.validarData(ocorrencia.getData()));
+        ocorrenciaError.setDataDaOcorrencia(DataValidator.validarData(ocorrencia.getDataDaOcorrencia()));
 
-        ocorrenciaError.setHora(HoraValidator.validarHora(ocorrencia.getHora()));
+        ocorrenciaError.setHoraDaOcorrencia(HoraValidator.validarHora(ocorrencia.getHoraDaOcorrencia()));
+
+        ocorrenciaError.setDataDaInternacao(DataValidator.validarData(ocorrencia.getDataDaInternacao()));
+
+        ocorrenciaError.setHoraDaInternacao(HoraValidator.validarHora(ocorrencia.getHoraDaInternacao()));
 
         if(ocorrencia.getResumo() == null || ocorrencia.getResumo().isEmpty()){
             ocorrenciaError.setResumo("O resumo da ocorrência não pode ser vazio!");
         }else if(ocorrencia.getResumo().length() < 15){
             ocorrenciaError.setResumo("O resumo da ocorrência está muito curto! (min: 15 caracteres)");
+        }
+
+        if(ocorrencia.getDiagnostico() == null || ocorrencia.getDiagnostico().isEmpty()){
+            ocorrenciaError.setDiagnostico("O diagnóstico do paciente não pode ser vazio!");
+        }else if(ocorrencia.getDiagnostico().length() < 15){
+            ocorrenciaError.setDiagnostico("O diagnóstico do paciente está muito curto! (min: 15 caracteres)");
         }
 
         if(ocorrencia.getTipoOcorrencia() == null){
@@ -36,6 +46,14 @@ public class OcorrenciaValidator {
 
         if(ocorrencia.getTipoIncidencia() == null){
             ocorrenciaError.setTipoIncidencia("O tipo de incidência não pode ser vazio!");
+        }
+
+        if(ocorrencia.getTipoIdentificacao() == null){
+            ocorrenciaError.setTipoIncidencia("O tipo de identificação não pode ser vazio!");
+        }
+
+        if(ocorrencia.getTipoIdentificador() == null){
+            ocorrenciaError.setTipoIncidencia("O tipo de identificador não pode ser vazio!");
         }
 
         if(ocorrencia.getTipoDano() == null){

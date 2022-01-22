@@ -36,10 +36,29 @@ public class HomeController {
     private TipoSetorRepository tipoSetorRepository;
 
     @Autowired
+    private TipoIdentificacaoRepository tipoIdentificacaoRepository;
+
+    @Autowired
+    private TipoIdentificadorRepository tipoIdentificadorRepository;
+
+    @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
 
     @Autowired
     private PacienteRepository pacienteRepository;
+
+    private Model setAllLists(Model model){
+
+        model.addAttribute("listaTipoOcorrencia", tipoOcorrenciaRepository.findAll());
+        model.addAttribute("listaTipoIncidencia", tipoIncidenciaRepository.findAll());
+        model.addAttribute("listaTipoDano", tipoDanoRepository.findAll());
+        model.addAttribute("listaTipoFaseAssistencia", tipoFaseAssistenciaRepository.findAll());
+        model.addAttribute("listaTipoSetor", tipoSetorRepository.findAll());
+        model.addAttribute("listaTipoIdentificacao", tipoIdentificacaoRepository.findAll());
+        model.addAttribute("listaTipoIdentificador", tipoIdentificadorRepository.findAll());
+
+        return model;
+    }
 
     @GetMapping
     public String form(Model model){
@@ -48,11 +67,7 @@ public class HomeController {
             model.addAttribute("erros", new OcorrenciaError());
         }
 
-        model.addAttribute("listaTipoOcorrencia", tipoOcorrenciaRepository.findAll());
-        model.addAttribute("listaTipoIncidencia", tipoIncidenciaRepository.findAll());
-        model.addAttribute("listaTipoDano", tipoDanoRepository.findAll());
-        model.addAttribute("listaTipoFaseAssistencia", tipoFaseAssistenciaRepository.findAll());
-        model.addAttribute("listaTipoSetor", tipoSetorRepository.findAll());
+        model = setAllLists(model);
 
         return "home.html";
     }

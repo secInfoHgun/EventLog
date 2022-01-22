@@ -33,10 +33,29 @@ public class OcorrenciaController {
     private TipoSetorRepository tipoSetorRepository;
 
     @Autowired
+    private TipoIdentificacaoRepository tipoIdentificacaoRepository;
+
+    @Autowired
+    private TipoIdentificadorRepository tipoIdentificadorRepository;
+
+    @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
 
     @Autowired
     private PacienteRepository pacienteRepository;
+
+    private Model setAllLists(Model model){
+
+        model.addAttribute("listaTipoOcorrencia", tipoOcorrenciaRepository.findAll());
+        model.addAttribute("listaTipoIncidencia", tipoIncidenciaRepository.findAll());
+        model.addAttribute("listaTipoDano", tipoDanoRepository.findAll());
+        model.addAttribute("listaTipoFaseAssistencia", tipoFaseAssistenciaRepository.findAll());
+        model.addAttribute("listaTipoSetor", tipoSetorRepository.findAll());
+        model.addAttribute("listaTipoIdentificacao", tipoIdentificacaoRepository.findAll());
+        model.addAttribute("listaTipoIdentificador", tipoIdentificadorRepository.findAll());
+
+        return model;
+    }
 
     @GetMapping
     public String ocorrenciaslistpage(Model model){
@@ -46,11 +65,7 @@ public class OcorrenciaController {
             model.addAttribute("ocorrencias", ocorrenciaRepository.getAll());
         }
 
-        model.addAttribute("listaTipoOcorrencia", tipoOcorrenciaRepository.findAll());
-        model.addAttribute("listaTipoIncidencia", tipoIncidenciaRepository.findAll());
-        model.addAttribute("listaTipoDano", tipoDanoRepository.findAll());
-        model.addAttribute("listaTipoFaseAssistencia", tipoFaseAssistenciaRepository.findAll());
-        model.addAttribute("listaTipoSetor", tipoSetorRepository.findAll());
+        model = setAllLists(model);
 
         return "ocorrencia/listagemOcorrencia.html";
     }
@@ -63,11 +78,7 @@ public class OcorrenciaController {
             model.addAttribute("info", false);
         }
 
-        model.addAttribute("listaTipoOcorrencia", tipoOcorrenciaRepository.findAll());
-        model.addAttribute("listaTipoIncidencia", tipoIncidenciaRepository.findAll());
-        model.addAttribute("listaTipoDano", tipoDanoRepository.findAll());
-        model.addAttribute("listaTipoFaseAssistencia", tipoFaseAssistenciaRepository.findAll());
-        model.addAttribute("listaTipoSetor", tipoSetorRepository.findAll());
+        model = setAllLists(model);
 
         return "ocorrencia/formularioOcorrencia.html";
     }
@@ -133,12 +144,20 @@ public class OcorrenciaController {
                 ocorrencias.removeIf(o -> o.tipoSetor.id != ocorrenciaFilter.tipoSetor.id);
             }
 
-            if(ocorrenciaFilter.data != null && !ocorrenciaFilter.data.isEmpty() && !ocorrenciaFilter.data.equals("")){
-                ocorrencias.removeIf(o -> !o.data.equals(ocorrenciaFilter.data));
+            if(ocorrenciaFilter.dataDaOcorrencia != null && !ocorrenciaFilter.dataDaOcorrencia.isEmpty() && !ocorrenciaFilter.dataDaOcorrencia.equals("")){
+                ocorrencias.removeIf(o -> !o.dataDaOcorrencia.equals(ocorrenciaFilter.dataDaOcorrencia));
             }
 
-            if(ocorrenciaFilter.hora != null && !ocorrenciaFilter.hora.isEmpty() && !ocorrenciaFilter.hora.equals("")){
-                ocorrencias.removeIf(o -> !o.hora.equals(ocorrenciaFilter.hora));
+            if(ocorrenciaFilter.horaDaOcorrencia != null && !ocorrenciaFilter.horaDaOcorrencia.isEmpty() && !ocorrenciaFilter.horaDaOcorrencia.equals("")){
+                ocorrencias.removeIf(o -> !o.horaDaOcorrencia.equals(ocorrenciaFilter.horaDaOcorrencia));
+            }
+
+            if(ocorrenciaFilter.dataDaInternacao != null && !ocorrenciaFilter.dataDaInternacao.isEmpty() && !ocorrenciaFilter.dataDaInternacao.equals("")){
+                ocorrencias.removeIf(o -> !o.dataDaInternacao.equals(ocorrenciaFilter.dataDaInternacao));
+            }
+
+            if(ocorrenciaFilter.horaDaInternacao != null && !ocorrenciaFilter.horaDaInternacao.isEmpty() && !ocorrenciaFilter.horaDaInternacao.equals("")){
+                ocorrencias.removeIf(o -> !o.horaDaInternacao.equals(ocorrenciaFilter.horaDaInternacao));
             }
 
             if(ocorrenciaFilter.tipoOcorrencia != null && ocorrenciaFilter.tipoOcorrencia.id != null){
@@ -155,6 +174,14 @@ public class OcorrenciaController {
 
             if(ocorrenciaFilter.tipoDano != null && ocorrenciaFilter.tipoDano.id != null){
                 ocorrencias.removeIf(o -> o.tipoDano.id != ocorrenciaFilter.tipoDano.id);
+            }
+
+            if(ocorrenciaFilter.tipoIdentificacao != null && ocorrenciaFilter.tipoIdentificacao.id != null){
+                ocorrencias.removeIf(o -> o.tipoIdentificacao.id != ocorrenciaFilter.tipoIdentificacao.id);
+            }
+
+            if(ocorrenciaFilter.tipoIdentificador != null && ocorrenciaFilter.tipoIdentificador.id != null){
+                ocorrencias.removeIf(o -> o.tipoIdentificador.id != ocorrenciaFilter.tipoIdentificador.id);
             }
 
             if(ocorrenciaFilter.pacienteFoiInternado != null && ocorrenciaFilter.pacienteFoiInternado != false){

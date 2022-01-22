@@ -31,6 +31,9 @@ public class Ocorrencia {
     @NotBlank
     public String descricao;
 
+    @NotBlank
+    public String diagnostico;
+
     public String fatorContribuinte;
 
     @NotNull
@@ -40,13 +43,21 @@ public class Ocorrencia {
     public Boolean pacienteFoiInternado;
 
     @NotBlank
-    public String data;
+    public String dataDaOcorrencia;
 
     @NotBlank
-    public String hora;
+    public String horaDaOcorrencia;
+
+    @NotBlank
+    public String dataDaInternacao;
+
+    @NotBlank
+    public String horaDaInternacao;
 
     @NotNull
     public Boolean visualizada;
+
+
 
     @NotNull
     @OneToOne
@@ -67,4 +78,12 @@ public class Ocorrencia {
     @NotNull
     @OneToOne
     public TipoFaseAssistencia tipoFaseAssistencia;
+
+    @NotNull
+    @OneToOne
+    public TipoIdentificacao tipoIdentificacao;
+
+    @NotNull
+    @OneToOne
+    public TipoIdentificador tipoIdentificador;
 }

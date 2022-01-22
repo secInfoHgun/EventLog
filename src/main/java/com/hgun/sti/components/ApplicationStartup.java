@@ -28,6 +28,12 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     @Autowired
     private TipoLesaoRepository tipoLesaoRepository;
 
+    @Autowired
+    private TipoIdentificacaoRepository tipoIdentificacaoRepository;
+
+    @Autowired
+    private TipoIdentificadorRepository tipoIdentificadorRepository;
+
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent event) {
         var listaTipoOcorrencia = tipoOcorrenciaRepository.findAll();
@@ -36,6 +42,8 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         var listaTipoFaseAssistencia = tipoFaseAssistenciaRepository.findAll();
         var listaTipoSetor = tipoSetorRepository.findAll();
         var listaTipoLesao = tipoLesaoRepository.findAll();
+        var listaTipoIdentificacao = tipoIdentificacaoRepository.findAll();
+        var listaTipoIdentificador = tipoIdentificadorRepository.findAll();
 
         if(listaTipoOcorrencia.isEmpty()){
             String[][] aux = {
@@ -196,6 +204,48 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             }
 
             System.out.println("cadastrei os tipos de fase de assistencia");
+        }
+
+        if(listaTipoIdentificacao.isEmpty()){
+            String[][] aux = {
+                    {"Identificação pró-ativa de riscos", ""},
+                    {"Por meio de máquina / sistema / alteração ambiental / alarme", ""},
+                    {"Por meio de uma contagem / auditoria / revisão", ""},
+                    {"Reconhecimento do erro", ""},
+                    {"Por alteração do estado do paciente", ""}
+            };
+
+            for (String[] i: aux) {
+                var tipoIdentificacao =  new TipoIdentificacao();
+                tipoIdentificacao.setNome(i[0]);
+                tipoIdentificacao.setDescricao(i[1]);
+                tipoIdentificacaoRepository.save(tipoIdentificacao);
+            }
+
+            System.out.println("cadastrei os tipos de identificacao");
+        }
+
+        if(listaTipoIdentificador.isEmpty()){
+            String[][] aux = {
+                    {"Próprio paciente", ""},
+                    {"Outro paciente", ""},
+                    {"Familiar", ""},
+                    {"Cuidador", ""},
+                    {"Voluntário", ""},
+                    {"Amiga / Visitante", ""},
+                    {"Pessoa de assistência espiritual", ""},
+                    {"Profissional de saúde", ""},
+                    {"Outro profissional do serviço de saúde", ""},
+            };
+
+            for (String[] i: aux) {
+                var tipoIdentificador =  new TipoIdentificador();
+                tipoIdentificador.setNome(i[0]);
+                tipoIdentificador.setDescricao(i[1]);
+                tipoIdentificadorRepository.save(tipoIdentificador);
+            }
+
+            System.out.println("cadastrei os tipos de identificador");
         }
 
         return;

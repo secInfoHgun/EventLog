@@ -117,7 +117,7 @@ public class ExportPDF {
 
         document.add(getParagrafoNovo("Notificação  de Incidente / Notificação  de Evento Adverso                                               Nº da notificação : " + formataNumeroNotificacao(this.ocorrencia.id), false, false, true, false));
 
-        document.add(getParagrafoNovo("Data / Hora do Evento: " + this.ocorrencia.data + " - " + this.ocorrencia.hora, false, false, false, true));
+        document.add(getParagrafoNovo("Data / Hora do Evento: " + this.ocorrencia.dataDaOcorrencia + " - " + this.ocorrencia.horaDaOcorrencia, false, false, false, true));
 
         return document;
     }
