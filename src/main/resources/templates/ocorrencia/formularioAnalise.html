@@ -75,45 +75,174 @@
                                 </div>
                             </div>
 
+                            <div class="row" style="margin-top: 20px">
+                                <div class="col-md-12 pl-1">
+                                    <p style="color: #2a2b2d">Fatores Contribuintes</p>
+                                </div>
+                            </div>
+
                             <div class="row">
-                                <div class="col-md-12 px-1">
+                                <div class="col-md-7 pl-1">
                                     <div class="form-group">
-                                        <label style="color: #2a2b2d">Fatores contribuintes  <b style="color: red">*</b></label>
-                                        <textarea th:style="${ erros.fatoresContribuintes != null ? 'border-color: red' : ''}" class="form-control" required th:field="*{fatoresContribuintes}" th:disabled="${info}"></textarea>
-                                        <label style="color: red" th:if="${erros.fatoresContribuintes != null}" th:text="${erros.fatoresContribuintes}"></label>
+                                        <label style="color: #2a2b2d">Fatores cognitivos <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorContribuinteCognitivo != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorContribuinteCognitivo.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorContibuinteCognitivo}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorContribuinteCognitivo != null}" th:text="${erros.tipoFatorContribuinteCognitivo}"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Fatores de comportamento <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorContribuinteComportamento != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorContribuinteComportamento.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorContribuinteComportamento}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorContribuinteComportamento != null}" th:text="${erros.tipoFatorContribuinteComportamento}"></label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12 px-1">
+                                <div class="col-md-6 pl-1">
                                     <div class="form-group">
-                                        <label style="color: #2a2b2d">Consequências organizacionais  <b style="color: red">*</b></label>
-                                        <textarea th:style="${ erros.consequenciasOrganizacionais != null ? 'border-color: red' : ''}" class="form-control" required th:field="*{consequenciasOrganizacionais}" th:disabled="${info}"></textarea>
-                                        <label style="color: red" th:if="${erros.consequenciasOrganizacionais != null}" th:text="${erros.consequenciasOrganizacionais}"></label>
+                                        <label style="color: #2a2b2d">Fatores da comunicação <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorContribuinteComunicacao != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorContribuinteComunicacao.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorContribuinteComunicacao}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorContribuinteComunicacao != null}" th:text="${erros.tipoFatorContribuinteComunicacao}"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Fatores de desenpenho <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorContribuinteDesenpenho != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorContribuinteDesenpenho.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorContribuinteDesenpenho}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorContribuinteDesenpenho != null}" th:text="${erros.tipoFatorContribuinteDesenpenho}"></label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12 px-1">
+                                <div class="col-md-5 pl-1">
                                     <div class="form-group">
-                                        <label style="color: #2a2b2d">Identificação e analise de fatores  <b style="color: red">*</b></label>
-                                        <textarea th:style="${ erros.identificacaoeAnaliseDeFatores != null ? 'border-color: red' : ''}" class="form-control" required th:field="*{identificacaoeAnaliseDeFatores}" th:disabled="${info}"></textarea>
-                                        <label style="color: red" th:if="${erros.identificacaoeAnaliseDeFatores != null}" th:text="${erros.identificacaoeAnaliseDeFatores}"></label>
+                                        <label style="color: #2a2b2d">Fatores organizacionais <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorContribuinteOrganizacional != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorContribuinteOrganizacional.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorContribuinteOrganizacional}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorContribuinteOrganizacional != null}" th:text="${erros.tipoFatorContribuinteOrganizacional}"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Fatores do paciente <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorContribuintePaciente != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorContribuintePaciente.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorContribuintePaciente}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorContribuintePaciente != null}" th:text="${erros.tipoFatorContribuintePaciente}"></label>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12 px-1">
+                                <div class="col-md-6 pl-1">
                                     <div class="form-group">
-                                        <label style="color: #2a2b2d">Fatores atenuantes da ocorrência  <b style="color: red">*</b></label>
-                                        <textarea th:style="${ erros.fatoresAtenuantesDaOcorrencia != null ? 'border-color: red' : ''}" class="form-control" required th:field="*{fatoresAtenuantesDaOcorrencia}" th:disabled="${info}"></textarea>
-                                        <label style="color: red" th:if="${erros.fatoresAtenuantesDaOcorrencia != null}" th:text="${erros.fatoresAtenuantesDaOcorrencia}"></label>
+                                        <label style="color: #2a2b2d">Fatores prodissionais <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorContribuinteProfissional != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorContribuinteProfissional.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorContribuinteProfissional}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorContribuinteProfissional != null}" th:text="${erros.tipoFatorContribuinteProfissional}"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Fatores do trabalho / ambiente <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorContribuinteTrabalho != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorContribuinteTrabalho.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorContribuinteTrabalho}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorContribuinteTrabalho != null}" th:text="${erros.tipoFatorContribuinteTrabalho}"></label>
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row" style="margin-top: 20px">
+                                <div class="col-md-12 pl-1">
+                                    <p style="color: #2a2b2d">Fatores Atenuantes do Dano</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-7 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Dirigidos à um agente <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorAtenuanteAgente != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorAtenuanteAgente.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorAtenuanteAgente}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorAtenuanteAgente != null}" th:text="${erros.tipoFatorAtenuanteAgente}"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Dirigidos à organização <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorAtenuanteOrganizacao != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorAtenuanteOrganizacao.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorAtenuanteOrganizacao}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorAtenuanteOrganizacao != null}" th:text="${erros.tipoFatorAtenuanteOrganizacao}"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Dirigidos ao paciente <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorAtenuantePaciente != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorAtenuantePaciente.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorAtenuantePaciente}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorAtenuantePaciente != null}" th:text="${erros.tipoFatorAtenuantePaciente}"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Dirigidos ao profissional <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoFatorAtenuanteProfissional != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoFatorAtenuanteProfissional.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFatorAtenuanteProfissional}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoFatorAtenuanteProfissional != null}" th:text="${erros.tipoFatorAtenuanteProfissional}"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 20px">
+                                <div class="col-md-12 pl-1">
+                                    <p style="color: #2a2b2d">Consequências Organizacionais <b style="color: red">*</b></p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 pl-1">
+                                    <div class="form-group">
+                                        <select th:disabled="${info}" th:class="${ erros.tipoConsequenciaOrganizacional != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoConsequenciaOrganizacional.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoConsequenciaOrganizacional}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoConsequenciaOrganizacional != null}" th:text="${erros.tipoConsequenciaOrganizacional}"></label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row" th:if="${!info}">
                                 <div class="ml-auto mr-auto">
                                     <button type="submit" class="btn btn-primary mx-auto" style="width: 200px; height: 40px; font-size: 14px" >Enviar</button>

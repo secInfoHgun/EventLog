@@ -181,17 +181,6 @@ public class ExportPDF {
             document.add(getParagrafoNovo("1. Data / Hora que foi feito o registro da análise:\n", false, false, false, false));
             document.add(getParagrafoNovo(this.analise.data + " - " + this.analise.hora , true, false, false, false));
 
-            document.add(getParagrafoNovo("\n2. Fatores contribuintes para ocorrência:\n", false, false, false, false));
-            document.add(getParagrafoNovo(this.analise.fatoresContribuintes, true, false, false, false));
-
-            document.add(getParagrafoNovo("\n3. Consequências organizacionais:\n", false, false, false, false));
-            document.add(getParagrafoNovo(this.analise.consequenciasOrganizacionais, true, false, false, false));
-
-            document.add(getParagrafoNovo("\n4. Identificação e análise de fatores:\n", false, false, false, false));
-            document.add(getParagrafoNovo(this.analise.identificacaoeAnaliseDeFatores, true, false, false, false));
-
-            document.add(getParagrafoNovo("\n5. Fatores atenuantes da ocorrência\n", false,false, false, false));
-            document.add(getParagrafoNovo(this.analise.fatoresAtenuantesDaOcorrencia, true, false, false, false));
         }
         return document;
     }

@@ -7,6 +7,12 @@ import com.hgun.sti.models.Analise;
 import com.hgun.sti.models.errors.AnaliseError;
 import com.hgun.sti.repository.AnaliseRepository;
 import com.hgun.sti.repository.OcorrenciaRepository;
+import com.hgun.sti.repository.types.TipoConsequenciaOrganizacionalRepository;
+import com.hgun.sti.repository.types.fator.atenuante.TipoFatorAtenuanteAgenteRepository;
+import com.hgun.sti.repository.types.fator.atenuante.TipoFatorAtenuanteOrganizacaoRepository;
+import com.hgun.sti.repository.types.fator.atenuante.TipoFatorAtenuantePacienteRepository;
+import com.hgun.sti.repository.types.fator.atenuante.TipoFatorAtenuanteProfissionalRepository;
+import com.hgun.sti.repository.types.fator.contribuinte.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,12 +24,72 @@ import java.time.LocalDateTime;
 @Controller
 @RequestMapping("/administrador/ocorrencias/analises")
 public class AnaliseController {
+
+    @Autowired
+    private TipoConsequenciaOrganizacionalRepository tipoConsequenciaOrganizacionalRepository;
+
+    @Autowired
+    private TipoFatorContribuinteCognitivoRepository tipoFatorContribuinteCognitivoRepository;
+
+    @Autowired
+    private TipoFatorContribuinteComportamentoRepository tipoFatorContribuinteComportamentoRepository;
+
+    @Autowired
+    private TipoFatorContribuinteComunicacaoRepository tipoFatorContribuinteComunicacaoRepository;
+
+    @Autowired
+    private TipoFatorContribuinteDesenpenhoRepository tipoFatorContribuinteDesenpenhoRepository;
+
+    @Autowired
+    private TipoFatorContribuinteOrganizacionalRepository tipoFatorContribuinteOrganizacionalRepository;
+
+    @Autowired
+    private TipoFatorContribuintePacienteRepository tipoFatorContribuintePacienteRepository;
+
+    @Autowired
+    private TipoFatorContribuinteProfissionalRepository tipoFatorContribuinteProfissionalRepository;
+
+    @Autowired
+    private TipoFatorContribuinteTrabalhoRepository tipoFatorContribuinteTrabalhoRepository;
+
+    @Autowired
+    private TipoFatorAtenuanteAgenteRepository tipoFatorAtenuanteAgenteRepository;
+
+    @Autowired
+    private TipoFatorAtenuanteOrganizacaoRepository tipoFatorAtenuanteOrganizacaoRepository;
+
+    @Autowired
+    private TipoFatorAtenuantePacienteRepository tipoFatorAtenuantePacienteRepository;
+
+    @Autowired
+    private TipoFatorAtenuanteProfissionalRepository tipoFatorAtenuanteProfissionalRepository;
+
     @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
 
     @Autowired
     private AnaliseRepository analiseRepository;
 
+    private Model setAllLists(Model model){
+
+        model.addAttribute("listaTipoConsequenciaOrganizacional", tipoConsequenciaOrganizacionalRepository.findAll());
+
+        model.addAttribute("listaTipoFatorContibuinteCognitivo", tipoFatorContribuinteCognitivoRepository.findAll());
+        model.addAttribute("listaTipoFatorContribuinteComportamento", tipoFatorContribuinteComportamentoRepository.findAll());
+        model.addAttribute("listaTipoFatorContribuinteComunicacao", tipoFatorContribuinteComunicacaoRepository.findAll());
+        model.addAttribute("listaTipoFatorContribuinteDesenpenho", tipoFatorContribuinteDesenpenhoRepository.findAll());
+        model.addAttribute("listaTipoFatorContribuinteOrganizacional", tipoFatorContribuinteOrganizacionalRepository.findAll());
+        model.addAttribute("listaTipoFatorContribuintePaciente", tipoFatorContribuintePacienteRepository.findAll());
+        model.addAttribute("listaTipoFatorContribuinteProfissional", tipoFatorContribuinteProfissionalRepository.findAll());
+        model.addAttribute("listaTipoFatorContribuinteTrabalho", tipoFatorContribuinteTrabalhoRepository.findAll());
+
+        model.addAttribute("listaTipoFatorAtenuanteAgente", tipoFatorAtenuanteAgenteRepository.findAll());
+        model.addAttribute("listaTipoFatorAtenuanteOrganizacao", tipoFatorAtenuanteOrganizacaoRepository.findAll());
+        model.addAttribute("listaTipoFatorAtenuantePaciente", tipoFatorAtenuantePacienteRepository.findAll());
+        model.addAttribute("listaTipoFatorAtenuanteProfissional", tipoFatorAtenuanteProfissionalRepository.findAll());
+
+        return model;
+    }
 
     @GetMapping("/form")
     public String analisesformpage(Model model){
@@ -32,6 +98,8 @@ public class AnaliseController {
             model.addAttribute("erros", new AnaliseError());
             model.addAttribute("info", false);
         }
+
+        model = setAllLists(model);
 
         return "ocorrencia/formularioAnalise.html";
     }

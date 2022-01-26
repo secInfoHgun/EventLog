@@ -1,8 +1,12 @@
 package com.hgun.sti.components;
 
 import com.hgun.sti.models.types.*;
+import com.hgun.sti.models.types.fator.atenuante.*;
+import com.hgun.sti.models.types.fator.contribuinte.*;
 import com.hgun.sti.models.types.identificacao.*;
 import com.hgun.sti.repository.types.*;
+import com.hgun.sti.repository.types.fator.atenuante.*;
+import com.hgun.sti.repository.types.fator.contribuinte.*;
 import com.hgun.sti.repository.types.identificacao.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -36,6 +40,46 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     @Autowired
     private TipoIdentificadorRepository tipoIdentificadorRepository;
 
+    @Autowired
+    private TipoConsequenciaOrganizacionalRepository tipoConsequenciaOrganizacionalRepository;
+
+    @Autowired
+    private TipoFatorContribuinteCognitivoRepository tipoFatorContribuinteCognitivoRepository;
+
+    @Autowired
+    private TipoFatorContribuinteComportamentoRepository tipoFatorContribuinteComportamentoRepository;
+
+    @Autowired
+    private TipoFatorContribuinteComunicacaoRepository tipoFatorContribuinteComunicacaoRepository;
+
+    @Autowired
+    private TipoFatorContribuinteDesenpenhoRepository tipoFatorContribuinteDesenpenhoRepository;
+
+    @Autowired
+    private TipoFatorContribuinteOrganizacionalRepository tipoFatorContribuinteOrganizacionalRepository;
+
+    @Autowired
+    private TipoFatorContribuintePacienteRepository tipoFatorContribuintePacienteRepository;
+
+    @Autowired
+    private TipoFatorContribuinteProfissionalRepository tipoFatorContribuinteProfissionalRepository;
+
+    @Autowired
+    private TipoFatorContribuinteTrabalhoRepository tipoFatorContribuinteTrabalhoRepository;
+
+    @Autowired
+    private TipoFatorAtenuanteAgenteRepository tipoFatorAtenuanteAgenteRepository;
+
+    @Autowired
+    private TipoFatorAtenuanteOrganizacaoRepository tipoFatorAtenuanteOrganizacaoRepository;
+
+    @Autowired
+    private TipoFatorAtenuantePacienteRepository tipoFatorAtenuantePacienteRepository;
+
+    @Autowired
+    private TipoFatorAtenuanteProfissionalRepository tipoFatorAtenuanteProfissionalRepository;
+
+
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent event) {
         var listaTipoOcorrencia = tipoOcorrenciaRepository.findAll();
@@ -46,6 +90,20 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         var listaTipoLesao = tipoLesaoRepository.findAll();
         var listaTipoIdentificacao = tipoIdentificacaoRepository.findAll();
         var listaTipoIdentificador = tipoIdentificadorRepository.findAll();
+        var listaTipoConsequenciaOrganizacional = tipoConsequenciaOrganizacionalRepository.findAll();
+        var listaTipoFatorContibuinteCognitivo = tipoFatorContribuinteCognitivoRepository.findAll();
+        var listaTipoFatorContribuinteComportamento = tipoFatorContribuinteComportamentoRepository.findAll();
+        var listaTipoFatorContribuinteComunicacao = tipoFatorContribuinteComunicacaoRepository.findAll();
+        var listaTipoFatorContribuinteDesenpenho = tipoFatorContribuinteDesenpenhoRepository.findAll();
+        var listaTipoFatorContribuinteOrganizacional = tipoFatorContribuinteOrganizacionalRepository.findAll();
+        var listaTipoFatorContribuintePaciente = tipoFatorContribuintePacienteRepository.findAll();
+        var listaTipoFatorContribuinteProfissional = tipoFatorContribuinteProfissionalRepository.findAll();
+        var listaTipoFatorContribuinteTrabalho = tipoFatorContribuinteTrabalhoRepository.findAll();
+        var listaTipoFatorAtenuanteAgente = tipoFatorAtenuanteAgenteRepository.findAll();
+        var listaTipoFatorAtenuanteOrganizacao = tipoFatorAtenuanteOrganizacaoRepository.findAll();
+        var listaTipoFatorAtenuantePaciente = tipoFatorAtenuantePacienteRepository.findAll();
+        var listaTipoFatorAtenuanteProfissional = tipoFatorAtenuanteProfissionalRepository.findAll();
+
 
         if(listaTipoOcorrencia.isEmpty()){
             String[][] aux = {
@@ -248,6 +306,266 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             }
 
             System.out.println("cadastrei os tipos de identificador");
+        }
+
+        if(listaTipoConsequenciaOrganizacional.isEmpty()){
+            String[][] aux = {
+                    {"Dano à propriedade", ""},
+                    {"Aumento dos recursos necessários para o paciente", ""},
+                    {"Atenção da mídia", ""},
+                    {"Reclamação formal", ""},
+                    {"Reputação denegrida", ""},
+                    {"Implicações legais", ""}
+            };
+
+            for (String[] i: aux) {
+                var  tipoConsequenciaOrganizacional =  new TipoConsequenciaOrganizacional();
+                tipoConsequenciaOrganizacional.setNome(i[0]);
+                tipoConsequenciaOrganizacional.setDescricao(i[1]);
+                tipoConsequenciaOrganizacionalRepository.save(tipoConsequenciaOrganizacional);
+            }
+
+            System.out.println("cadastrei os tipos de consequencias organizacionais");
+        }
+
+        if(listaTipoFatorContibuinteCognitivo.isEmpty()){
+            String[][] aux = {
+                    {"Percepção / compreensão", ""},
+                    {"Resolução de problemas baseada em conhecimento", ""},
+                    {"Correlação ilusória", "associação incorreta entre duas variáveis ou classe de acontecimentos"},
+                    {"Efeito de Halo", "tendeência a qualificar o indivíduo de forma equivocada devido a uma informação prévia ou impressão geral que se tenha do indivíduo"},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorContribuinteCognitivo =  new TipoFatorContribuinteCognitivo();
+                tipoFatorContribuinteCognitivo.setNome(i[0]);
+                tipoFatorContribuinteCognitivo.setDescricao(i[1]);
+                tipoFatorContribuinteCognitivoRepository.save(tipoFatorContribuinteCognitivo);
+            }
+
+            System.out.println("cadastrei os tipos de fatores contribuintes cognitivos");
+        }
+
+        if(listaTipoFatorContribuinteComportamento.isEmpty()){
+            String[][] aux = {
+                    {"Problemas de atenção", ""},
+                    {"Fadiga / exaustão", ""},
+                    {"Excesso de confiança", ""},
+                    {"Não cumprimento de normas / protocolos", ""},
+                    {"Infrações sistemáticas", ""},
+                    {"Problemas de atenção", ""},
+                    {"Comportamento de risco", ""},
+                    {"Comportamento negligente", ""},
+                    {"Ato de sabotagem / criminal", ""},
+                    {"Problemas com uso / abuso de substâncias", ""},
+                    {"Fatores emocionais", ""},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorContribuinteComportamento =  new TipoFatorContribuinteComportamento();
+                tipoFatorContribuinteComportamento.setNome(i[0]);
+                tipoFatorContribuinteComportamento.setDescricao(i[1]);
+                tipoFatorContribuinteComportamentoRepository.save(tipoFatorContribuinteComportamento);
+            }
+
+            System.out.println("cadastrei os tipos de fatores contribuintes comportamentais");
+        }
+
+        if(listaTipoFatorContribuinteComunicacao.isEmpty()){
+            String[][] aux = {
+                    {"Método de comunicação", ""},
+                    {"Ausência ou inadequada transmissão de informações durante a passagem de plantão", ""},
+                    {"Problema / evento adverso na compreensão das orientações", "escritas ou verbais"},
+                    {"Ausência de anotações", "prontuário / ficha do paciente"},
+                    {"Informações ilegiveis", "prontuário / ficha do paciente"},
+                    {"Dificuldades linguisticas", ""},
+                    {"Literacia em saúde", "capacidade de compreender a informação de saúde e usar essa informação para tomar decisões sobre a saúde e cuidados médicos"},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorContribuinteComunicacao =  new TipoFatorContribuinteComunicacao();
+                tipoFatorContribuinteComunicacao.setNome(i[0]);
+                tipoFatorContribuinteComunicacao.setDescricao(i[1]);
+                tipoFatorContribuinteComunicacaoRepository.save(tipoFatorContribuinteComunicacao);
+            }
+
+            System.out.println("cadastrei os tipos de fatores contribuintes comunicações");
+        }
+
+        if(listaTipoFatorContribuinteDesenpenho.isEmpty()){
+            String[][] aux = {
+                    {"Erro técnico na execução", "baseado na aptidão física"},
+                    {"Baseado em regras", ""},
+                    {"Seletividade", ""},
+                    {"Parcialidade", ""},
+
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorContribuinteDesenpenho =  new TipoFatorContribuinteDesenpenho();
+                tipoFatorContribuinteDesenpenho.setNome(i[0]);
+                tipoFatorContribuinteDesenpenho.setDescricao(i[1]);
+                tipoFatorContribuinteDesenpenhoRepository.save(tipoFatorContribuinteDesenpenho);
+            }
+
+            System.out.println("cadastrei os tipos de fatores contribuintes desempenho");
+        }
+
+        if(listaTipoFatorContribuinteOrganizacional.isEmpty()){
+            String[][] aux = {
+                    {"Protocolos / políticas / procedimentos / processos", ""},
+                    {"Decisões organizacionais / cultura", ""},
+                    {"Organização das equipes", ""},
+                    {"Recursos / carga de trabalho", ""},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorContribuinteOrganizacional =  new TipoFatorContribuinteOrganizacional();
+                tipoFatorContribuinteOrganizacional.setNome(i[0]);
+                tipoFatorContribuinteOrganizacional.setDescricao(i[1]);
+                tipoFatorContribuinteOrganizacionalRepository.save(tipoFatorContribuinteOrganizacional);
+            }
+
+            System.out.println("cadastrei os tipos de fatores contribuintes organizacionais");
+        }
+
+        if(listaTipoFatorContribuintePaciente.isEmpty()){
+            String[][] aux = {
+                    {"Percepção / compreensão", ""},
+                    {"Problemas de atenção", ""},
+                    {"Fadiga / exaustão", ""},
+                    {"Excesso de confiança", ""},
+                    {"Não cumprimento de orientações", ""},
+                    {"Comportamento de risco", ""},
+                    {"Comportamento negligente", ""},
+                    {"Ato de sabotagem / criminal", ""},
+                    {"Dificuldades linguisticas", ""},
+                    {"Dificuldade de compreensão das orientações de saúde", ""},
+                    {"Problemas com uso / abuso de substâncias", ""},
+                    {"Fatores emocionais", ""},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorContribuintePaciente =  new TipoFatorContribuintePaciente();
+                tipoFatorContribuintePaciente.setNome(i[0]);
+                tipoFatorContribuintePaciente.setDescricao(i[1]);
+                tipoFatorContribuintePacienteRepository.save(tipoFatorContribuintePaciente);
+            }
+
+            System.out.println("cadastrei os tipos de fatores contribuintes pacientes");
+        }
+
+        if(listaTipoFatorContribuinteProfissional.isEmpty()){
+            String[][] aux = {
+                    {"Discuido / distração / omissão", ""},
+                    {"Sobrecarga de trabalho / fadiga / esgotamento", ""},
+                    {"Problema / evento adverso na execução do trabalho", ""},
+                    {"Descumprimento de normas", ""},
+                    {"Violação de rotinas estabelecidas pelo serviço de saúde", ""},
+                    {"Comportamento arriscado / imprudente", ""},
+                    {"Problemas com abuso de substâncias", ""},
+                    {"Sabotagem / ato criminoso", ""},
+                    {"Ausência ou inadequada transmissão de informações durante a passagem de plantão", ""},
+                    {"Problema / evento adverso na compreensão das orientações", "escritas ou verbais"},
+                    {"Ausência de anotações", "prontuário / ficha do paciente"},
+                    {"Informações ilegiveis", "prontuário / ficha do paciente"},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorContribuinteProfissional =  new TipoFatorContribuinteProfissional();
+                tipoFatorContribuinteProfissional.setNome(i[0]);
+                tipoFatorContribuinteProfissional.setDescricao(i[1]);
+                tipoFatorContribuinteProfissionalRepository.save(tipoFatorContribuinteProfissional);
+            }
+
+            System.out.println("cadastrei os tipos de fatores contribuintes profissionais");
+        }
+
+        if(listaTipoFatorContribuinteTrabalho.isEmpty()){
+            String[][] aux = {
+                    {"Infraestrutura / ambiente físico", ""},
+                    {"Afastado ou a longa distância do serviço", ""},
+                    {"Avaliação de risco ambiental / avaliação de segurança", ""},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorContribuinteTrabalho =  new TipoFatorContribuinteTrabalho();
+                tipoFatorContribuinteTrabalho.setNome(i[0]);
+                tipoFatorContribuinteTrabalho.setDescricao(i[1]);
+                tipoFatorContribuinteTrabalhoRepository.save(tipoFatorContribuinteTrabalho);
+            }
+
+            System.out.println("cadastrei os tipos de fatores contribuintes trabalho / ambiente");
+        }
+
+        if(listaTipoFatorAtenuanteAgente.isEmpty()){
+            String[][] aux = {
+                    {"Medida de segurança / ambiente físico", ""},
+                    {"Corrigido o erro de utilização do equipamento / produto", ""},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorAtenuanteAgente =  new TipoFatorAtenuanteAgente();
+                tipoFatorAtenuanteAgente.setNome(i[0]);
+                tipoFatorAtenuanteAgente.setDescricao(i[1]);
+                tipoFatorAtenuanteAgenteRepository.save(tipoFatorAtenuanteAgente);
+            }
+
+            System.out.println("cadastrei os tipos de fatores atenuantes agentes");
+        }
+
+        if(listaTipoFatorAtenuanteOrganizacao.isEmpty()){
+            String[][] aux = {
+                    {"Protocolo eficaz disponível", ""},
+                    {"Corrigido erro de documentação", ""},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorAtenuanteOrganizacao =  new TipoFatorAtenuanteOrganizacao();
+                tipoFatorAtenuanteOrganizacao.setNome(i[0]);
+                tipoFatorAtenuanteOrganizacao.setDescricao(i[1]);
+                tipoFatorAtenuanteOrganizacaoRepository.save(tipoFatorAtenuanteOrganizacao);
+            }
+
+            System.out.println("cadastrei os tipos de fatores atenuantes organizacionais");
+        }
+
+        if(listaTipoFatorAtenuantePaciente.isEmpty()){
+            String[][] aux = {
+                    {"Pedido de ajuda", ""},
+                    {"Empreendidas medidas de gestão / tratamento / cuidado", ""},
+                    {"Paciente encaminhado", ""},
+                    {"Explicação / informação para o paciente", ""},
+                    {"Pedido de desculpas", ""},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorAtenuantePaciente =  new TipoFatorAtenuantePaciente();
+                tipoFatorAtenuantePaciente.setNome(i[0]);
+                tipoFatorAtenuantePaciente.setDescricao(i[1]);
+                tipoFatorAtenuantePacienteRepository.save(tipoFatorAtenuantePaciente);
+            }
+
+            System.out.println("cadastrei os tipos de fatores atenuantes pacientes");
+        }
+
+        if(listaTipoFatorAtenuanteProfissional.isEmpty()){
+            String[][] aux = {
+                    {"Boa supervisão / liderança", ""},
+                    {"Bom trabalho de equipe", ""},
+                    {"Comunicação efetiva", ""},
+                    {"Formação de pessoas-chave", ""},
+                    {"Boa sorte / causalidade", ""},
+            };
+
+            for (String[] i: aux) {
+                var  tipoFatorAtenuanteProfissional =  new TipoFatorAtenuanteProfissional();
+                tipoFatorAtenuanteProfissional.setNome(i[0]);
+                tipoFatorAtenuanteProfissional.setDescricao(i[1]);
+                tipoFatorAtenuanteProfissionalRepository.save(tipoFatorAtenuanteProfissional);
+            }
+
+            System.out.println("cadastrei os tipos de fatores atenuantes profissionais");
         }
 
         return;
