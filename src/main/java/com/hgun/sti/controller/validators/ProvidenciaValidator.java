@@ -8,16 +8,24 @@ public class ProvidenciaValidator {
 
         var providenciaError = new ProvidenciaError();
 
-        if(providencia.getAcoesDeMelhoria() != null && !providencia.getAcoesDeMelhoria().isEmpty()){
-            if(providencia.getAcoesDeMelhoria().length() < 4){
-                providenciaError.setAcoesDeMelhoria("As ações de melhoria está muito curta! (min: 4 caracteres)");
-            }
+        if(providencia.getTipoAcaoMelhoriaPaciente() == null) {
+            providenciaError.setTipoAcaoMelhoriaPaciente("A ação de melhoria focada no paciente não pode ser vazia!");
         }
 
-        if(providencia.getAcoesParaReduzirRiscos() != null && !providencia.getAcoesParaReduzirRiscos().isEmpty()){
-            if(providencia.getAcoesParaReduzirRiscos().length() < 4){
-                providenciaError.setAcoesParaReduzirRiscos("As ações para reduzir riscos está muito curta! (min: 4 caracteres)");
-            }
+        if(providencia.getTipoAcaoMelhoriaOrganizacao() == null) {
+            providenciaError.setTipoAcaoMelhoriaOrganizacao("A ação de melhoria focada na organização não pode ser vazia!");
+        }
+
+        if(providencia.getTipoAcaoReduzirRiscoPaciente() == null) {
+            providenciaError.setTipoAcaoReduzirRiscoPaciente("A ação de redução de riscos focada no paciente não pode ser vazia!");
+        }
+
+        if(providencia.getTipoAcaoReduzirRiscoProfissional() == null) {
+            providenciaError.setTipoAcaoReduzirRiscoProfissional("A ação de redução de riscos focada no profissional não pode ser vazia!");
+        }
+
+        if(providencia.getTipoAcaoReduzirRiscoOrganizacional() == null) {
+            providenciaError.setTipoAcaoReduzirRiscoOrganizacional("A ação de redução de riscos focada no ambiental / organizacional não pode ser vazia!");
         }
 
         if(providencia.getOutrasProvidencias() != null && !providencia.getOutrasProvidencias().isEmpty()){

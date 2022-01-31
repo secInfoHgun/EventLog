@@ -7,6 +7,11 @@ import com.hgun.sti.models.Providencia;
 import com.hgun.sti.models.errors.ProvidenciaError;
 import com.hgun.sti.repository.OcorrenciaRepository;
 import com.hgun.sti.repository.ProvidenciaRepository;
+import com.hgun.sti.repository.types.acao.melhoria.TipoAcaoMelhoriaOrganizacaoRepository;
+import com.hgun.sti.repository.types.acao.melhoria.TipoAcaoMelhoriaPacienteRepository;
+import com.hgun.sti.repository.types.acao.reduzirRisco.TipoAcaoReduzirRiscoOrganizacionalRepository;
+import com.hgun.sti.repository.types.acao.reduzirRisco.TipoAcaoReduzirRiscoPacienteRepository;
+import com.hgun.sti.repository.types.acao.reduzirRisco.TipoAcaoReduzirRiscoProfissionalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +30,21 @@ public class ProvidenciaController {
     @Autowired
     private ProvidenciaRepository providenciaRepository;
 
+    @Autowired
+    private TipoAcaoMelhoriaPacienteRepository tipoAcaoMelhoriaPacienteRepository;
+
+    @Autowired
+    private TipoAcaoMelhoriaOrganizacaoRepository tipoAcaoMelhoriaOrganizacaoRepository;
+
+    @Autowired
+    private TipoAcaoReduzirRiscoProfissionalRepository tipoAcaoReduzirRiscoProfissionalRepository;
+
+    @Autowired
+    private TipoAcaoReduzirRiscoPacienteRepository tipoAcaoReduzirRiscoPacienteRepository;
+
+    @Autowired
+    private TipoAcaoReduzirRiscoOrganizacionalRepository tipoAcaoReduzirRiscoOrganizacionalRepository;
+
     @GetMapping("/form")
     public String providenciasformpage(Model model){
         if(model.getAttribute("providencia") == null){
@@ -32,6 +52,12 @@ public class ProvidenciaController {
             model.addAttribute("erros", new ProvidenciaError());
             model.addAttribute("info", false);
         }
+
+        model.addAttribute("listaTipoAcaoMelhoriaOrganizacao", tipoAcaoMelhoriaOrganizacaoRepository.findAll());
+        model.addAttribute("listaTipoAcaoMelhoriaPaciente", tipoAcaoMelhoriaPacienteRepository.findAll());
+        model.addAttribute("listaTipoAcaoReduzirRiscoOrganizacional", tipoAcaoReduzirRiscoOrganizacionalRepository.findAll());
+        model.addAttribute("listaTipoAcaoReduzirRiscoPaciente", tipoAcaoReduzirRiscoPacienteRepository.findAll());
+        model.addAttribute("listaTipoAcaoReduzirRiscoProfissional", tipoAcaoReduzirRiscoProfissionalRepository.findAll());
 
         return "ocorrencia/formularioProvidencias.html";
     }

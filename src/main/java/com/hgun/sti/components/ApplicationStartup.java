@@ -1,10 +1,14 @@
 package com.hgun.sti.components;
 
 import com.hgun.sti.models.types.*;
+import com.hgun.sti.models.types.acao.reduzirRisco.*;
+import com.hgun.sti.models.types.acao.melhoria.*;
 import com.hgun.sti.models.types.fator.atenuante.*;
 import com.hgun.sti.models.types.fator.contribuinte.*;
 import com.hgun.sti.models.types.identificacao.*;
 import com.hgun.sti.repository.types.*;
+import com.hgun.sti.repository.types.acao.melhoria.*;
+import com.hgun.sti.repository.types.acao.reduzirRisco.*;
 import com.hgun.sti.repository.types.fator.atenuante.*;
 import com.hgun.sti.repository.types.fator.contribuinte.*;
 import com.hgun.sti.repository.types.identificacao.*;
@@ -79,6 +83,21 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
     @Autowired
     private TipoFatorAtenuanteProfissionalRepository tipoFatorAtenuanteProfissionalRepository;
 
+    @Autowired
+    private TipoAcaoMelhoriaOrganizacaoRepository tipoAcaoMelhoriaOrganizacaoRepository;
+
+    @Autowired
+    private TipoAcaoMelhoriaPacienteRepository tipoAcaoMelhoriaPacienteRepository;
+
+    @Autowired
+    private TipoAcaoReduzirRiscoOrganizacionalRepository tipoAcaoReduzirRiscoOrganizacionalRepository;
+
+    @Autowired
+    private TipoAcaoReduzirRiscoPacienteRepository tipoAcaoReduzirRiscoPacienteRepository;
+
+    @Autowired
+    private TipoAcaoReduzirRiscoProfissionalRepository tipoAcaoReduzirRiscoProfissionalRepository;
+
 
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent event) {
@@ -103,7 +122,11 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         var listaTipoFatorAtenuanteOrganizacao = tipoFatorAtenuanteOrganizacaoRepository.findAll();
         var listaTipoFatorAtenuantePaciente = tipoFatorAtenuantePacienteRepository.findAll();
         var listaTipoFatorAtenuanteProfissional = tipoFatorAtenuanteProfissionalRepository.findAll();
-
+        var listaTipoAcaoMelhoriaOrganizacaoRepository = tipoAcaoMelhoriaOrganizacaoRepository.findAll();
+        var listaTipoAcaoMelhoriaPacienteRepository = tipoAcaoMelhoriaPacienteRepository.findAll();
+        var listaTipoAcaoReduzirRiscoOrganizacionalRepository = tipoAcaoReduzirRiscoOrganizacionalRepository.findAll();
+        var listaTipoAcaoReduzirRiscoPacienteRepository = tipoAcaoReduzirRiscoPacienteRepository.findAll();
+        var listaTipoAcaoReduzirRiscoProfissionalRepository = tipoAcaoReduzirRiscoProfissionalRepository.findAll();
 
         if(listaTipoOcorrencia.isEmpty()){
             String[][] aux = {
@@ -566,6 +589,113 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             }
 
             System.out.println("cadastrei os tipos de fatores atenuantes profissionais");
+        }
+
+        if(listaTipoAcaoMelhoriaOrganizacaoRepository.isEmpty()){
+            String[][] aux = {
+                    {"Gestão da mídia / relações pública", ""},
+                    {"Gestão de reclamações", ""},
+                    {"Gestão de ação judicial / riscos", ""},
+                    {"Gestão do stress / acompanhamento psicológico para os profissionais", ""},
+                    {"Notificação local e idenização", ""},
+                    {"Reconciliação / mediação", ""},
+                    {"Mudança de cultura organizacional", ""},
+                    {"Formação / treinamento", ""},
+                    {"Ainda não foram realizadas ações de melhoria", ""},
+            };
+
+            for (String[] i: aux) {
+                var tipoAcaoMelhoriaOrganizacao  =  new TipoAcaoMelhoriaOrganizacao();
+                tipoAcaoMelhoriaOrganizacao.setNome(i[0]);
+                tipoAcaoMelhoriaOrganizacao.setDescricao(i[1]);
+                tipoAcaoMelhoriaOrganizacaoRepository.save(tipoAcaoMelhoriaOrganizacao);
+            }
+
+            System.out.println("cadastrei os tipos de ações de melhorias organizacionais");
+        }
+
+        if(listaTipoAcaoMelhoriaPacienteRepository.isEmpty()){
+            String[][] aux = {
+                    {"Gestão da doença", ""},
+                    {"Gestão da lesão", ""},
+                    {"Gestão da incapacidade", ""},
+                    {"Compensação", ""},
+                    {"Relevação / desculpa pública", ""},
+                    {"Gestão da doença", ""},
+                    {"Ainda não foram realizadas ações de melhoria", ""},
+            };
+
+            for (String[] i: aux) {
+                var  tipoAcaoMelhoriaPaciente =  new TipoAcaoMelhoriaPaciente();
+                tipoAcaoMelhoriaPaciente.setNome(i[0]);
+                tipoAcaoMelhoriaPaciente.setDescricao(i[1]);
+                tipoAcaoMelhoriaPacienteRepository.save(tipoAcaoMelhoriaPaciente);
+            }
+
+            System.out.println("cadastrei os tipos de ações de melhorias do paciente");
+        }
+
+        if(listaTipoAcaoReduzirRiscoOrganizacionalRepository.isEmpty()){
+            String[][] aux = {
+                    {"Ambiente físico adequado às necessidades", ""},
+                    {"Providenciar acesso a um serviço", ""},
+                    {"Efetuar avaliações de risco / análise de causa-raiz", ""},
+                    {"Cumprir códigos / especificações / regulamentos", ""},
+                    {"Disponibilizar o rápido acesso a protocolos / politicas / apoio á decisão", ""},
+                    {"Melhoia de liderança / orientação", ""},
+                    {"Adequação dos profissionais às tarefas / aptidões", ""},
+                    {"Melhoria da cultura de segurança", ""},
+
+            };
+
+            for (String[] i: aux) {
+                var  tipoAcaoReduzirRiscoOrganizacional =  new TipoAcaoReduzirRiscoOrganizacional();
+                tipoAcaoReduzirRiscoOrganizacional.setNome(i[0]);
+                tipoAcaoReduzirRiscoOrganizacional.setDescricao(i[1]);
+                tipoAcaoReduzirRiscoOrganizacionalRepository.save(tipoAcaoReduzirRiscoOrganizacional);
+            }
+
+            System.out.println("cadastrei os tipos de ações para reduzir riscos organizacionais");
+        }
+
+        if(listaTipoAcaoReduzirRiscoPacienteRepository.isEmpty()){
+            String[][] aux = {
+                    {"Disponibilização de cuidados / apoio adequado", ""},
+                    {"Disponibilização de instrução / orientações para o paciente", ""},
+                    {"Disponibilização de protocolos de apoio á decisão", ""},
+                    {"Disponibilização de equipamento de monitorização", ""},
+                    {"Disponibilização de sistema de ajuda e dispensação da medicação", ""},
+
+            };
+
+            for (String[] i: aux) {
+                var  tipoAcaoReduzirRiscoPaciente =  new TipoAcaoReduzirRiscoPaciente();
+                tipoAcaoReduzirRiscoPaciente.setNome(i[0]);
+                tipoAcaoReduzirRiscoPaciente.setDescricao(i[1]);
+                tipoAcaoReduzirRiscoPacienteRepository.save(tipoAcaoReduzirRiscoPaciente);
+            }
+
+            System.out.println("cadastrei os tipos de ações para reduzir riscos do paciente");
+        }
+
+        if(listaTipoAcaoReduzirRiscoProfissionalRepository.isEmpty()){
+            String[][] aux = {
+                    {"Formação", ""},
+                    {"Orientação", ""},
+                    {"Supervisão / assistência", ""},
+                    {"Estratégias para gestão da fadiga", ""},
+                    {"Disponibilidade de checkilist / protocolos / políticas", ""},
+                    {"Número de profissionais adequado á demanda", ""},
+            };
+
+            for (String[] i: aux) {
+                var  tipoAcaoReduzirRiscoProfissional =  new TipoAcaoReduzirRiscoProfissional();
+                tipoAcaoReduzirRiscoProfissional.setNome(i[0]);
+                tipoAcaoReduzirRiscoProfissional.setDescricao(i[1]);
+                tipoAcaoReduzirRiscoProfissionalRepository.save(tipoAcaoReduzirRiscoProfissional);
+            }
+
+            System.out.println("cadastrei os tipos de ações para reduzir riscos profissionais");
         }
 
         return;

@@ -61,52 +61,117 @@
                             <input class="invisible" id="id" name="id" th:field="*{id}" placeholder="Id do providencia">
 
                             <div class="row">
-                                <div class="col-md-4 px-1">
+                                <div class="col-md-2 pl-1">
                                     <div class="form-group">
                                         <label style="color: #2a2b2d">Datade cadastro</label>
                                         <input type="text" th:class="${'form-control'}" data-mask="00/00/0000" th:field="*{data}" disabled>
                                     </div>
                                 </div>
-                                <div class="col-md-4 px-1">
+                                <div class="col-md-2 pl-1">
                                     <div class="form-group">
                                         <label style="color: #2a2b2d">Hora de cadastro</label>
                                         <input type="text" th:class="${'form-control'}" data-mask="00:00" th:field="*{hora}" disabled>
                                     </div>
                                 </div>
-                                <div class="col-md-4 px-1">
-                                    <div style="margin-top: 30px; margin-left: 60px">
+                                <div class="col-md-4 pl-1">
+                                    <div style="margin-top: 30px; margin-left: 50px">
                                         <input class="form-check-input" type="checkbox" th:field="*{naoCaracterizaEventoAdverso}" th:checked="${naoCaracterizaEventoAdverso}" th:disabled="${info}" style="width: 20px; height: 20px">
                                         <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d">
                                             Não caracteriza um evento adverso
                                         </label>
                                     </div>
                                 </div>
+                                <div class="col-md-4 pl-1">
+                                    <div style="margin-top: 30px;">
+                                        <input class="form-check-input" type="checkbox" th:field="*{naoAdotadasAcoesReducaoRisco}" th:checked="${naoAdotadasAcoesReducaoRisco}" th:disabled="${info}" style="width: 20px; height: 20px">
+                                        <label class="form-check-label" style="margin-left: 15px; margin-top: 6px; color: #2a2b2d">
+                                            Não foram adotadas ações de redução de risco
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 20px">
+                                <div class="col-md-12 pl-1">
+                                    <p style="color: #2a2b2d">Ações de melhoria</p>
+                                </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12 px-1">
+                                <div class="col-md-7 pl-1">
                                     <div class="form-group">
-                                        <label style="color: #2a2b2d">Ações de melhoria</label>
-                                        <textarea th:style="${ erros.acoesDeMelhoria != null ? 'border-color: red' : ''}" class="form-control" th:field="*{acoesDeMelhoria}" th:disabled="${info}"></textarea>
-                                        <label style="color: red" th:if="${erros.acoesDeMelhoria != null}" th:text="${erros.acoesDeMelhoria}"></label>
+                                        <label style="color: #2a2b2d">Relacionadas ao paciente <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoAcaoMelhoriaPaciente != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoAcaoMelhoriaPaciente.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoAcaoMelhoriaPaciente}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoAcaoMelhoriaPaciente != null}" th:text="${erros.tipoAcaoMelhoriaPaciente}"></label>
                                     </div>
+                                </div>
+                                <div class="col-md-5 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Relacionadas com a organização <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoAcaoMelhoriaOrganizacao != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoAcaoMelhoriaOrganizacao.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoAcaoMelhoriaOrganizacao}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoAcaoMelhoriaOrganizacao != null}" th:text="${erros.tipoAcaoMelhoriaOrganizacao}"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top: 20px">
+                                <div class="col-md-12 pl-1">
+                                    <p style="color: #2a2b2d">Ações para reduzir riscos</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-5 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Relacionadas ao paciente <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoAcaoReduzirRiscoPaciente != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoAcaoReduzirRiscoPaciente.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoAcaoReduzirRiscoPaciente}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoAcaoReduzirRiscoPaciente != null}" th:text="${erros.tipoAcaoReduzirRiscoPaciente}"></label>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Relacionadas ao profissional <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoAcaoReduzirRiscoProfissional != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoAcaoReduzirRiscoProfissional.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoAcaoReduzirRiscoProfissional}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoAcaoReduzirRiscoProfissional != null}" th:text="${erros.tipoAcaoReduzirRiscoProfissional}"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 pl-1">
+                                    <div class="form-group">
+                                        <label style="color: #2a2b2d">Relacionadas ao ambiental / organizacional <b style="color: red">*</b></label>
+                                        <select th:disabled="${info}" th:class="${ erros.tipoAcaoReduzirRiscoOrganizacional != null ? 'form-control errorInput' : 'form-control'}" required th:field="*{tipoAcaoReduzirRiscoOrganizacional.id}">
+                                            <option th:value="null"></option>
+                                            <option th:value="${tipo.id}" th:each="tipo : ${listaTipoAcaoReduzirRiscoOrganizacional}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
+                                        </select>
+                                        <label style="color: red" th:if="${erros.tipoAcaoReduzirRiscoOrganizacional != null}" th:text="${erros.tipoAcaoReduzirRiscoOrganizacional}"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row" style="margin-top: 20px">
+                                <div class="col-md-12 pl-1">
+                                    <p style="color: #2a2b2d">Outras providências <b style="color: red">*</b></p>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12 px-1">
                                     <div class="form-group">
-                                        <label style="color: #2a2b2d">Ações para reduzir riscos</label>
-                                        <textarea th:style="${ erros.acoesParaReduzirRiscos != null ? 'border-color: red' : ''}" class="form-control" th:field="*{acoesParaReduzirRiscos}" th:disabled="${info}"></textarea>
-                                        <label style="color: red" th:if="${erros.acoesParaReduzirRiscos != null}" th:text="${erros.acoesParaReduzirRiscos}"></label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-12 px-1">
-                                    <div class="form-group">
-                                        <label style="color: #2a2b2d">Outras providências</label>
                                         <textarea th:style="${ erros.outrasProvidencias != null ? 'border-color: red' : ''}" class="form-control" th:field="*{outrasProvidencias}" th:disabled="${info}"></textarea>
                                         <label style="color: red" th:if="${erros.outrasProvidencias != null}" th:text="${erros.outrasProvidencias}"></label>
                                     </div>

@@ -193,12 +193,6 @@ public class ExportPDF {
             document.add(getParagrafoNovo("1. Data / Hora que foi feito o registro da providência:\n", false, false, false, false));
             document.add(getParagrafoNovo(this.providencia.data + " - " + this.providencia.hora , true, false, false, false));
 
-            document.add(getParagrafoNovo("\n2. Ações de melhoria:\n", false, false, false, false));
-            document.add(getParagrafoNovo((this.providencia.acoesDeMelhoria.isEmpty() ? "-" : this.providencia.acoesDeMelhoria), true, false, false, false));
-
-            document.add(getParagrafoNovo("\n3. Ações para reduzir riscos:\n", false, false, false, false));
-            document.add(getParagrafoNovo((this.providencia.acoesParaReduzirRiscos.isEmpty() ? "-" : this.providencia.acoesParaReduzirRiscos), true, false, false, false));
-
             document.add(getParagrafoNovo("\n4. Não caracteriza um evento adverso:\n", false, false, false, false));
             document.add(getParagrafoNovo((this.providencia.naoCaracterizaEventoAdverso ? "(X) Sim ( ) Não" : "( ) Sim (X) Não"), true, false, false, false));
 
