@@ -23,43 +23,43 @@ public class Analise {
     public Long id;
 
     @OneToOne
-    private TipoConsequenciaOrganizacional tipoConsequenciaOrganizacional;
+    public TipoConsequenciaOrganizacional tipoConsequenciaOrganizacional;
 
     @OneToOne
-    private TipoFatorContribuinteCognitivo tipoFatorContribuinteCognitivo;
+    public TipoFatorContribuinteCognitivo tipoFatorContribuinteCognitivo;
 
     @OneToOne
-    private TipoFatorContribuinteComportamento tipoFatorContribuinteComportamento;
+    public TipoFatorContribuinteComportamento tipoFatorContribuinteComportamento;
 
     @OneToOne
-    private TipoFatorContribuinteComunicacao tipoFatorContribuinteComunicacao;
+    public TipoFatorContribuinteComunicacao tipoFatorContribuinteComunicacao;
 
     @OneToOne
-    private TipoFatorContribuinteDesenpenho tipoFatorContribuinteDesenpenho;
+    public TipoFatorContribuinteDesenpenho tipoFatorContribuinteDesenpenho;
 
     @OneToOne
-    private TipoFatorContribuinteOrganizacional tipoFatorContribuinteOrganizacional;
+    public TipoFatorContribuinteOrganizacional tipoFatorContribuinteOrganizacional;
 
     @OneToOne
-    private TipoFatorContribuintePaciente tipoFatorContribuintePaciente;
+    public TipoFatorContribuintePaciente tipoFatorContribuintePaciente;
 
     @OneToOne
-    private TipoFatorContribuinteProfissional tipoFatorContribuinteProfissional;
+    public TipoFatorContribuinteProfissional tipoFatorContribuinteProfissional;
 
     @OneToOne
-    private TipoFatorContribuinteTrabalho tipoFatorContribuinteTrabalho;
+    public TipoFatorContribuinteTrabalho tipoFatorContribuinteTrabalho;
 
     @OneToOne
-    private TipoFatorAtenuanteAgente tipoFatorAtenuanteAgente;
+    public TipoFatorAtenuanteAgente tipoFatorAtenuanteAgente;
 
     @OneToOne
-    private TipoFatorAtenuanteOrganizacao tipoFatorAtenuanteOrganizacao;
+    public TipoFatorAtenuanteOrganizacao tipoFatorAtenuanteOrganizacao;
 
     @OneToOne
-    private TipoFatorAtenuantePaciente tipoFatorAtenuantePaciente;
+    public TipoFatorAtenuantePaciente tipoFatorAtenuantePaciente;
 
     @OneToOne
-    private TipoFatorAtenuanteProfissional tipoFatorAtenuanteProfissional;
+    public TipoFatorAtenuanteProfissional tipoFatorAtenuanteProfissional;
 
     @NotBlank
     public String data;
