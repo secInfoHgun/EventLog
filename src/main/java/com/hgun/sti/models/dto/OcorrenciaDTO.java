@@ -31,6 +31,8 @@ public class OcorrenciaDTO {
     TipoFaseAssistencia tipoFaseAssistencia;
     TipoIdentificacao tipoIdentificacao;
     TipoIdentificador tipoIdentificador;
+    Boolean visualizada;
+
 
     public static Ocorrencia fromDTO(OcorrenciaDTO ocorrencia){
         return Ocorrencia.builder()
@@ -53,6 +55,7 @@ public class OcorrenciaDTO {
                 .tipoFaseAssistencia(ocorrencia.getTipoFaseAssistencia())
                 .tipoIdentificacao(ocorrencia.getTipoIdentificacao())
                 .tipoIdentificador(ocorrencia.getTipoIdentificador())
+                .visualizada(ocorrencia.getVisualizada())
                 .build();
     }
 
@@ -77,6 +80,7 @@ public class OcorrenciaDTO {
                 .tipoFaseAssistencia(ocorrencia.getTipoFaseAssistencia())
                 .tipoIdentificacao(ocorrencia.getTipoIdentificacao())
                 .tipoIdentificador(ocorrencia.getTipoIdentificador())
+                .visualizada(ocorrencia.getVisualizada())
                 .build();
     }
 }

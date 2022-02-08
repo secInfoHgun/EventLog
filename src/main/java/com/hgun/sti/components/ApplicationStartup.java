@@ -109,6 +109,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         var listaTipoLesao = tipoLesaoRepository.findAll();
         var listaTipoIdentificacao = tipoIdentificacaoRepository.findAll();
         var listaTipoIdentificador = tipoIdentificadorRepository.findAll();
+
         var listaTipoConsequenciaOrganizacional = tipoConsequenciaOrganizacionalRepository.findAll();
         var listaTipoFatorContibuinteCognitivo = tipoFatorContribuinteCognitivoRepository.findAll();
         var listaTipoFatorContribuinteComportamento = tipoFatorContribuinteComportamentoRepository.findAll();
@@ -333,6 +334,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoConsequenciaOrganizacional.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Dano à propriedade", ""},
                     {"Aumento dos recursos necessários para o paciente", ""},
                     {"Atenção da mídia", ""},
@@ -353,6 +355,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorContibuinteCognitivo.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Percepção / compreensão", ""},
                     {"Resolução de problemas baseada em conhecimento", ""},
                     {"Correlação ilusória", "associação incorreta entre duas variáveis ou classe de acontecimentos"},
@@ -371,6 +374,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorContribuinteComportamento.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Problemas de atenção", ""},
                     {"Fadiga / exaustão", ""},
                     {"Excesso de confiança", ""},
@@ -396,6 +400,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorContribuinteComunicacao.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Método de comunicação", ""},
                     {"Ausência ou inadequada transmissão de informações durante a passagem de plantão", ""},
                     {"Problema / evento adverso na compreensão das orientações", "escritas ou verbais"},
@@ -417,6 +422,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorContribuinteDesenpenho.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Erro técnico na execução", "baseado na aptidão física"},
                     {"Baseado em regras", ""},
                     {"Seletividade", ""},
@@ -436,6 +442,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorContribuinteOrganizacional.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Protocolos / políticas / procedimentos / processos", ""},
                     {"Decisões organizacionais / cultura", ""},
                     {"Organização das equipes", ""},
@@ -454,6 +461,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorContribuintePaciente.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Percepção / compreensão", ""},
                     {"Problemas de atenção", ""},
                     {"Fadiga / exaustão", ""},
@@ -480,6 +488,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorContribuinteProfissional.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Discuido / distração / omissão", ""},
                     {"Sobrecarga de trabalho / fadiga / esgotamento", ""},
                     {"Problema / evento adverso na execução do trabalho", ""},
@@ -506,6 +515,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorContribuinteTrabalho.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Infraestrutura / ambiente físico", ""},
                     {"Afastado ou a longa distância do serviço", ""},
                     {"Avaliação de risco ambiental / avaliação de segurança", ""},
@@ -523,6 +533,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorAtenuanteAgente.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Medida de segurança / ambiente físico", ""},
                     {"Corrigido o erro de utilização do equipamento / produto", ""},
             };
@@ -539,6 +550,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorAtenuanteOrganizacao.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Protocolo eficaz disponível", ""},
                     {"Corrigido erro de documentação", ""},
             };
@@ -555,6 +567,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorAtenuantePaciente.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Pedido de ajuda", ""},
                     {"Empreendidas medidas de gestão / tratamento / cuidado", ""},
                     {"Paciente encaminhado", ""},
@@ -574,6 +587,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFatorAtenuanteProfissional.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Boa supervisão / liderança", ""},
                     {"Bom trabalho de equipe", ""},
                     {"Comunicação efetiva", ""},
@@ -593,6 +607,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoAcaoMelhoriaOrganizacaoRepository.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Gestão da mídia / relações pública", ""},
                     {"Gestão de reclamações", ""},
                     {"Gestão de ação judicial / riscos", ""},
@@ -616,6 +631,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoAcaoMelhoriaPacienteRepository.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Gestão da doença", ""},
                     {"Gestão da lesão", ""},
                     {"Gestão da incapacidade", ""},
@@ -637,6 +653,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoAcaoReduzirRiscoOrganizacionalRepository.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Ambiente físico adequado às necessidades", ""},
                     {"Providenciar acesso a um serviço", ""},
                     {"Efetuar avaliações de risco / análise de causa-raiz", ""},
@@ -660,6 +677,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoAcaoReduzirRiscoPacienteRepository.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Disponibilização de cuidados / apoio adequado", ""},
                     {"Disponibilização de instrução / orientações para o paciente", ""},
                     {"Disponibilização de protocolos de apoio á decisão", ""},
@@ -680,6 +698,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoAcaoReduzirRiscoProfissionalRepository.isEmpty()){
             String[][] aux = {
+                    {"", ""},
                     {"Formação", ""},
                     {"Orientação", ""},
                     {"Supervisão / assistência", ""},

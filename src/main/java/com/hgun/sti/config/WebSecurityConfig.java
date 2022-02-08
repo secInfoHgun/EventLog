@@ -82,7 +82,7 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter {
             public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
                 Cookie c = new Cookie("usuario", authentication.getName());
                 response.addCookie(c);
-                response.sendRedirect("/administrador/ocorrencias");
+                response.sendRedirect("/administrador/ocorrencias/novas");
             }
         };
     }

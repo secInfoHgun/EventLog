@@ -17,12 +17,26 @@
 
 <!--                <li th:replace="fragments/fragmentMenu/li :: li(${indice == 1}, '/administrador', 'nc-icon nc-bank', 'Dashboard')"></li>-->
 
-                <li th:replace="fragments/fragmentMenu/li :: li(${indice == 2}, '/administrador/ocorrencias', 'nc-icon nc-tile-56', 'Ocorrências')"></li>
+                <li>
+                    <a style="cursor: text">
+                        <i class="nc-icon nc-tile-56"></i>
+                        <p > Ocorrências :</p>
+                    </a>
+
+                </li>
+
+                <li th:replace="fragments/fragmentMenu/li :: li(${indice == 2}, '/administrador/ocorrencias/novas', '', 'Novas')"></li>
+                <li th:replace="fragments/fragmentMenu/li :: li(${indice == 3}, '/administrador/ocorrencias/finalizadas', '', 'Finalizadas')"></li>
 
             </ul>
 
-            <ul class="nav fixed-bottom" style="margin-bottom: 20px">
-                <li th:replace="fragments/fragmentMenu/li :: li(${indice == 0}, '/logout', 'fa fa-sign-out', 'Sair')"></li>
+            <ul class="nav fixed-bottom" style="margin-bottom: 20px; width: inherit">
+                <li>
+                    <a th:href="@{/logout}">
+                        <i class="fa fa-sign-out"></i>
+                        <p >Sair</p>
+                    </a>
+                </li>
             </ul>
 
         </div>

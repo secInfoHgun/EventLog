@@ -14,6 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/administrador/ocorrencias")
 public class OcorrenciaController {
@@ -58,15 +61,36 @@ public class OcorrenciaController {
         return model;
     }
 
-    @GetMapping
-    public String ocorrenciaslistpage(Model model){
+    @GetMapping("/novas")
+    public String ocorrenciaslistpagenovas(Model model){
 
         if(model.getAttribute("ocorrencias") == null){
             model.addAttribute("ocorrenciaFiltro", new Ocorrencia());
-            model.addAttribute("ocorrencias", ocorrenciaRepository.getAll());
+            model.addAttribute("ocorrencias", ocorrenciaRepository.getAllNaoVisualizadas());
         }
 
         model = setAllLists(model);
+
+        model.addAttribute("titlePage", "Novas Ocorrências");
+        model.addAttribute("menuValor", 2);
+        model.addAttribute("visualizada", false);
+
+        return "ocorrencia/listagemOcorrencia.html";
+    }
+
+    @GetMapping("/finalizadas")
+    public String ocorrenciaslistpagefinalizadas(Model model){
+
+        if(model.getAttribute("ocorrencias") == null){
+            model.addAttribute("ocorrenciaFiltro", new Ocorrencia());
+            model.addAttribute("ocorrencias", ocorrenciaRepository.getAllVisualizadas());
+        }
+
+        model = setAllLists(model);
+
+        model.addAttribute("titlePage", "Ocorrências Finalizadas");
+        model.addAttribute("menuValor", 3);
+        model.addAttribute("visualizada", true);
 
         return "ocorrencia/listagemOcorrencia.html";
     }
@@ -107,7 +131,6 @@ public class OcorrenciaController {
             }
 
             ocorrencia.setPaciente(pacienteBanco);
-            ocorrencia.setVisualizada(false);
             ocorrenciaRepository.save(ocorrencia);
 
             redirectAttributes.addFlashAttribute("cadastrou", true);
@@ -121,10 +144,6 @@ public class OcorrenciaController {
 
         var ocorrencia = ocorrenciaRepository.findById(id).get();
 
-        ocorrencia.setVisualizada(true);
-
-        ocorrenciaRepository.save(ocorrencia);
-
         redirectAttributes.addFlashAttribute("ocorrencia", ocorrencia);
         redirectAttributes.addFlashAttribute("erros", new OcorrenciaError());
         redirectAttributes.addFlashAttribute("info", true);
@@ -132,9 +151,16 @@ public class OcorrenciaController {
         return "redirect:/administrador/ocorrencias/form";
     }
 
-    @PostMapping("/listfilter")
-    public String ocorrenciaslistfilter(@ModelAttribute Ocorrencia ocorrenciaFilter, RedirectAttributes redirectAttributes){
-        var ocorrencias = ocorrenciaRepository.getAll();
+    @PostMapping("/listfilter/{visualizada}")
+    public String ocorrenciaslistfilter(@PathVariable Boolean visualizada,@ModelAttribute Ocorrencia ocorrenciaFilter, RedirectAttributes redirectAttributes){
+
+        List<Ocorrencia> ocorrencias = new ArrayList<Ocorrencia>();
+
+        if(visualizada){
+            ocorrencias = ocorrenciaRepository.getAllVisualizadas();
+        }else{
+            ocorrencias = ocorrenciaRepository.getAllNaoVisualizadas();
+        }
 
         if(!ocorrencias.isEmpty()){
             if(ocorrenciaFilter.paciente.preccp != null && !ocorrenciaFilter.paciente.preccp.isEmpty() && !ocorrenciaFilter.paciente.preccp.equals("")){
@@ -192,15 +218,26 @@ public class OcorrenciaController {
             if(ocorrenciaFilter.pacienteFaleceu != null && ocorrenciaFilter.pacienteFaleceu != false){
                 ocorrencias.removeIf(o -> o.pacienteFaleceu != ocorrenciaFilter.pacienteFaleceu);
             }
-
-            if(ocorrenciaFilter.visualizada != null && ocorrenciaFilter.visualizada != false){
-                ocorrencias.removeIf(o -> o.visualizada != ocorrenciaFilter.visualizada);
-            }
         }
 
         redirectAttributes.addFlashAttribute("ocorrenciaFiltro", ocorrenciaFilter);
         redirectAttributes.addFlashAttribute("ocorrencias", ocorrencias);
 
-        return "redirect:/administrador/ocorrencias";
+        if(visualizada){
+            return "redirect:/administrador/ocorrencias/finalizadas";
+        }else{
+            return "redirect:/administrador/ocorrencias/novas";
+        }
+    }
+
+    @GetMapping("/alterar/{id}")
+    public String alterarStatus(@PathVariable(name = "id") Long id) {
+        var ocorrencia = ocorrenciaRepository.findById(id).get();
+
+        ocorrencia.setVisualizada(!ocorrencia.getVisualizada());
+
+        ocorrenciaRepository.save(ocorrencia);
+
+        return "redirect:/administrador/ocorrencias/info/" + id;
     }
 }

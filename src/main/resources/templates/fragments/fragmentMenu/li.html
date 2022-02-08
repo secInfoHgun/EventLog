@@ -2,10 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <li th:fragment="li(ativo, link, classI, nome)" th:attr="class=${ativo ? 'active' : ''}" >
-    <a th:href="@{${link}}">
-        <i th:attr="class=${classI}"></i>
-        <p th:text="${nome}"></p>
-    </a>
+    <a style="margin-left: 70px;"  th:href="@{${link}}" th:text="${nome}"></a>
 </li>
 
 </html>

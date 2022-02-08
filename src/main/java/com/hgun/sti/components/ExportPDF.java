@@ -196,46 +196,46 @@ public class ExportPDF {
 
             document.add(getParagrafoNovo("\n2. Fatores contribuintes:\n", semIdentacao, false, false, false));
             document.add(getParagrafoNovo("\n2.1. Fatores cognitivos:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorContribuinteCognitivo.nome + (!this.analise.tipoFatorContribuinteCognitivo.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteCognitivo.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorContribuinteCognitivo.nome.isEmpty() ?  this.analise.tipoFatorContribuinteCognitivo.nome : "-") + (!this.analise.tipoFatorContribuinteCognitivo.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteCognitivo.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n2.2. Fatores de comportamento:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorContribuinteComportamento.nome + (!this.analise.tipoFatorContribuinteComportamento.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteComportamento.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorContribuinteComportamento.nome.isEmpty() ?  this.analise.tipoFatorContribuinteComportamento.nome : "-") + (!this.analise.tipoFatorContribuinteComportamento.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteComportamento.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n2.3. Fatores da comunicação:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorContribuinteComunicacao.nome + (!this.analise.tipoFatorContribuinteComunicacao.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteComunicacao.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorContribuinteComunicacao.nome.isEmpty() ?  this.analise.tipoFatorContribuinteComunicacao.nome : "-") + (!this.analise.tipoFatorContribuinteComunicacao.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteComunicacao.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n2.4. Fatores de desenpenho:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorContribuinteDesenpenho.nome + (!this.analise.tipoFatorContribuinteDesenpenho.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteDesenpenho.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorContribuinteDesenpenho.nome.isEmpty() ?  this.analise.tipoFatorContribuinteDesenpenho.nome : "-") + (!this.analise.tipoFatorContribuinteDesenpenho.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteDesenpenho.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n2.5. Fatores Organizacionais:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorContribuinteOrganizacional.nome + (!this.analise.tipoFatorContribuinteOrganizacional.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteOrganizacional.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorContribuinteOrganizacional.nome.isEmpty() ?  this.analise.tipoFatorContribuinteOrganizacional.nome : "-") + (!this.analise.tipoFatorContribuinteOrganizacional.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteOrganizacional.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n2.6. Fatores do paciente:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorContribuintePaciente.nome + (!this.analise.tipoFatorContribuintePaciente.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuintePaciente.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorContribuintePaciente.nome.isEmpty() ?  this.analise.tipoFatorContribuintePaciente.nome : "-") + (!this.analise.tipoFatorContribuintePaciente.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuintePaciente.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n2.7. Fatores profissionais:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorContribuinteProfissional.nome + (!this.analise.tipoFatorContribuinteProfissional.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteProfissional.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorContribuinteProfissional.nome.isEmpty() ?  this.analise.tipoFatorContribuinteProfissional.nome : "-") + (!this.analise.tipoFatorContribuinteProfissional.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteProfissional.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n2.8. Fatores do trabalho / ambiente:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorContribuinteTrabalho.nome + (!this.analise.tipoFatorContribuinteTrabalho.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteTrabalho.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorContribuinteTrabalho.nome.isEmpty() ?  this.analise.tipoFatorContribuinteTrabalho.nome : "-") + (!this.analise.tipoFatorContribuinteTrabalho.descricao.isEmpty() ? (" ("+this.analise.tipoFatorContribuinteTrabalho.descricao)+")" : ""), identacao2, false, false, false));
 
 
             document.add(getParagrafoNovo("\n3. Fatores atenuantes do dano:\n", semIdentacao, false, false, false));
             document.add(getParagrafoNovo("\n3.1. Dirigidos à um agente:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorAtenuanteAgente.nome + (!this.analise.tipoFatorAtenuanteAgente.descricao.isEmpty() ? (" ("+this.analise.tipoFatorAtenuanteAgente.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorAtenuanteAgente.nome.isEmpty() ?  this.analise.tipoFatorAtenuanteAgente.nome : "-") + (!this.analise.tipoFatorAtenuanteAgente.descricao.isEmpty() ? (" ("+this.analise.tipoFatorAtenuanteAgente.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n3.2. Dirigidos à organização:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorAtenuanteOrganizacao.nome + (!this.analise.tipoFatorAtenuanteOrganizacao.descricao.isEmpty() ? (" ("+this.analise.tipoFatorAtenuanteOrganizacao.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorAtenuanteOrganizacao.nome.isEmpty() ?  this.analise.tipoFatorAtenuanteOrganizacao.nome : "-") + (!this.analise.tipoFatorAtenuanteOrganizacao.descricao.isEmpty() ? (" ("+this.analise.tipoFatorAtenuanteOrganizacao.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n3.3. Dirigidos ao paciente:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorAtenuantePaciente.nome + (!this.analise.tipoFatorAtenuantePaciente.descricao.isEmpty() ? (" ("+this.analise.tipoFatorAtenuantePaciente.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoFatorAtenuantePaciente.nome.isEmpty() ?  this.analise.tipoFatorAtenuantePaciente.nome : "-") + (!this.analise.tipoFatorAtenuantePaciente.descricao.isEmpty() ? (" ("+this.analise.tipoFatorAtenuantePaciente.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n3.4. Dirigidos ao profissional:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoFatorAtenuanteProfissional.nome + (!this.analise.tipoFatorAtenuanteProfissional.descricao.isEmpty() ? (" ("+this.analise.tipoFatorAtenuanteProfissional.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo( (!this.analise.tipoFatorAtenuanteProfissional.nome.isEmpty() ?  this.analise.tipoFatorAtenuanteProfissional.nome : "-") + (!this.analise.tipoFatorAtenuanteProfissional.descricao.isEmpty() ? (" ("+this.analise.tipoFatorAtenuanteProfissional.descricao)+")" : ""), identacao2, false, false, false));
 
 
             document.add(getParagrafoNovo("\n4. Consequências organizacionais:\n", semIdentacao, false, false, false));
-            document.add(getParagrafoNovo(this.analise.tipoConsequenciaOrganizacional.nome + (!this.analise.tipoConsequenciaOrganizacional.descricao.isEmpty() ? (" ("+this.analise.tipoConsequenciaOrganizacional.descricao)+")" : ""), identacao1, false, false, false));
+            document.add(getParagrafoNovo((!this.analise.tipoConsequenciaOrganizacional.nome.isEmpty() ?  this.analise.tipoConsequenciaOrganizacional.nome : "-") + (!this.analise.tipoConsequenciaOrganizacional.descricao.isEmpty() ? (" ("+this.analise.tipoConsequenciaOrganizacional.descricao)+")" : ""), identacao1, false, false, false));
         }
 
         return document;
@@ -257,20 +257,20 @@ public class ExportPDF {
 
             document.add(getParagrafoNovo("\n4. Açoes de melhoria:\n", semIdentacao, false, false, false));
             document.add(getParagrafoNovo("\n4.1. Relacionadas ao paciente:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.providencia.tipoAcaoMelhoriaPaciente.nome + (!this.providencia.tipoAcaoMelhoriaPaciente.descricao.isEmpty() ? (" ("+this.providencia.tipoAcaoMelhoriaPaciente.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.providencia.tipoAcaoMelhoriaPaciente.nome.isEmpty() ? this.providencia.tipoAcaoMelhoriaPaciente.nome : "-") + (!this.providencia.tipoAcaoMelhoriaPaciente.descricao.isEmpty() ? (" ("+this.providencia.tipoAcaoMelhoriaPaciente.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n4.2. Relacionadas com a organização:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.providencia.tipoAcaoMelhoriaOrganizacao.nome + (!this.providencia.tipoAcaoMelhoriaOrganizacao.descricao.isEmpty() ? (" ("+this.providencia.tipoAcaoMelhoriaOrganizacao.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.providencia.tipoAcaoMelhoriaOrganizacao.nome.isEmpty() ? this.providencia.tipoAcaoMelhoriaOrganizacao.nome : "-") + (!this.providencia.tipoAcaoMelhoriaOrganizacao.descricao.isEmpty() ? (" ("+this.providencia.tipoAcaoMelhoriaOrganizacao.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n5. Açoes para reduzir riscos:\n", semIdentacao, false, false, false));
             document.add(getParagrafoNovo("\n5.1. Relacionadas ao paciente:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.providencia.tipoAcaoReduzirRiscoPaciente.nome + (!this.providencia.tipoAcaoReduzirRiscoPaciente.descricao.isEmpty() ? (" ("+this.providencia.tipoAcaoReduzirRiscoPaciente.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.providencia.tipoAcaoReduzirRiscoPaciente.nome.isEmpty() ? this.providencia.tipoAcaoReduzirRiscoPaciente.nome : "-") + (!this.providencia.tipoAcaoReduzirRiscoPaciente.descricao.isEmpty() ? (" ("+this.providencia.tipoAcaoReduzirRiscoPaciente.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n5.2. Relacionadas ao profissional:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.providencia.tipoAcaoReduzirRiscoProfissional.nome + (!this.providencia.tipoAcaoReduzirRiscoProfissional.descricao.isEmpty() ? (" ("+this.providencia.tipoAcaoReduzirRiscoProfissional.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.providencia.tipoAcaoReduzirRiscoProfissional.nome.isEmpty() ? this.providencia.tipoAcaoReduzirRiscoProfissional.nome : "-") + (!this.providencia.tipoAcaoReduzirRiscoProfissional.descricao.isEmpty() ? (" ("+this.providencia.tipoAcaoReduzirRiscoProfissional.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n5.3. Relacionadas ao ambiente / organizacional:\n", identacao1, false, false, false));
-            document.add(getParagrafoNovo(this.providencia.tipoAcaoReduzirRiscoOrganizacional.nome + (!this.providencia.tipoAcaoReduzirRiscoOrganizacional.descricao.isEmpty() ? (" ("+this.providencia.tipoAcaoReduzirRiscoOrganizacional.descricao)+")" : ""), identacao2, false, false, false));
+            document.add(getParagrafoNovo((!this.providencia.tipoAcaoReduzirRiscoOrganizacional.nome.isEmpty() ? this.providencia.tipoAcaoReduzirRiscoOrganizacional.nome : "-") + (!this.providencia.tipoAcaoReduzirRiscoOrganizacional.descricao.isEmpty() ? (" ("+this.providencia.tipoAcaoReduzirRiscoOrganizacional.descricao)+")" : ""), identacao2, false, false, false));
 
             document.add(getParagrafoNovo("\n6. Outras providências:\n", semIdentacao, false, false, false));
             document.add(getParagrafoNovo((this.providencia.outrasProvidencias.isEmpty() ? "-" : this.providencia.outrasProvidencias), identacao1, false, false, false));

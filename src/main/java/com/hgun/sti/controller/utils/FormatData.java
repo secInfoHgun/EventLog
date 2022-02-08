@@ -11,7 +11,9 @@ public class FormatData {
         var mes = data.getMonth().getValue();
         var ano = data.getYear();
 
-        dataFormatada += dia;
+        if(dia < 10){
+            dataFormatada += "0" + dia;
+        }
         dataFormatada += "/";
 
         if(mes < 10){
