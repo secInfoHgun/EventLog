@@ -128,16 +128,16 @@ public class ExportPDF {
 
         document.add(getParagrafoNovo("\n\nDados do paciente:", semIdentacao, false, true, false));
 
-        document.add(getParagrafoNovo("Nome: " + this.ocorrencia.paciente.nome, semIdentacao, false, false, false));
+        document.add(getParagrafoNovo("Nome: " + (this.ocorrencia.paciente.nome == null ? "-" : this.ocorrencia.paciente.nome), semIdentacao, false, false, false));
 
-        document.add(getParagrafoNovo("Sexo: " + (this.ocorrencia.paciente.sexo == 'M' ? "(X) Masculino ( ) Feminino" : "( ) Masculino (X) Feminino") +
+        document.add(getParagrafoNovo("Sexo: " + (this.ocorrencia.paciente.sexo == null ? "-" : (this.ocorrencia.paciente.sexo == 'M' ? "(X) Masculino ( ) Feminino" : "( ) Masculino (X) Feminino")) +
                 "                              " + "Idade: " + this.ocorrencia.paciente.idade + " anos" +
                 "                              " + "Nº do PRECCP: " + (this.ocorrencia.paciente.preccp == null ? "-" : this.ocorrencia.paciente.preccp), semIdentacao, false, false, false));
 
         document.add(getParagrafoNovo("Diagnóstico do paciente:", semIdentacao, false, false, false));
-        document.add(getParagrafoNovo(this.ocorrencia.diagnostico, identacao1, false, false, false));
+        document.add(getParagrafoNovo((this.ocorrencia.diagnostico == null ? "-" : this.ocorrencia.diagnostico), identacao1, false, false, false));
 
-        document.add(getParagrafoNovo("Data / Hora da internação do paciente:                " + this.ocorrencia.dataDaInternacao + " - " + this.ocorrencia.horaDaInternacao, semIdentacao, false, false, false));
+        document.add(getParagrafoNovo("Data / Hora da internação do paciente:                " + (this.ocorrencia.dataDaInternacao == null ? "-" : this.ocorrencia.dataDaInternacao) + " - " + (this.ocorrencia.horaDaInternacao == null ? "-" : this.ocorrencia.horaDaInternacao), semIdentacao, false, false, false));
 
         return document;
     }
@@ -159,7 +159,7 @@ public class ExportPDF {
         document.add(getParagrafoNovo(this.ocorrencia.tipoSetor.nome + (!this.ocorrencia.tipoSetor.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoSetor.descricao)+")" : ""), identacao1, false, false, false));
 
         document.add(getParagrafoNovo("\n5. Em que fase da assistência o evento ocorreu:\n", semIdentacao, false, false, false));
-        document.add(getParagrafoNovo(this.ocorrencia.tipoFaseAssistencia.nome + (!this.ocorrencia.tipoFaseAssistencia.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoFaseAssistencia.descricao)+")" : ""), identacao1, false, false, false));
+        document.add(getParagrafoNovo((!this.ocorrencia.tipoFaseAssistencia.nome.isEmpty() ?   this.ocorrencia.tipoFaseAssistencia.nome : "-") + (!this.ocorrencia.tipoFaseAssistencia.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoFaseAssistencia.descricao)+")" : ""), identacao1, false, false, false));
 
         document.add(getParagrafoNovo("\n6. Como foi identificado o incidente / evento adverso:\n", semIdentacao, false, false, false));
         document.add(getParagrafoNovo(this.ocorrencia.tipoIdentificacao.nome + (!this.ocorrencia.tipoIdentificacao.descricao.isEmpty() ? (" ("+this.ocorrencia.tipoIdentificacao.descricao)+")" : ""), identacao1, false, false, false));

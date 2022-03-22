@@ -20,9 +20,13 @@ public class OcorrenciaValidator {
 
         ocorrenciaError.setHoraDaOcorrencia(HoraValidator.validarHora(ocorrencia.getHoraDaOcorrencia()));
 
-        ocorrenciaError.setDataDaInternacao(DataValidator.validarData(ocorrencia.getDataDaInternacao()));
+        if(ocorrencia.getDataDaInternacao() != null && !ocorrencia.getDataDaInternacao().isEmpty() && !ocorrencia.getDataDaInternacao().equals("")){
+            ocorrenciaError.setDataDaInternacao(DataValidator.validarData(ocorrencia.getDataDaInternacao()));
+        }
 
-        ocorrenciaError.setHoraDaInternacao(HoraValidator.validarHora(ocorrencia.getHoraDaInternacao()));
+        if(ocorrencia.getHoraDaInternacao() != null && !ocorrencia.getHoraDaInternacao().isEmpty() && !ocorrencia.getHoraDaInternacao().equals("")){
+            ocorrenciaError.setHoraDaInternacao(HoraValidator.validarHora(ocorrencia.getHoraDaInternacao()));
+        }
 
         if(ocorrencia.getResumo() == null || ocorrencia.getResumo().isEmpty()){
             ocorrenciaError.setResumo("O resumo da ocorrência não pode ser vazio!");
@@ -30,18 +34,16 @@ public class OcorrenciaValidator {
             ocorrenciaError.setResumo("O resumo da ocorrência está muito curto! (min: 15 caracteres)");
         }
 
-        if(ocorrencia.getDiagnostico() == null || ocorrencia.getDiagnostico().isEmpty()){
-            ocorrenciaError.setDiagnostico("O diagnóstico do paciente não pode ser vazio!");
-        }else if(ocorrencia.getDiagnostico().length() < 15){
-            ocorrenciaError.setDiagnostico("O diagnóstico do paciente está muito curto! (min: 15 caracteres)");
+        if(ocorrencia.getDiagnostico() != null && !ocorrencia.getDiagnostico().isEmpty() && !ocorrencia.getDiagnostico().equals("")){
+            if(ocorrencia.getDiagnostico().length() < 15){
+                ocorrenciaError.setDiagnostico("O diagnóstico do paciente está muito curto! (min: 15 caracteres)");
+            }else if(ocorrencia.getDiagnostico().matches("^[0-9]")){
+                ocorrenciaError.setDiagnostico("O diagnóstico do paciente está inválido!");
+            }
         }
 
         if(ocorrencia.getTipoOcorrencia() == null){
             ocorrenciaError.setTipoOcorrencia("O tipo de ocorrência não pode ser vazio!");
-        }
-
-        if(ocorrencia.getTipoFaseAssistencia() == null){
-            ocorrenciaError.setTipoFaseAssistencia("A fase de assistência não pode ser vazia!");
         }
 
         if(ocorrencia.getTipoIncidencia() == null){

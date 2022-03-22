@@ -111,6 +111,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         var listaTipoIdentificador = tipoIdentificadorRepository.findAll();
 
         var listaTipoConsequenciaOrganizacional = tipoConsequenciaOrganizacionalRepository.findAll();
+
         var listaTipoFatorContibuinteCognitivo = tipoFatorContribuinteCognitivoRepository.findAll();
         var listaTipoFatorContribuinteComportamento = tipoFatorContribuinteComportamentoRepository.findAll();
         var listaTipoFatorContribuinteComunicacao = tipoFatorContribuinteComunicacaoRepository.findAll();
@@ -119,46 +120,50 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
         var listaTipoFatorContribuintePaciente = tipoFatorContribuintePacienteRepository.findAll();
         var listaTipoFatorContribuinteProfissional = tipoFatorContribuinteProfissionalRepository.findAll();
         var listaTipoFatorContribuinteTrabalho = tipoFatorContribuinteTrabalhoRepository.findAll();
+
         var listaTipoFatorAtenuanteAgente = tipoFatorAtenuanteAgenteRepository.findAll();
         var listaTipoFatorAtenuanteOrganizacao = tipoFatorAtenuanteOrganizacaoRepository.findAll();
         var listaTipoFatorAtenuantePaciente = tipoFatorAtenuantePacienteRepository.findAll();
         var listaTipoFatorAtenuanteProfissional = tipoFatorAtenuanteProfissionalRepository.findAll();
-        var listaTipoAcaoMelhoriaOrganizacaoRepository = tipoAcaoMelhoriaOrganizacaoRepository.findAll();
-        var listaTipoAcaoMelhoriaPacienteRepository = tipoAcaoMelhoriaPacienteRepository.findAll();
-        var listaTipoAcaoReduzirRiscoOrganizacionalRepository = tipoAcaoReduzirRiscoOrganizacionalRepository.findAll();
-        var listaTipoAcaoReduzirRiscoPacienteRepository = tipoAcaoReduzirRiscoPacienteRepository.findAll();
-        var listaTipoAcaoReduzirRiscoProfissionalRepository = tipoAcaoReduzirRiscoProfissionalRepository.findAll();
 
-        if(listaTipoOcorrencia.isEmpty()){
+        var listaTipoAcaoMelhoriaOrganizacao = tipoAcaoMelhoriaOrganizacaoRepository.findAll();
+        var listaTipoAcaoMelhoriaPaciente = tipoAcaoMelhoriaPacienteRepository.findAll();
+        var listaTipoAcaoReduzirRiscoOrganizacional = tipoAcaoReduzirRiscoOrganizacionalRepository.findAll();
+        var listaTipoAcaoReduzirRiscoPaciente = tipoAcaoReduzirRiscoPacienteRepository.findAll();
+        var listaTipoAcaoReduzirRiscoProfissional = tipoAcaoReduzirRiscoProfissionalRepository.findAll();
+
+        if( listaTipoOcorrencia.isEmpty()){
             String[][] aux = {
-                {"Acidentes do paciente", ""},
-                {"Admissão no serviço de saúde", ""},
-                {"Falha na assistência radiológica", ""},
-                {"Falhas no cuidado / proteção do paciente", ""},
-                {"Falhas no cuidado / proteção do paciente", ""},
-                {"Falta de identificação no leito do paciente", ""},
-                {"Falta de pulseiras de identificação", ""},
-                {"Incidente / evento adverso durante procedimento cirúrgico", ""},
-                {"Infecção hospitalar no local da cirurgia", ""},
-                {"Infecções hospitalar como pneumonia", ""},
-                {"Infecções relacionadas à assistência à saúde", ""},
-                {"Lesão por dispositivo médico", "feridas na pele provocadas por contato prolongado com dispositivo médico"},
-                {"Lesão por pressão", "feridas na pele provocadas pelo tempo prolongado sentado ou deitado"},
-                {"Incidente / evento adverso na identificação do paciente", ""},
-                {"Incidente / evento adverso nas atividades administrativas", ""},
-                {"Incidente / evento adverso ocorridas em laboratórios clínicos ou de patologia", ""},
-                {"Incidente / evento adverso na administração de dietas infecção hospitalar causada pelo cateter colocado na veia", ""},
-                {"Infecção hospitalar como infecção urinária", ""},
-                {"Problema /evento adverso relacionado ao enxerto (osso, pele ou outros) fertilização", ""},
-                {"Problema / evento adverso relacionado ao uso de medicamentos", ""},
-                {"Problema / evento adverso relacionado ao uso de sangue", ""},
-                {"Problema / evento adverso relacionado ao uso de sangue / hemocomponente", ""},
-                {"Problemas / eventos adversos associados a equipamento médico-hospitalar", ""},
-                {"Problemas / eventos adversos associados a produtos para a saúde: artigo / material médico-hospitalar", ""},
-                {"Queda do paciente", ""},
-                {"Transferência para outros serviços de saúde", ""},
-                {"Troca de nome dos pacientes", ""}
+                    {"Acidentes do paciente", ""},
+                    {"Admissão no serviço de saúde", ""},
+                    {"Falha na assistência radiológica", ""},
+                    {"Falhas no cuidado / proteção do paciente", ""},
+                    {"Falhas no cuidado / proteção do paciente", ""},
+                    {"Falta de identificação no leito do paciente", ""},
+                    {"Falta de pulseiras de identificação", ""},
+                    {"Incidente / evento adverso durante procedimento cirúrgico", ""},
+                    {"Infecção hospitalar no local da cirurgia", ""},
+                    {"Infecções hospitalar como pneumonia", ""},
+                    {"Infecções relacionadas à assistência à saúde", ""},
+                    {"Lesão por dispositivo médico", "feridas na pele provocadas por contato prolongado com dispositivo médico"},
+                    {"Lesão por pressão", "feridas na pele provocadas pelo tempo prolongado sentado ou deitado"},
+                    {"Incidente / evento adverso na identificação do paciente", ""},
+                    {"Incidente / evento adverso nas atividades administrativas", ""},
+                    {"Incidente / evento adverso ocorridas em laboratórios clínicos ou de patologia", ""},
+                    {"Incidente / evento adverso na administração de dietas infecção hospitalar causada pelo cateter colocado na veia", ""},
+                    {"Infecção hospitalar como infecção urinária", ""},
+                    {"Problema /evento adverso relacionado ao enxerto (osso, pele ou outros) fertilização", ""},
+                    {"Problema / evento adverso relacionado ao uso de medicamentos", ""},
+                    {"Problema / evento adverso relacionado ao uso de sangue", ""},
+                    {"Problema / evento adverso relacionado ao uso de sangue / hemocomponente", ""},
+                    {"Problemas / eventos adversos associados a equipamento médico-hospitalar", ""},
+                    {"Problemas / eventos adversos associados a produtos para a saúde: artigo / material médico-hospitalar", ""},
+                    {"Queda do paciente", ""},
+                    {"Transferência para outros serviços de saúde", ""},
+                    {"Troca de nome dos pacientes", ""},
+                    {"Outros", ""}
             };
+
 
             for (String[] i: aux) {
                 var tipoOcorrencia =  new TipoOcorrencia();
@@ -170,11 +175,14 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             System.out.println("cadastrei os tipos de ocorrencia");
         }
 
+
+
         if(listaTipoIncidencia.isEmpty()){
             String[][] aux = {
-                {"Incidente com dano ou EA", "incidente que resulta em dano ao paciente"},
-                {"Incidente sem dano", "evento que atingiu o paciente, mas não causou dano"},
-                {"Near miss", "incidente que não atingiu o paciente"}
+                    {"Incidente com dano ou EA", "incidente que resulta em dano ao paciente"},
+                    {"Incidente sem dano", "evento que atingiu o paciente, mas não causou dano"},
+                    {"Near miss", "incidente que não atingiu o paciente"},
+                    {"Circunstância notificável", "Não ocorreu um acidente, mas sim um evento expressivo para o dano do paciente"}
             };
 
             for (String[] i: aux) {
@@ -208,6 +216,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
 
         if(listaTipoFaseAssistencia.isEmpty()){
             String[][] aux = {
+                {"", ""},
                 {"Durante a fase de diagnóstico", "exames laboratoriais ou de imagem e consultas médicas"},
                 {"Durante a fase de prestação dos cuidados, o tratamento ou a cirurgia", ""},
                 {"Durante ou após a fase de doação de sangue", ""},
@@ -605,7 +614,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             System.out.println("cadastrei os tipos de fatores atenuantes profissionais");
         }
 
-        if(listaTipoAcaoMelhoriaOrganizacaoRepository.isEmpty()){
+        if(listaTipoAcaoMelhoriaOrganizacao.isEmpty()){
             String[][] aux = {
                     {"", ""},
                     {"Gestão da mídia / relações pública", ""},
@@ -629,7 +638,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             System.out.println("cadastrei os tipos de ações de melhorias organizacionais");
         }
 
-        if(listaTipoAcaoMelhoriaPacienteRepository.isEmpty()){
+        if(listaTipoAcaoMelhoriaPaciente.isEmpty()){
             String[][] aux = {
                     {"", ""},
                     {"Gestão da doença", ""},
@@ -651,7 +660,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             System.out.println("cadastrei os tipos de ações de melhorias do paciente");
         }
 
-        if(listaTipoAcaoReduzirRiscoOrganizacionalRepository.isEmpty()){
+        if(listaTipoAcaoReduzirRiscoOrganizacional.isEmpty()){
             String[][] aux = {
                     {"", ""},
                     {"Ambiente físico adequado às necessidades", ""},
@@ -675,7 +684,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             System.out.println("cadastrei os tipos de ações para reduzir riscos organizacionais");
         }
 
-        if(listaTipoAcaoReduzirRiscoPacienteRepository.isEmpty()){
+        if(listaTipoAcaoReduzirRiscoPaciente.isEmpty()){
             String[][] aux = {
                     {"", ""},
                     {"Disponibilização de cuidados / apoio adequado", ""},
@@ -696,7 +705,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
             System.out.println("cadastrei os tipos de ações para reduzir riscos do paciente");
         }
 
-        if(listaTipoAcaoReduzirRiscoProfissionalRepository.isEmpty()){
+        if(listaTipoAcaoReduzirRiscoProfissional.isEmpty()){
             String[][] aux = {
                     {"", ""},
                     {"Formação", ""},
