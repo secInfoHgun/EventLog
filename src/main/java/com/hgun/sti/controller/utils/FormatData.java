@@ -13,7 +13,10 @@ public class FormatData {
 
         if(dia < 10){
             dataFormatada += "0" + dia;
+        }else{
+            dataFormatada += dia;
         }
+
         dataFormatada += "/";
 
         if(mes < 10){
