@@ -186,9 +186,8 @@
                             </div>
                             <div class="col-md-7 pl-1">
                                 <div class="form-group">
-                                    <label style="color: #2a2b2d">Em que fase da assistência ocorreu?</label>
+                                    <label style="color: #2a2b2d">Em que fase da assistência ocorreu? </label>
                                     <select th:class="${ erros.tipoFaseAssistencia != null ? 'form-control errorInput' : 'form-control'}" th:field="*{tipoFaseAssistencia.id}">
-                                        <option th:value="null"></option>
                                         <option th:value="${tipo.id}" th:each="tipo : ${listaTipoFaseAssistencia}" th:text="${tipo.nome + (tipo.descricao != '' ? ('  ('+tipo.descricao)+')' : '')}"></option>
                                     </select>
                                     <label style="color: red" th:if="${erros.tipoFaseAssistencia != null}" th:text="${erros.tipoFaseAssistencia}"></label>
