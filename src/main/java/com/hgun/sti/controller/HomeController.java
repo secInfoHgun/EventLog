@@ -96,9 +96,9 @@ public class HomeController {
 
             ocorrencia.setPaciente(pacienteBanco);
             ocorrencia.setVisualizada(false);
-            ocorrenciaRepository.save(ocorrencia);
+            ocorrencia = ocorrenciaRepository.save(ocorrencia);
 
-            redirectAttributes.addFlashAttribute("cadastrou", true);
+            redirectAttributes.addFlashAttribute("cadastrou", ocorrencia.getId());
         }
 
         return "redirect:/";

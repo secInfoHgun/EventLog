@@ -3,6 +3,7 @@ package com.hgun.sti.components;
 import com.hgun.sti.models.*;
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfWriter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -101,7 +102,7 @@ public class ExportPDF {
         return image;
     }
 
-    public Document headerDocument(Document document) throws IOException {
+    public Document cabecalhoDocument(Document document) throws IOException {
 
         document.add(getImagemNova("src/main/resources/static/img/brasao-da-republica-do-brasil.com.png"));
 
@@ -116,8 +117,14 @@ public class ExportPDF {
         document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
         document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
 
+        return document;
+    }
 
-        document.add(getParagrafoNovo("Notificação  de Incidente / Notificação  de Evento Adverso                                               Nº da notificação : " + formataNumeroNotificacao(this.ocorrencia.id), semIdentacao, false, true, false));
+    public Document headerDocument(Document document) throws IOException {
+
+        document = cabecalhoDocument(document);
+
+        document.add(getParagrafoNovo("Notificação de Incidente / Notificação  de Evento Adverso                                               Nº da notificação : " + formataNumeroNotificacao(this.ocorrencia.id), semIdentacao, false, true, false));
 
         document.add(getParagrafoNovo("Data / Hora do Evento: " + this.ocorrencia.dataDaOcorrencia + " - " + this.ocorrencia.horaDaOcorrencia, semIdentacao, false, false, true));
 
@@ -304,6 +311,33 @@ public class ExportPDF {
         return document;
     }
 
+    public Document dadosComprovante(Document document, PasswordEncoder passwordEncoder){
+
+        document.add(getParagrafoNovo("Comprovante do Registro de Notificação de Incidente / Notificação de Evento Adverso", semIdentacao, true, true, false));
+
+        document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
+        document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
+        document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
+
+
+        document.add(getParagrafoNovo("Nº da notificação:  " + formataNumeroNotificacao(this.ocorrencia.id) + "                                                                              Data / Hora do Evento:  " + this.ocorrencia.dataDaOcorrencia + " - " + this.ocorrencia.horaDaOcorrencia, semIdentacao ,false, false, false));
+
+        document.add(getParagrafoNovo("PREC-CP do paciente:  " + (this.ocorrencia.paciente.preccp == null ? "-" : this.ocorrencia.paciente.preccp), semIdentacao, false, false, false));
+
+        document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
+        document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
+        document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
+
+
+        document.add(getParagrafoNovo("Código de verificação:  " + passwordEncoder.encode(getDataFormatada()+formataNumeroNotificacao(this.ocorrencia.id)), semIdentacao, false, false, true));
+
+        document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
+
+        document.add(getParagrafoNovo(getDataFormatada(), semIdentacao, false, false, true));
+
+        return document;
+    }
+
     public Document footerDocument(Document document){
 
         document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
@@ -331,7 +365,7 @@ public class ExportPDF {
         return document;
     }
 
-    public void export(HttpServletResponse response) throws DocumentException, IOException {
+    public void exportOcorrencia(HttpServletResponse response) throws DocumentException, IOException {
         Document document = new Document(PageSize.A4);
         PdfWriter.getInstance(document, response.getOutputStream());
 
@@ -346,6 +380,18 @@ public class ExportPDF {
         document = dadosObito(document);
 
         document = footerDocument(document);
+
+        document.close();
+    }
+
+    public void exportComprovante(HttpServletResponse response, PasswordEncoder passwordEncoder) throws DocumentException, IOException {
+        Document document = new Document(PageSize.A4);
+        PdfWriter.getInstance(document, response.getOutputStream());
+
+        document.open();
+
+        document = cabecalhoDocument(document);
+        document = dadosComprovante(document, passwordEncoder);
 
         document.close();
     }
