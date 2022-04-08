@@ -319,7 +319,6 @@ public class ExportPDF {
         document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
         document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
 
-
         document.add(getParagrafoNovo("Nº da notificação:  " + formataNumeroNotificacao(this.ocorrencia.id) + "                                                                              Data / Hora do Evento:  " + this.ocorrencia.dataDaOcorrencia + " - " + this.ocorrencia.horaDaOcorrencia, semIdentacao ,false, false, false));
 
         document.add(getParagrafoNovo("PREC-CP do paciente:  " + (this.ocorrencia.paciente.preccp == null ? "-" : this.ocorrencia.paciente.preccp), semIdentacao, false, false, false));
@@ -327,7 +326,6 @@ public class ExportPDF {
         document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
         document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
         document.add(getParagrafoNovo(" ", semIdentacao, false, false, false));
-
 
         document.add(getParagrafoNovo("Código de verificação:  " + passwordEncoder.encode(getDataFormatada()+formataNumeroNotificacao(this.ocorrencia.id)), semIdentacao, false, false, true));
 
