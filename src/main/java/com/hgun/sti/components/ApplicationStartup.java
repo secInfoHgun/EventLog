@@ -242,6 +242,7 @@ public class ApplicationStartup implements ApplicationListener<ApplicationReadyE
                     {"1º ANDAR", ""},
                     {"2º ANDAR", ""},
                     {"2ª SEÇÃO", ""},
+                    {"ABAS", "P TRIG"},
                     {"ALMOXARIFADO", ""},
                     {"AMBULATÓRIO", ""},
                     {"CENTRO CIRURGICO", ""},
